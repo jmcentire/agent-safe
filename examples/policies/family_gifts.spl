@@ -1,0 +1,12 @@
+(and
+  (= (get req "actor_pub") "K_ai")
+  (= (get req "action") "payments.create")
+  (<= (get req "amount") 50)
+  (member (get req "recipient") allowed_recipients)
+  (= (get req "purpose") "giftcard")
+  (<= (per-day-count "payments.create" (get req "day")) 1)
+  (get req "device_attested")
+  (dpop_ok?)
+  (merkle_ok? (tuple (get req "actor_pub") (get req "action") (get req "recipient") 50 "giftcard" (get req "day")))
+  (vrf_ok? (get req "day") (get req "amount"))
+)
