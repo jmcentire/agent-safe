@@ -1,0 +1,14 @@
+{
+  "name": "@agentsafe/spl-cli",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "spl": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "license": "MIT"
+}

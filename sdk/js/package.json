@@ -1,0 +1,11 @@
+{
+  "name": "@agentsafe/spl-verifier",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "demo": "node dist/index.js ../../examples/policies/family_gifts.spl ../../examples/requests/gift_50_niece.json"
+  },
+  "license": "MIT"
+}

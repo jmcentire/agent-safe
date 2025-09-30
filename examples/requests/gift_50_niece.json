@@ -1,0 +1,9 @@
+{
+  "actor_pub": "K_ai",
+  "action": "payments.create",
+  "recipient": "niece@example.com",
+  "purpose": "giftcard",
+  "amount": 50,
+  "day": "2025-09-29",
+  "device_attested": true
+}
