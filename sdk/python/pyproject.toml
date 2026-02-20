@@ -5,11 +5,22 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "agent-safe-spl"
 version = "0.1.0"
-description = "SPL (Safe Policy Lisp) evaluator for Agent-Safe capability tokens"
+description = "SPL (Safe Policy Lisp) evaluator for Agent-Safe capability tokens. 150 lines, zero deps, microseconds."
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 authors = [{ name = "Jeremy McEntire" }]
+keywords = ["agent", "authorization", "capability", "token", "spl", "policy", "ai"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries",
+]
+
+[project.urls]
+Homepage = "https://jmcentire.github.io/agent-safe/"
+Repository = "https://github.com/jmcentire/agent-safe"
 
 [project.optional-dependencies]
 crypto = ["cryptography>=41.0"]
