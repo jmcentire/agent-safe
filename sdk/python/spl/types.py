@@ -19,3 +19,4 @@ class Env:
     per_day_count: Callable[[str, str], int] = lambda _a, _d: 0
     crypto: CryptoCallbacks = field(default_factory=CryptoCallbacks)
     max_gas: int = 10_000
+    sealed: bool = False

@@ -57,6 +57,7 @@ fn main() {
         per_day_count: Box::new(|_, _| 0),
         crypto: CryptoCallbacks::default(),
         max_gas: 10_000,
+        sealed: false,
     };
 
     match verify(&ast, &env) {

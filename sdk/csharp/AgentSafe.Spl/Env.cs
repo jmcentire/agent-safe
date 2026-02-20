@@ -21,4 +21,5 @@ public class Env
     public Func<string, string, int> PerDayCount { get; set; } = (_, _) => 0;
     public CryptoCallbacks Crypto { get; set; } = new();
     public int MaxGas { get; set; } = 10_000;
+    public bool Sealed { get; set; } = false;
 }

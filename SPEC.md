@@ -113,6 +113,25 @@ The evaluator receives an environment containing:
 
 Symbols not matching built-in names are resolved from `vars`. Unresolved symbols evaluate to themselves (as string literals).
 
+## Token Sealing
+
+A sealed token cannot be further attenuated. The token envelope includes a `sealed` field:
+
+- If `sealed` is `true`, any attempt to add further restrictions (new policy conjuncts, reduced Merkle root, lower hash-chain length) **must** be rejected by the verifier.
+- If `sealed` is `false` or absent, the token may be attenuated before forwarding.
+- Sealing is one-way: once set, it cannot be unset without re-signing.
+
+Verifiers that receive a token claiming to be derived from a sealed parent **must** reject it. The expected pattern: an issuer signs a sealed token when the delegation chain is complete and no further narrowing is needed.
+
+```json
+{
+  "policy": "(and ...)",
+  "merkle_root": "0e9a...",
+  "sealed": true,
+  "signature": "..."
+}
+```
+
 ## Canonicalization
 
 For signing and verification:

@@ -1,6 +1,9 @@
 import { evalPolicy } from './spl.js';
 
 export function verify(policyAst: any, req: any, env: any) {
+  if (env.sealed) {
+    return { allow: false, sealed: true, error: 'token is sealed and cannot be attenuated' };
+  }
   const ctx = {
     req,
     vars: env.vars || {},
@@ -10,6 +13,5 @@ export function verify(policyAst: any, req: any, env: any) {
     maxGas: env.maxGas,
   };
   const allow = !!evalPolicy(policyAst, ctx);
-  const obligations: any[] = [];
-  return { allow, obligations };
+  return { allow, sealed: false };
 }
