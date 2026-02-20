@@ -5,7 +5,12 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "test": "node --test dist/spl.test.js dist/crypto.test.js",
     "demo": "node dist/index.js ../../examples/policies/family_gifts.spl ../../examples/requests/gift_50_niece.json"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "typescript": "^5.9.3"
+  }
 }

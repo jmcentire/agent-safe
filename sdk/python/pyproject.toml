@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-safe-spl"
+version = "0.1.0"
+description = "SPL (Safe Policy Lisp) evaluator for Agent-Safe capability tokens"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "Jeremy McEntire" }]
+
+[project.optional-dependencies]
+crypto = ["cryptography>=41.0"]
+dev = ["pytest>=7.0", "cryptography>=41.0"]
+
+[tool.setuptools.packages.find]
+include = ["spl*"]

@@ -1,0 +1,20 @@
+{
+  "cases": [
+    {
+      "expected": true,
+      "message": "(and (= (get req \"action\") \"read\") (\u003c= (get req \"amount\") 100))",
+      "name": "valid_signature"
+    },
+    {
+      "expected": false,
+      "message": "(and o= (get req \"action\") \"read\") (\u003c= (get req \"amount\") 100))",
+      "name": "tampered_message"
+    }
+  ],
+  "description": "Ed25519 test vectors for SPL policy signing",
+  "message": "(and (= (get req \"action\") \"read\") (\u003c= (get req \"amount\") 100))",
+  "private_key_hex": "4ada6d701a85ba94ff45b9899a9e4014a1fe4f2ba5cc981d5d2328a9d99324d3",
+  "public_key_hex": "204b9b038094e9ef2da7000e1efaff835c6bd2c14da149089353b5e476f3acc6",
+  "signature_hex": "5871cf5c2b2b4c1d4c22803da68f5d3d196471e4c5d744be9cc7d1376ff1c335096848cf65990a27c01d47e90368ce74eb89601cc73b6c48d0d55069c5e86409",
+  "tampered_message": "(and o= (get req \"action\") \"read\") (\u003c= (get req \"amount\") 100))"
+}

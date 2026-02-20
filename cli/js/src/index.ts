@@ -12,10 +12,17 @@ if (!policyPath || !requestPath) {
 const policy = parseSExpr(readFileSync(resolve(policyPath), 'utf8').trim());
 const request = JSON.parse(readFileSync(resolve(requestPath), 'utf8'));
 const env = {
-  allowed_recipients: ['niece@example.com','mom@example.com'],
+  vars: {
+    allowed_recipients: ['niece@example.com', 'mom@example.com'],
+  },
   now: new Date().toISOString(),
-  per_day_count: (action, day)=>0,
-  crypto: { dpop_ok: ()=>true, merkle_ok: ()=>true, vrf_ok: ()=>true, thresh_ok: ()=>true }
+  per_day_count: (_action: string, _day: string) => 0,
+  crypto: {
+    dpop_ok: () => true,
+    merkle_ok: () => true,
+    vrf_ok: () => true,
+    thresh_ok: () => true,
+  },
 };
 const { allow } = verify(policy, request, env);
 console.log(allow ? 'ALLOW' : 'DENY');
