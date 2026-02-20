@@ -28,8 +28,5 @@ const env = {
   },
 };
 
-const { allow, obligations } = verify(policy, request, env);
+const { allow } = verify(policy, request, env);
 console.log(allow ? 'ALLOW' : 'DENY');
-if (obligations && obligations.length) {
-  console.log('OBLIGATIONS', obligations);
-}

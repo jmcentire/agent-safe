@@ -102,6 +102,7 @@ pub struct Env {
     pub per_day_count: Box<dyn Fn(&str, &str) -> i64>,
     pub crypto: CryptoCallbacks,
     pub max_gas: i64,
+    pub sealed: bool,
 }
 
 impl Default for Env {
@@ -112,6 +113,7 @@ impl Default for Env {
             per_day_count: Box::new(|_, _| 0),
             crypto: CryptoCallbacks::default(),
             max_gas: 10_000,
+            sealed: false,
         }
     }
 }

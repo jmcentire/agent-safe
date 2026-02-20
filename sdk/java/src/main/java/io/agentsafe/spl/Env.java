@@ -13,4 +13,5 @@ public class Env {
     public BiFunction<String, String, Integer> perDayCount = (a, d) -> 0;
     public CryptoCallbacks crypto = new CryptoCallbacks();
     public int maxGas = 10_000;
+    public boolean sealed = false;
 }

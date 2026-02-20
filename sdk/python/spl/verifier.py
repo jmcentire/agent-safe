@@ -35,6 +35,15 @@ def verify(policy_ast: Any, req: dict, env: Any) -> dict:
             "crypto": env.crypto if hasattr(env, "crypto") else {},
             "maxGas": env.max_gas if hasattr(env, "max_gas") else None,
         }
+    sealed = False
+    if isinstance(env, dict):
+        sealed = env.get("sealed", False)
+    elif hasattr(env, "sealed"):
+        sealed = env.sealed
+
+    if sealed:
+        return {"allow": False, "sealed": True, "error": "token is sealed and cannot be attenuated"}
+
     result = eval_policy(policy_ast, ctx)
     allow = bool(result) if result is not None else False
-    return {"allow": allow, "obligations": []}
+    return {"allow": allow, "sealed": False}

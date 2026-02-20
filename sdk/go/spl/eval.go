@@ -10,6 +10,7 @@ type Env struct {
 	Gas    int
 	MaxGas int
 	Depth  int
+	Sealed bool
 
 	PerDayCount func(action, day string) int
 	Crypto      struct {
@@ -24,6 +25,9 @@ const DefaultMaxGas = 10000
 const MaxDepth = 64
 
 func Verify(ast Node, env Env) (bool, error) {
+	if env.Sealed {
+		return false, fmt.Errorf("token is sealed and cannot be attenuated")
+	}
 	if env.MaxGas == 0 {
 		env.MaxGas = DefaultMaxGas
 	}
