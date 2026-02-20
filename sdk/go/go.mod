@@ -1,3 +1,3 @@
-module github.com/agent-safe-iam/spl
+module github.com/jmcentire/agent-safe/sdk/go
 
 go 1.22

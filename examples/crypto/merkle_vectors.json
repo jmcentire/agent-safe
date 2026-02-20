@@ -1,0 +1,66 @@
+{
+  "cases": [
+    {
+      "expected": true,
+      "leaf": "alice@example.com",
+      "leaf_hash": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976",
+      "name": "valid_proof_leaf_0",
+      "proof": [
+        {
+          "hash": "5ff860bf1190596c7188ab851db691f0f3169c453936e9e1eba2f9a47f7a0018",
+          "position": "right"
+        },
+        {
+          "hash": "de0f19045cc3519808da1a100de034e4a1a897b4ce0466c2d2e447c5c01b5086",
+          "position": "right"
+        }
+      ]
+    },
+    {
+      "expected": true,
+      "leaf": "carol@example.com",
+      "leaf_hash": "e0d47ca1bc1eb62e650fc1fd660a9bfbf7cba8dc6337d81df7ea9aa9071a24a5",
+      "name": "valid_proof_leaf_2",
+      "proof": [
+        {
+          "hash": "7b34211350ff567970974e1e2b98d319a601969e74fd1a957bc889b8332d00eb",
+          "position": "right"
+        },
+        {
+          "hash": "7a062a287587394a2860dfa2c39d0c3b6bf1d13144a7962b33e390e4a32e09f7",
+          "position": "left"
+        }
+      ]
+    },
+    {
+      "expected": false,
+      "leaf": "eve@example.com",
+      "leaf_hash": "d0574c4966d2c326193622feebc64991c5b59807ae68fa8255b26c79f4bf917a",
+      "name": "invalid_proof_wrong_leaf",
+      "proof": [
+        {
+          "hash": "5ff860bf1190596c7188ab851db691f0f3169c453936e9e1eba2f9a47f7a0018",
+          "position": "right"
+        },
+        {
+          "hash": "de0f19045cc3519808da1a100de034e4a1a897b4ce0466c2d2e447c5c01b5086",
+          "position": "right"
+        }
+      ]
+    }
+  ],
+  "description": "SHA-256 Merkle tree test vectors (4 leaves)",
+  "leaf_hashes": [
+    "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976",
+    "5ff860bf1190596c7188ab851db691f0f3169c453936e9e1eba2f9a47f7a0018",
+    "e0d47ca1bc1eb62e650fc1fd660a9bfbf7cba8dc6337d81df7ea9aa9071a24a5",
+    "7b34211350ff567970974e1e2b98d319a601969e74fd1a957bc889b8332d00eb"
+  ],
+  "leaves": [
+    "alice@example.com",
+    "bob@example.com",
+    "carol@example.com",
+    "dave@example.com"
+  ],
+  "root": "0e9a1502e51e4040a918fd445b19cdf672c6d5a95eaad946955871c79584cabb"
+}

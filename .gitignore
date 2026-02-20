@@ -1,0 +1,21 @@
+node_modules/
+dist/
+*.zip
+*.exe
+
+# Python
+__pycache__/
+*.egg-info/
+*.pyc
+.pytest_cache/
+
+# Rust
+target/
+
+# Java
+*.class
+sdk/java/target/
+
+# C#
+bin/
+obj/

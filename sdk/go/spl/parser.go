@@ -13,27 +13,43 @@ func Parse(src string) (Node, error) {
 	i := 0
 	var parse func() (Node, error)
 	parse = func() (Node, error) {
-		if i >= len(toks) { return nil, fmt.Errorf("unexpected EOF") }
-		tok := toks[i]; i++
+		if i >= len(toks) {
+			return nil, fmt.Errorf("unexpected EOF")
+		}
+		tok := toks[i]
+		i++
 		switch tok {
 		case "(":
 			var arr []Node
 			for {
-				if i >= len(toks) { return nil, fmt.Errorf("unterminated (") }
-				if toks[i] == ")" { i++; break }
+				if i >= len(toks) {
+					return nil, fmt.Errorf("unterminated (")
+				}
+				if toks[i] == ")" {
+					i++
+					break
+				}
 				n, err := parse()
-				if err != nil { return nil, err }
+				if err != nil {
+					return nil, err
+				}
 				arr = append(arr, n)
 			}
 			return arr, nil
 		case ")":
 			return nil, fmt.Errorf("unexpected )")
 		default:
-			if tok == "#t" { return true, nil }
-			if tok == "#f" { return false, nil }
-			if strings.HasPrefix(tok, """) && strings.HasSuffix(tok, """) {
+			if tok == "#t" {
+				return true, nil
+			}
+			if tok == "#f" {
+				return false, nil
+			}
+			if strings.HasPrefix(tok, "\"") && strings.HasSuffix(tok, "\"") {
 				s, err := strconv.Unquote(tok)
-				if err != nil { return nil, err }
+				if err != nil {
+					return nil, err
+				}
 				return s, nil
 			}
 			if n, err := strconv.ParseFloat(tok, 64); err == nil {
@@ -46,7 +62,6 @@ func Parse(src string) (Node, error) {
 }
 
 func tokenize(src string) []string {
-	// simple tokenizer
 	var toks []string
 	var buf strings.Builder
 	inStr := false
@@ -61,7 +76,7 @@ func tokenize(src string) []string {
 			continue
 		}
 		switch ch {
-		case '(' , ')':
+		case '(', ')':
 			if buf.Len() > 0 {
 				toks = append(toks, strings.Fields(buf.String())...)
 				buf.Reset()
@@ -83,6 +98,8 @@ func tokenize(src string) []string {
 			buf.WriteRune(ch)
 		}
 	}
-	if buf.Len() > 0 { toks = append(toks, strings.Fields(buf.String())...) }
+	if buf.Len() > 0 {
+		toks = append(toks, strings.Fields(buf.String())...)
+	}
 	return toks
 }

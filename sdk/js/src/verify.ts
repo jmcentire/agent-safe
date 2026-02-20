@@ -1,14 +1,15 @@
 import { evalPolicy } from './spl.js';
 
-export function verify(policyAst: any, req: any, env: any){
+export function verify(policyAst: any, req: any, env: any) {
   const ctx = {
     req,
-    allowed_recipients: env.allowed_recipients,
+    vars: env.vars || {},
     now: env.now,
     per_day_count: env.per_day_count,
-    crypto: env.crypto
+    crypto: env.crypto,
+    maxGas: env.maxGas,
   };
   const allow = !!evalPolicy(policyAst, ctx);
-  const obligations:any[] = allow ? [] : [];
+  const obligations: any[] = [];
   return { allow, obligations };
 }

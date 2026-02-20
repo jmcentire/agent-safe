@@ -1,0 +1,43 @@
+{
+  "cases": [
+    {
+      "expected": true,
+      "index": 3,
+      "name": "valid_receipt_step_3",
+      "note": "Hash preimage (5-3)=2 times to reach commitment",
+      "preimage": "14f5ed522a239b3d0ec791bd230ac2c4bb57a5f8f04921c67ae9b7d935006851"
+    },
+    {
+      "expected": true,
+      "index": 0,
+      "name": "valid_receipt_step_0",
+      "note": "Hash seed 5 times to reach commitment",
+      "preimage": "3c3422bef136e92e9a702cffcf4406bf4491832dc8d0afea2b4cfbc36b0e2da5"
+    },
+    {
+      "expected": true,
+      "index": 5,
+      "name": "valid_receipt_step_5",
+      "note": "Preimage IS the commitment (0 hashes)",
+      "preimage": "e3b73b4d9d56b2ebe5ea0461bd1b04a92cd3e7a12d84646fc25a6d0eaa185caa"
+    },
+    {
+      "expected": false,
+      "index": 3,
+      "name": "invalid_receipt_wrong_preimage",
+      "preimage": "8810ad581e59f2bc3928b261707a71308f7e139eb04820366dc4d5c18d980225"
+    }
+  ],
+  "chain": [
+    "3c3422bef136e92e9a702cffcf4406bf4491832dc8d0afea2b4cfbc36b0e2da5",
+    "cf3d24af9c2551996792e9569fec77ddb04c9ac199cd1b06df205b0ce7379e30",
+    "e2539e3d1e3126162ff980f0783ed8ac673807dc2baea894e2b2879f3f4ff4c7",
+    "14f5ed522a239b3d0ec791bd230ac2c4bb57a5f8f04921c67ae9b7d935006851",
+    "11aac6b79538213b7fb67a643348acc3ae4d63e4dc0f172c4d65ea9547393323",
+    "e3b73b4d9d56b2ebe5ea0461bd1b04a92cd3e7a12d84646fc25a6d0eaa185caa"
+  ],
+  "chain_length": 5,
+  "commitment": "e3b73b4d9d56b2ebe5ea0461bd1b04a92cd3e7a12d84646fc25a6d0eaa185caa",
+  "description": "SHA-256 hash chain test vectors (5-step chain)",
+  "seed_hex": "3c3422bef136e92e9a702cffcf4406bf4491832dc8d0afea2b4cfbc36b0e2da5"
+}
