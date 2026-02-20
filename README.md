@@ -89,41 +89,51 @@ For comparison, an OPA REST call typically takes 1-5 ms (network + evaluation). 
 
 ### TypeScript
 ```bash
-cd sdk/js && npm i && npm run build
-node dist/index.js ../../examples/policies/family_gifts.spl ../../examples/requests/gift_50_niece.json
-# → ALLOW
+npm install agent-safe-spl
+```
+```typescript
+import { parseSExpr, evalPolicy } from 'agent-safe-spl';
+import { mint, verifyToken, generateKeypair } from 'agent-safe-spl/token';
 ```
 
 ### Go
 ```bash
-cd sdk/go
-go run ./verify ../../examples/policies/family_gifts.spl ../../examples/requests/gift_50_niece.json
-# → ALLOW
+go get github.com/jmcentire/agent-safe/sdk/go
+```
+```go
+import "github.com/jmcentire/agent-safe/sdk/go/spl"
+token, _ := spl.Mint(policy, privKeyHex, spl.MintOptions{})
+result := spl.VerifyToken(tokenJSON, req, spl.VerifyTokenOptions{Vars: vars})
 ```
 
 ### Python
 ```bash
-cd sdk/python && pip install -e .
-python -m spl ../../examples/policies/family_gifts.spl ../../examples/requests/gift_50_niece.json
-# → ALLOW
+pip install agent-safe-spl        # core (zero deps)
+pip install agent-safe-spl[crypto] # + Ed25519 signing
+```
+```python
+from spl import mint, verify_token, generate_keypair
+pub, priv = generate_keypair()
+token = mint(policy, priv, expires="2027-01-01T00:00:00Z")
+result = verify_token(token, request, vars={"allowed_recipients": [...]})
 ```
 
 ### Rust
 ```bash
-cd sdk/rust
-cargo run --example verify -- ../../examples/policies/family_gifts.spl ../../examples/requests/gift_50_niece.json
-# → ALLOW
+cargo add agent-safe-spl
 ```
 
 ### Java
 ```bash
-cd sdk/java && mvn test -B   # JUnit 5, 35 tests
+cd sdk/java && mvn install   # JDK 21+
 ```
 
 ### C#
 ```bash
-cd sdk/csharp && dotnet test  # xUnit, 35 tests
+cd sdk/csharp && dotnet build  # .NET 10+
 ```
+
+See `examples/e2e/` for full mint-verify-attenuate-seal lifecycle examples in TypeScript, Go, and Python.
 
 ## Tests
 

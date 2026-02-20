@@ -1,14 +1,37 @@
 {
-  "name": "@agentsafe/spl-verifier",
+  "name": "agent-safe-spl",
   "version": "0.1.0",
+  "description": "SPL (Safe Policy Lisp) evaluator for Agent-Safe capability tokens. 150 lines, zero deps, microseconds.",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/spl.js",
+  "types": "dist/spl.d.ts",
+  "exports": {
+    ".": "./dist/spl.js",
+    "./verify": "./dist/verify.js",
+    "./crypto": "./dist/crypto.js",
+    "./token": "./dist/token.js"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "node --test dist/spl.test.js dist/crypto.test.js",
-    "demo": "node dist/index.js ../../examples/policies/family_gifts.spl ../../examples/requests/gift_50_niece.json"
+    "demo": "node dist/index.js ../../examples/policies/family_gifts.spl ../../examples/requests/gift_50_niece.json",
+    "prepublishOnly": "npm run build"
   },
+  "keywords": ["agent", "authorization", "capability", "token", "spl", "policy", "ai", "lisp"],
+  "author": "Jeremy McEntire",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmcentire/agent-safe.git",
+    "directory": "sdk/js"
+  },
+  "homepage": "https://jmcentire.github.io/agent-safe/",
   "devDependencies": {
     "@types/node": "^25.3.0",
     "typescript": "^5.9.3"
