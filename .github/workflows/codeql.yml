@@ -38,7 +38,11 @@ jobs:
         with:
           dotnet-version: "10.0"
 
-      - uses: github/codeql-action/autobuild@45580472a5bb82c4681c4ac726cfdb60060c2ee1 # v3
+      - if: matrix.language != 'java-kotlin'
+        uses: github/codeql-action/autobuild@45580472a5bb82c4681c4ac726cfdb60060c2ee1 # v3
+
+      - if: matrix.language == 'java-kotlin'
+        run: mvn compile -f sdk/java/pom.xml -q
 
       - uses: github/codeql-action/analyze@45580472a5bb82c4681c4ac726cfdb60060c2ee1 # v3
         with:
