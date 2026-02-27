@@ -2,8 +2,12 @@ namespace AgentSafe.Spl;
 
 public static class Parser
 {
+    private const int MaxPolicyBytes = 65536; // 64 KB
+
     public static Node Parse(string src)
     {
+        if (System.Text.Encoding.UTF8.GetByteCount(src) > MaxPolicyBytes)
+            throw new SplException($"policy exceeds maximum size of {MaxPolicyBytes} bytes");
         var tokens = Tokenize(src.Trim());
         if (tokens.Count == 0) throw new SplException("unexpected EOF");
         var pos = new int[] { 0 };

@@ -1,4 +1,4 @@
-use ed25519_dalek::{Signature, VerifyingKey};
+use ed25519_dalek::{Signature, SigningKey, VerifyingKey};
 use sha2::{Digest, Sha256};
 
 /// Verify an Ed25519 signature over a message.
@@ -49,6 +49,67 @@ pub fn verify_merkle_proof(leaf_data: &str, proof: &[MerkleProofStep], root_hex:
     }
 
     hex::encode(&current) == root_hex
+}
+
+/// HMAC-SHA256 (used internally for HKDF).
+fn hmac_sha256(key: &[u8], data: &[u8]) -> Vec<u8> {
+    const BLOCK_SIZE: usize = 64;
+    let mut key_block = [0u8; BLOCK_SIZE];
+    if key.len() > BLOCK_SIZE {
+        let h = sha256(key);
+        key_block[..h.len()].copy_from_slice(&h);
+    } else {
+        key_block[..key.len()].copy_from_slice(key);
+    }
+
+    let mut ipad: Vec<u8> = (0..BLOCK_SIZE).map(|i| 0x36 ^ key_block[i]).collect();
+    let mut opad: Vec<u8> = (0..BLOCK_SIZE).map(|i| 0x5c ^ key_block[i]).collect();
+
+    ipad.extend_from_slice(data);
+    let inner_hash = sha256(&ipad);
+    opad.extend_from_slice(&inner_hash);
+    sha256(&opad)
+}
+
+/// HKDF-SHA256 (RFC 5869) extract-and-expand. Zero external dependencies.
+fn hkdf_sha256(ikm: &[u8], salt: &[u8], info: &[u8], length: usize) -> Vec<u8> {
+    // Extract
+    let salt = if salt.is_empty() { vec![0u8; 32] } else { salt.to_vec() };
+    let prk = hmac_sha256(&salt, ikm);
+
+    // Expand
+    let mut out = Vec::new();
+    let mut prev = Vec::new();
+    let mut i = 1u8;
+    while out.len() < length {
+        let mut input = prev.clone();
+        input.extend_from_slice(info);
+        input.push(i);
+        prev = hmac_sha256(&prk, &input);
+        out.extend_from_slice(&prev);
+        i += 1;
+    }
+    out.truncate(length);
+    out
+}
+
+/// Derive a service-specific Ed25519 keypair using HKDF-SHA256.
+/// Provides unlinkability: different services see different public keys.
+pub fn derive_service_key(master_key_hex: &str, service_domain: &str) -> Result<(String, String), crate::types::SplError> {
+    let master_key = hex::decode(master_key_hex)
+        .map_err(|e| crate::types::SplError(format!("invalid master key hex: {e}")))?;
+    let salt = b"agent-safe-v1";
+    let info = service_domain.as_bytes();
+    let seed_bytes = hkdf_sha256(&master_key, salt, info, 32);
+    let seed: [u8; 32] = seed_bytes.try_into()
+        .map_err(|_| crate::types::SplError("HKDF output size mismatch".into()))?;
+
+    let signing_key = SigningKey::from_bytes(&seed);
+    let verifying_key = signing_key.verifying_key();
+    Ok((
+        hex::encode(verifying_key.as_bytes()),
+        hex::encode(signing_key.as_bytes()),
+    ))
 }
 
 /// Verify a hash chain receipt.

@@ -135,11 +135,9 @@ fn eval_op(op: &str, args: &[Node], env: &Env, st: &mut EvalState) -> SplResult 
                 _ => return Ok(Node::Nil),
             };
             // For non-req symbols, resolve them
-            if let Some(v) = env.vars.get(obj_name) {
-                if let Node::List(_) = v {
-                    // Can't get from a list by string key
-                    return Ok(Node::Nil);
-                }
+            if let Some(Node::List(_)) = env.vars.get(obj_name) {
+                // Can't get from a list by string key
+                return Ok(Node::Nil);
             }
             Ok(Node::Nil)
         }
@@ -183,13 +181,13 @@ fn resolve_symbol(name: &str, env: &Env) -> SplResult {
         "#t" => Ok(Node::Bool(true)),
         "#f" => Ok(Node::Bool(false)),
         "req" => {
-            // Convert req HashMap to a form the evaluator can use
-            // We use a special wrapper — return a map-like node
             Ok(Node::Str("__req__".into()))
         }
         "now" => {
             if let Some(v) = env.vars.get("now") {
                 Ok(v.clone())
+            } else if env.strict {
+                Err(SplError(format!("Unresolved symbol: {name}")))
             } else {
                 Ok(Node::Symbol(name.into()))
             }
@@ -197,6 +195,8 @@ fn resolve_symbol(name: &str, env: &Env) -> SplResult {
         _ => {
             if let Some(v) = env.vars.get(name) {
                 Ok(v.clone())
+            } else if env.strict {
+                Err(SplError(format!("Unresolved symbol: {name}")))
             } else {
                 Ok(Node::Symbol(name.into()))
             }

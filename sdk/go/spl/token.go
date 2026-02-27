@@ -2,6 +2,7 @@ package spl
 
 import (
 	"crypto/ed25519"
+	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -18,6 +19,7 @@ type Token struct {
 	Expires              string `json:"expires,omitempty"`
 	PublicKey            string `json:"public_key"`
 	Signature            string `json:"signature"`
+	PoPKey               string `json:"pop_key,omitempty"`
 }
 
 // GenerateKeypair creates a new Ed25519 keypair.
@@ -33,6 +35,18 @@ type MintOptions struct {
 	HashChainCommitment string
 	Sealed              bool
 	Expires             string
+	PoPKey              string
+}
+
+// SigningPayload builds the canonical signing payload for a token.
+// Covers all security-relevant fields so sealed, expires, merkle_root, and
+// hash_chain_commitment cannot be tampered with after signing.
+func SigningPayload(policy, merkleRoot, hashChainCommitment string, sealed bool, expires string) []byte {
+	sealedStr := "0"
+	if sealed {
+		sealedStr = "1"
+	}
+	return []byte(policy + "\x00" + merkleRoot + "\x00" + hashChainCommitment + "\x00" + sealedStr + "\x00" + expires)
 }
 
 // Mint creates a signed capability token.
@@ -48,8 +62,8 @@ func Mint(policy string, privateKeyHex string, opts MintOptions) (*Token, error)
 	priv := ed25519.NewKeyFromSeed(seed)
 	pub := priv.Public().(ed25519.PublicKey)
 
-	policyBytes := []byte(policy)
-	sig := ed25519.Sign(priv, policyBytes)
+	payload := SigningPayload(policy, opts.MerkleRoot, opts.HashChainCommitment, opts.Sealed, opts.Expires)
+	sig := ed25519.Sign(priv, payload)
 
 	return &Token{
 		Version:             "0.1.0",
@@ -60,7 +74,25 @@ func Mint(policy string, privateKeyHex string, opts MintOptions) (*Token, error)
 		Expires:             opts.Expires,
 		PublicKey:           hex.EncodeToString(pub),
 		Signature:           hex.EncodeToString(sig),
+		PoPKey:              opts.PoPKey,
 	}, nil
+}
+
+// CreatePresentationSignature creates a PoP presentation signature for a token.
+// The agent signs SHA-256(signing_payload) with its own Ed25519 key.
+func CreatePresentationSignature(t *Token, agentPrivateKeyHex string) (string, error) {
+	seed, err := hex.DecodeString(agentPrivateKeyHex)
+	if err != nil {
+		return "", fmt.Errorf("invalid agent private key hex: %w", err)
+	}
+	if len(seed) != ed25519.SeedSize {
+		return "", fmt.Errorf("agent private key must be %d bytes, got %d", ed25519.SeedSize, len(seed))
+	}
+	priv := ed25519.NewKeyFromSeed(seed)
+	payload := SigningPayload(t.Policy, t.MerkleRoot, t.HashChainCommitment, t.Sealed, t.Expires)
+	h := sha256.Sum256(payload)
+	sig := ed25519.Sign(priv, h[:])
+	return hex.EncodeToString(sig), nil
 }
 
 // VerifyTokenOptions configures token verification.
@@ -73,7 +105,8 @@ type VerifyTokenOptions struct {
 		VRFOk    func(day string, amount float64) bool
 		ThreshOk func() bool
 	}
-	Now string
+	Now                    string
+	PresentationSignature  string
 }
 
 // VerifyTokenResult is the result of token verification.
@@ -111,9 +144,21 @@ func VerifyTokenObj(t *Token, req map[string]any, opts VerifyTokenOptions) Verif
 		}
 	}
 
-	// Verify signature
-	if !VerifyEd25519([]byte(t.Policy), t.Signature, t.PublicKey) {
+	// Verify signature over full token envelope
+	payload := SigningPayload(t.Policy, t.MerkleRoot, t.HashChainCommitment, t.Sealed, t.Expires)
+	if !VerifyEd25519(payload, t.Signature, t.PublicKey) {
 		return VerifyTokenResult{Allow: false, Sealed: t.Sealed, Error: "invalid signature"}
+	}
+
+	// PoP binding: if token has pop_key, require and verify presentation signature
+	if t.PoPKey != "" {
+		if opts.PresentationSignature == "" {
+			return VerifyTokenResult{Allow: false, Sealed: t.Sealed, Error: "PoP binding requires presentation signature"}
+		}
+		h := sha256.Sum256(payload)
+		if !VerifyEd25519(h[:], opts.PresentationSignature, t.PoPKey) {
+			return VerifyTokenResult{Allow: false, Sealed: t.Sealed, Error: "invalid presentation signature"}
+		}
 	}
 
 	// Parse policy
@@ -129,19 +174,19 @@ func VerifyTokenObj(t *Token, req map[string]any, opts VerifyTokenOptions) Verif
 	}
 	dpopOk := opts.Crypto.DPoPOk
 	if dpopOk == nil {
-		dpopOk = func() bool { return true }
+		dpopOk = func() bool { return false }
 	}
 	merkleOk := opts.Crypto.MerkleOk
 	if merkleOk == nil {
-		merkleOk = func(_ []any) bool { return true }
+		merkleOk = func(_ []any) bool { return false }
 	}
 	vrfOk := opts.Crypto.VRFOk
 	if vrfOk == nil {
-		vrfOk = func(_ string, _ float64) bool { return true }
+		vrfOk = func(_ string, _ float64) bool { return false }
 	}
 	threshOk := opts.Crypto.ThreshOk
 	if threshOk == nil {
-		threshOk = func() bool { return true }
+		threshOk = func() bool { return false }
 	}
 
 	vars := opts.Vars

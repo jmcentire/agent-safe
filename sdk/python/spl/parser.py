@@ -55,8 +55,13 @@ def _atom(tok: str) -> AST:
     return tok
 
 
+MAX_POLICY_BYTES = 65536  # 64 KB
+
+
 def parse(src: str) -> AST:
     """Parse an SPL S-expression string into an AST."""
+    if len(src.encode("utf-8")) > MAX_POLICY_BYTES:
+        raise SyntaxError(f"policy exceeds maximum size of {MAX_POLICY_BYTES} bytes")
     tokens = tokenize(src.strip())
     if not tokens:
         raise SyntaxError("unexpected EOF")

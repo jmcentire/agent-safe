@@ -467,6 +467,64 @@ func TestErrorPropagationInGet(t *testing.T) {
 	}
 }
 
+// --- Fail-closed crypto defaults ---
+
+func TestCryptoDefaultsFailClosed(t *testing.T) {
+	// Env with NO crypto callbacks set — should default to false
+	env := Env{
+		Req:         map[string]any{},
+		Vars:        map[string]any{},
+		PerDayCount: func(_, _ string) int { return 0 },
+	}
+	ok, err := evalExpr(t, "(dpop_ok?)", env)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ok {
+		t.Fatal("expected false: crypto defaults should be fail-closed")
+	}
+}
+
+// --- Strict mode tests ---
+
+func TestStrictModeRejectsUnresolved(t *testing.T) {
+	env := makeEnv()
+	env.Strict = true
+	_, err := evalExpr(t, `(= "foo" unbound_var)`, env)
+	if err == nil {
+		t.Fatal("expected error for unresolved symbol in strict mode")
+	}
+	if !strings.Contains(err.Error(), "unresolved symbol") {
+		t.Fatalf("expected 'unresolved symbol' error, got: %v", err)
+	}
+}
+
+func TestNonStrictAllowsUnresolved(t *testing.T) {
+	env := makeEnv()
+	ok, err := evalExpr(t, `(= "foo" unbound_var)`, env)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ok {
+		t.Fatal("expected false: unresolved symbol should not match string")
+	}
+}
+
+// --- Type-aware equality tests ---
+
+func TestEqualityTypeAware(t *testing.T) {
+	env := makeEnv()
+	// Number 50 should NOT equal string "50"
+	env.Vars["str_fifty"] = "50"
+	ok, err := evalExpr(t, `(= 50 str_fifty)`, env)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ok {
+		t.Fatal("expected false: number 50 should not equal string '50'")
+	}
+}
+
 // --- Integration test ---
 
 func TestFamilyGiftsPolicy(t *testing.T) {

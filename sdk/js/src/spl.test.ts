@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import * as assert from 'node:assert/strict';
-import { parseSExpr, evalPolicy } from './spl.js';
+import { parseSExpr, evalPolicy, Sym } from './spl.js';
 import { verify } from './verify.js';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -14,7 +14,7 @@ function makeEnv() {
     now: '2025-10-01T00:00:00Z',
     per_day_count: (_action: string, _day: string) => 0,
     crypto: {
-      dpop_ok: () => true,
+      dpop_ok: () => true,     // explicit opt-in for tests
       merkle_ok: (_tuple: any) => true,
       vrf_ok: (_day: string, _amount: number) => true,
       thresh_ok: () => true,
@@ -47,14 +47,17 @@ describe('Parser', () => {
   });
 
   it('parses symbols', () => {
-    assert.equal(parseSExpr('foo'), 'foo');
+    const s = parseSExpr('foo');
+    assert.ok(s instanceof Sym);
+    assert.equal((s as Sym).name, 'foo');
   });
 
   it('parses lists', () => {
     const ast = parseSExpr('(and #t #f)');
     assert.ok(Array.isArray(ast));
     assert.equal((ast as any[]).length, 3);
-    assert.equal((ast as any[])[0], 'and');
+    assert.ok((ast as any[])[0] instanceof Sym);
+    assert.equal(((ast as any[])[0] as Sym).name, 'and');
   });
 
   it('parses nested lists', () => {
@@ -62,7 +65,8 @@ describe('Parser', () => {
     assert.ok(Array.isArray(ast));
     const inner = (ast as any[])[1];
     assert.ok(Array.isArray(inner));
-    assert.equal(inner[0], '=');
+    assert.ok(inner[0] instanceof Sym);
+    assert.equal((inner[0] as Sym).name, '=');
   });
 
   it('parses strings with spaces', () => {
@@ -163,9 +167,21 @@ describe('Eval', () => {
     assert.equal(allow, true);
   });
 
-  it('crypto stubs', () => {
+  it('crypto callbacks (explicit true)', () => {
     assert.equal(evalExpr('(dpop_ok?)'), true);
     assert.equal(evalExpr('(thresh_ok?)'), true);
+  });
+
+  it('crypto defaults are fail-closed', () => {
+    const env = {
+      vars: {},
+      now: '2025-10-01T00:00:00Z',
+      per_day_count: (_action: string, _day: string) => 0,
+      crypto: {},
+    };
+    const ast = parseSExpr('(dpop_ok?)');
+    const { allow } = verify(ast, {}, env);
+    assert.equal(allow, false);
   });
 
   it('unknown op throws', () => {
@@ -186,6 +202,22 @@ describe('Gas budget', () => {
     const env = makeEnv();
     (env as any).maxGas = 100;
     assert.equal(evalExpr('(and #t #t)', env), true);
+  });
+});
+
+// --- Strict mode tests ---
+
+describe('Strict mode', () => {
+  it('errors on unresolved symbol when strict', () => {
+    const env = makeEnv();
+    (env as any).strict = true;
+    assert.throws(() => evalExpr('(= "foo" unbound_var)', env), /Unresolved symbol: unbound_var/);
+  });
+
+  it('allows unresolved symbols when not strict', () => {
+    const env = makeEnv();
+    // unbound_var resolves to "unbound_var" string, which != "foo"
+    assert.equal(evalExpr('(= "foo" unbound_var)', env), false);
   });
 });
 
