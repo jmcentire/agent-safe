@@ -133,9 +133,17 @@ class SplTest {
         assertTrue(evalExpr("(= (get req \"actor_pub\") \"K_ai\")"));
     }
 
-    @Test void cryptoStubs() {
-        assertTrue(evalExpr("(dpop_ok?)"));
-        assertTrue(evalExpr("(thresh_ok?)"));
+    @Test void cryptoStubsDefaultFalse() {
+        assertFalse(evalExpr("(dpop_ok?)"));
+        assertFalse(evalExpr("(thresh_ok?)"));
+    }
+
+    @Test void cryptoStubsExplicitTrue() {
+        Env env = makeEnv();
+        env.crypto.dpopOk = () -> true;
+        env.crypto.threshOk = () -> true;
+        assertTrue(evalExpr("(dpop_ok?)", env));
+        assertTrue(evalExpr("(thresh_ok?)", env));
     }
 
     @Test void unknownOp() {
@@ -164,6 +172,9 @@ class SplTest {
                 java.nio.file.Path.of("../../examples/policies/family_gifts.spl"))).trim();
             Node ast = Parser.parse(policySrc);
             Env env = makeEnv();
+            env.crypto.dpopOk = () -> true;
+            env.crypto.merkleOk = (t) -> true;
+            env.crypto.vrfOk = (d, a) -> true;
             assertTrue(Verifier.verify(ast, env).allow());
         } catch (Exception e) {
             // Skip if files not found
