@@ -39,7 +39,9 @@ pub struct MintOptions {
 /// Generate an Ed25519 keypair.
 /// Returns (public_key_hex, private_key_hex).
 pub fn generate_keypair() -> (String, String) {
-    let signing_key = SigningKey::generate(&mut rand::rngs::OsRng);
+    let mut seed = [0u8; 32];
+    getrandom::fill(&mut seed).expect("OS RNG failed");
+    let signing_key = SigningKey::from_bytes(&seed);
     let verifying_key = signing_key.verifying_key();
     (
         hex::encode(verifying_key.as_bytes()),
