@@ -66,7 +66,7 @@ func Mint(policy string, privateKeyHex string, opts MintOptions) (*Token, error)
 	sig := ed25519.Sign(priv, payload)
 
 	return &Token{
-		Version:             "0.1.0",
+		Version:             "0.2.0",
 		Policy:              policy,
 		MerkleRoot:          opts.MerkleRoot,
 		HashChainCommitment: opts.HashChainCommitment,

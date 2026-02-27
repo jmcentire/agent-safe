@@ -86,7 +86,7 @@ pub fn mint(policy: &str, private_key_hex: &str, opts: MintOptions) -> Result<To
     let signature = signing_key.sign(&payload);
 
     Ok(Token {
-        version: "0.1.0".to_string(),
+        version: "0.2.0".to_string(),
         policy: policy.trim().to_string(),
         merkle_root: opts.merkle_root,
         hash_chain_commitment: opts.hash_chain_commitment,
