@@ -1,10 +1,11 @@
 """Real crypto implementations for SPL token verification.
 
 Ed25519: requires `cryptography` package (optional dependency).
-Merkle/hash-chain: uses stdlib hashlib only.
+Merkle/hash-chain/HKDF: uses stdlib hashlib + hmac only.
 """
 
 import hashlib
+import hmac
 import json
 from typing import Any
 
@@ -71,6 +72,50 @@ def hash_tuple(values: list[Any]) -> str:
     """Hash a tuple by JSON-serializing then SHA-256."""
     serialized = json.dumps(values, separators=(",", ":"))
     return sha256_hex(serialized.encode("utf-8"))
+
+
+def _hkdf_sha256(ikm: bytes, salt: bytes, info: bytes, length: int) -> bytes:
+    """HKDF-SHA256 (RFC 5869) extract-and-expand. Zero external dependencies."""
+    # Extract
+    if not salt:
+        salt = b"\x00" * 32
+    prk = hmac.new(salt, ikm, hashlib.sha256).digest()
+    # Expand
+    out = b""
+    prev = b""
+    i = 1
+    while len(out) < length:
+        prev = hmac.new(prk, prev + info + bytes([i]), hashlib.sha256).digest()
+        out += prev
+        i += 1
+    return out[:length]
+
+
+def derive_service_key(master_key_hex: str, service_domain: str) -> tuple[str, str]:
+    """Derive a service-specific Ed25519 keypair using HKDF-SHA256.
+
+    Provides unlinkability: different services see different public keys.
+
+    Args:
+        master_key_hex: 32-byte master private key seed (hex)
+        service_domain: Service identifier (e.g. "api.example.com")
+
+    Returns:
+        (public_key_hex, private_key_hex)
+
+    Requires the `cryptography` package for Ed25519 key generation.
+    """
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+    from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
+
+    master_key = bytes.fromhex(master_key_hex)
+    salt = b"agent-safe-v1"
+    info = service_domain.encode("utf-8")
+    seed = _hkdf_sha256(master_key, salt, info, 32)
+
+    private_key = Ed25519PrivateKey.from_private_bytes(seed)
+    pub_bytes = private_key.public_key().public_bytes(Encoding.Raw, PublicFormat.Raw)
+    return pub_bytes.hex(), seed.hex()
 
 
 def verify_hash_chain(

@@ -31,9 +31,15 @@ fn make_env() -> Env {
         req,
         vars,
         per_day_count: Box::new(|_, _| 0),
-        crypto: CryptoCallbacks::default(),
+        crypto: CryptoCallbacks {
+            dpop_ok: Box::new(|| true),
+            merkle_ok: Box::new(|_| true),
+            vrf_ok: Box::new(|_, _| true),
+            thresh_ok: Box::new(|| true),
+        },
         max_gas: 10_000,
         sealed: false,
+        strict: false,
     }
 }
 
@@ -161,9 +167,18 @@ fn test_get() {
 }
 
 #[test]
-fn test_crypto_stubs() {
+fn test_crypto_callbacks() {
+    // make_env() explicitly provides true callbacks
     assert!(eval_expr("(dpop_ok?)", make_env()).unwrap());
     assert!(eval_expr("(thresh_ok?)", make_env()).unwrap());
+}
+
+#[test]
+fn test_crypto_defaults_fail_closed() {
+    let env = Env::default();
+    let ast = parse("(dpop_ok?)").unwrap();
+    let result = verify(&ast, &env).unwrap();
+    assert!(!result.allow, "default crypto should be fail-closed");
 }
 
 #[test]
@@ -279,6 +294,19 @@ fn test_merkle_proof() {
         let result = crypto::verify_merkle_proof(leaf, &proof, root);
         assert_eq!(result, expected, "case: {}", case["name"]);
     }
+}
+
+#[test]
+fn test_hkdf_derive_service_key() {
+    let master = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    let (pub_key, priv_key) = crypto::derive_service_key(master, "api.example.com").unwrap();
+    // Cross-SDK parity: must match JS, Go, Python outputs
+    assert_eq!(pub_key, "7f8bf4b326530be3d1173a44f0fdc2a66ff8762a8eaf162ddb54a9f43cf99aff");
+    assert_eq!(priv_key, "6835ca3b2483ebb3c6ac5150edf58b2178adb6f879db439ded8bec3bee49a654");
+
+    // Different service domains produce different keys
+    let (pub2, _) = crypto::derive_service_key(master, "other.example.com").unwrap();
+    assert_ne!(pub_key, pub2);
 }
 
 #[test]

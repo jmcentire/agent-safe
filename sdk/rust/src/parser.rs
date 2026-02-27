@@ -1,7 +1,12 @@
 use crate::types::{Node, SplError};
 
+const MAX_POLICY_BYTES: usize = 65536; // 64 KB
+
 /// Parse an SPL S-expression string into an AST Node.
 pub fn parse(src: &str) -> Result<Node, SplError> {
+    if src.len() > MAX_POLICY_BYTES {
+        return Err(SplError(format!("policy exceeds maximum size of {MAX_POLICY_BYTES} bytes")));
+    }
     let tokens = tokenize(src.trim());
     if tokens.is_empty() {
         return Err(SplError("unexpected EOF".into()));

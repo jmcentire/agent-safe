@@ -1,10 +1,18 @@
 // Minimal S-expression parser & evaluator for SPL subset
-type S = string | number | boolean | S[];
+export class Sym {
+  constructor(public name: string) {}
+  toString() { return this.name; }
+}
+type S = string | number | boolean | Sym | S[];
 
 const DEFAULT_MAX_GAS = 10000;
 const MAX_DEPTH = 64;
+const MAX_POLICY_BYTES = 65536; // 64 KB
 
 export function parseSExpr(src: string): S {
+  if (Buffer.byteLength(src, 'utf8') > MAX_POLICY_BYTES) {
+    throw new Error('policy exceeds maximum size of ' + MAX_POLICY_BYTES + ' bytes');
+  }
   const tokens = tokenize(src);
   let i = 0;
 
@@ -13,7 +21,7 @@ export function parseSExpr(src: string): S {
     if (tok === '#f') return false;
     if (/^-?\d+(\.\d+)?$/.test(tok)) return Number(tok);
     if (tok.startsWith('"') && tok.endsWith('"')) return JSON.parse(tok);
-    return tok;
+    return new Sym(tok);
   }
 
   function parse(): S {
@@ -90,10 +98,14 @@ function evalS(node: S, ctx: any): any {
 }
 
 function evalInner(node: S, ctx: any): any {
-  if (!Array.isArray(node)) return resolveSymbol(node, ctx);
+  if (!Array.isArray(node)) {
+    if (node instanceof Sym) return resolveSymbol(node, ctx);
+    return node; // literal value (string, number, boolean)
+  }
   if (node.length === 0) return null;
   const [op, ...args] = node;
-  switch (op) {
+  const opName = op instanceof Sym ? op.name : op;
+  switch (opName) {
     case 'and': return args.every(a => truthy(evalS(a, ctx)));
     case 'or': return args.some(a => truthy(evalS(a, ctx)));
     case 'not': return !truthy(evalS(args[0], ctx));
@@ -120,7 +132,7 @@ function evalInner(node: S, ctx: any): any {
       return a < b;
     }
     case 'get': {
-      const obj = resolveSymbol(args[0], ctx);
+      const obj = args[0] instanceof Sym ? resolveSymbol(args[0], ctx) : evalS(args[0], ctx);
       const key = evalS(args[1], ctx);
       return obj?.[key];
     }
@@ -145,12 +157,15 @@ function evalInner(node: S, ctx: any): any {
 }
 
 function resolveSymbol(x: S, ctx: any): any {
-  if (typeof x === 'string') {
-    if (x === '#t') return true;
-    if (x === '#f') return false;
-    if (x === 'req') return ctx.req;
-    if (x === 'now') return ctx.vars?.now ?? x;
-    if (ctx.vars && x in ctx.vars) return ctx.vars[x];
+  if (x instanceof Sym) {
+    const name = x.name;
+    if (name === '#t') return true;
+    if (name === '#f') return false;
+    if (name === 'req') return ctx.req;
+    if (name === 'now') return ctx.vars?.now ?? name;
+    if (ctx.vars && name in ctx.vars) return ctx.vars[name];
+    if (ctx.strict) throw new Error('Unresolved symbol: ' + name);
+    return name;
   }
   return x;
 }

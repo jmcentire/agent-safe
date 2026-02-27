@@ -19,3 +19,6 @@ sdk/java/target/
 # C#
 bin/
 obj/
+
+# Internal planning
+AUDIT_PLAN.md

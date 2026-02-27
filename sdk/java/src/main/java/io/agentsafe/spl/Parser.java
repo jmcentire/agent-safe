@@ -7,9 +7,14 @@ import java.util.List;
  * Tokenizer and recursive-descent parser for SPL S-expressions.
  */
 public final class Parser {
+    private static final int MAX_POLICY_BYTES = 65536; // 64 KB
+
     private Parser() {}
 
     public static Node parse(String src) {
+        if (src.getBytes(java.nio.charset.StandardCharsets.UTF_8).length > MAX_POLICY_BYTES) {
+            throw new SplException("policy exceeds maximum size of " + MAX_POLICY_BYTES + " bytes");
+        }
         List<String> tokens = tokenize(src.trim());
         if (tokens.isEmpty()) throw new SplException("unexpected EOF");
         int[] pos = {0};
