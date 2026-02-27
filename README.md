@@ -1,5 +1,7 @@
 # Agent-Safe
 
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/12052/badge)](https://www.bestpractices.dev/projects/12052)
+
 **Embed authorization in the token. 150 lines. Zero deps. Microseconds.**
 
 Agent-Safe defines **SPL (Safe Policy Lisp)** — a tiny S-expression policy language that travels inside signed capability tokens. A verifier calls one function and gets a deterministic yes or no. No policy server. No round-trip. No dependencies.
