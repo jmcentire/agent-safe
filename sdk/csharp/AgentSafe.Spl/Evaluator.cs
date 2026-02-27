@@ -125,7 +125,11 @@ public class Evaluator
         "#t" => Node.Bool(true),
         "#f" => Node.Bool(false),
         "req" => Node.Str("__req__"),
-        "now" => _env.Vars.TryGetValue("now", out var v) ? v : Node.Sym(name),
-        _ => _env.Vars.TryGetValue(name, out var val) ? val : Node.Sym(name)
+        "now" => _env.Vars.TryGetValue("now", out var v) ? v
+            : _env.Strict ? throw new SplException($"Unresolved symbol: {name}")
+            : Node.Sym(name),
+        _ => _env.Vars.TryGetValue(name, out var val) ? val
+            : _env.Strict ? throw new SplException($"Unresolved symbol: {name}")
+            : Node.Sym(name)
     };
 }

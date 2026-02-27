@@ -2,6 +2,7 @@ package spl
 
 import (
 	"crypto/ed25519"
+	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
@@ -63,6 +64,47 @@ func HashTuple(tuple []any) string {
 	}
 	h := sha256.Sum256(b)
 	return hex.EncodeToString(h[:])
+}
+
+// hkdfSHA256 implements HKDF-SHA256 (RFC 5869) extract-and-expand.
+// Zero external dependencies.
+func hkdfSHA256(ikm, salt, info []byte, length int) []byte {
+	// Extract: PRK = HMAC-SHA256(salt, ikm)
+	if len(salt) == 0 {
+		salt = make([]byte, sha256.Size)
+	}
+	mac := hmac.New(sha256.New, salt)
+	mac.Write(ikm)
+	prk := mac.Sum(nil)
+
+	// Expand: output = T(1) || T(2) || ...
+	var out []byte
+	var prev []byte
+	for i := 1; len(out) < length; i++ {
+		mac = hmac.New(sha256.New, prk)
+		mac.Write(prev)
+		mac.Write(info)
+		mac.Write([]byte{byte(i)})
+		prev = mac.Sum(nil)
+		out = append(out, prev...)
+	}
+	return out[:length]
+}
+
+// DeriveServiceKey derives a service-specific Ed25519 keypair using HKDF-SHA256.
+// Provides unlinkability: different services see different public keys.
+func DeriveServiceKey(masterKeyHex, serviceDomain string) (publicKeyHex, privateKeyHex string, err error) {
+	masterKey, err := hex.DecodeString(masterKeyHex)
+	if err != nil {
+		return "", "", err
+	}
+	salt := []byte("agent-safe-v1")
+	info := []byte(serviceDomain)
+	seed := hkdfSHA256(masterKey, salt, info, ed25519.SeedSize)
+
+	priv := ed25519.NewKeyFromSeed(seed)
+	pub := priv.Public().(ed25519.PublicKey)
+	return hex.EncodeToString(pub), hex.EncodeToString(seed), nil
 }
 
 // VerifyHashChain checks that hashing preimageHex (chainLength - index) times

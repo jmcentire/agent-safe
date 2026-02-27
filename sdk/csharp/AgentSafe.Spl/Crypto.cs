@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+// HMACSHA256 is in System.Security.Cryptography
 
 namespace AgentSafe.Spl;
 
@@ -60,6 +61,51 @@ public static class Crypto
         {
             return false;
         }
+    }
+
+    /// <summary>HKDF-SHA256 (RFC 5869) extract-and-expand. Zero external dependencies.</summary>
+    private static byte[] HkdfSha256(byte[] ikm, byte[] salt, byte[] info, int length)
+    {
+        if (salt == null || salt.Length == 0) salt = new byte[32];
+        // Extract: PRK = HMAC-SHA256(salt, ikm)
+        using var extractMac = new HMACSHA256(salt);
+        var prk = extractMac.ComputeHash(ikm);
+
+        // Expand
+        var result = new byte[length];
+        var prev = Array.Empty<byte>();
+        var offset = 0;
+        for (byte i = 1; offset < length; i++)
+        {
+            using var expandMac = new HMACSHA256(prk);
+            expandMac.TransformBlock(prev, 0, prev.Length, null, 0);
+            expandMac.TransformBlock(info, 0, info.Length, null, 0);
+            expandMac.TransformFinalBlock(new[] { i }, 0, 1);
+            prev = expandMac.Hash!;
+            var toCopy = Math.Min(prev.Length, length - offset);
+            Array.Copy(prev, 0, result, offset, toCopy);
+            offset += toCopy;
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Derive a service-specific Ed25519 seed using HKDF-SHA256.
+    /// Returns (publicKeyHex, privateKeyHex) when Ed25519 is available.
+    /// Without AGENTSAFE_ED25519, returns only the derived seed hex.
+    /// </summary>
+    public static (string Seed, string? PublicKey) DeriveServiceSeed(string masterKeyHex, string serviceDomain)
+    {
+        var masterKey = Convert.FromHexString(masterKeyHex);
+        var salt = System.Text.Encoding.UTF8.GetBytes("agent-safe-v1");
+        var info = System.Text.Encoding.UTF8.GetBytes(serviceDomain);
+        var seed = HkdfSha256(masterKey, salt, info, 32);
+        var seedHex = Convert.ToHexString(seed).ToLowerInvariant();
+#if AGENTSAFE_ED25519
+        // When Ed25519 is available, derive the full keypair
+        // For now, return just the seed
+#endif
+        return (seedHex, null);
     }
 
 // Ed25519 is not yet available in the .NET standard library.

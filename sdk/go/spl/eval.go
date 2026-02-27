@@ -11,6 +11,7 @@ type Env struct {
 	MaxGas int
 	Depth  int
 	Sealed bool
+	Strict bool
 
 	PerDayCount func(action, day string) int
 	Crypto      struct {
@@ -32,6 +33,19 @@ func Verify(ast Node, env Env) (bool, error) {
 		env.MaxGas = DefaultMaxGas
 	}
 	env.Gas = env.MaxGas
+	// Ensure crypto callbacks are never nil (fail-closed defaults)
+	if env.Crypto.DPoPOk == nil {
+		env.Crypto.DPoPOk = func() bool { return false }
+	}
+	if env.Crypto.MerkleOk == nil {
+		env.Crypto.MerkleOk = func(_ []any) bool { return false }
+	}
+	if env.Crypto.VRFOk == nil {
+		env.Crypto.VRFOk = func(_ string, _ float64) bool { return false }
+	}
+	if env.Crypto.ThreshOk == nil {
+		env.Crypto.ThreshOk = func() bool { return false }
+	}
 	val, err := eval(ast, &env)
 	if err != nil {
 		return false, err
@@ -295,6 +309,9 @@ func resolveSymbol(name string, env *Env) (any, error) {
 		if v, ok := env.Vars["now"]; ok {
 			return v, nil
 		}
+		if env.Strict {
+			return nil, fmt.Errorf("unresolved symbol: %s", name)
+		}
 		return name, nil
 	case "#t":
 		return true, nil
@@ -305,6 +322,9 @@ func resolveSymbol(name string, env *Env) (any, error) {
 			if v, ok := env.Vars[name]; ok {
 				return v, nil
 			}
+		}
+		if env.Strict {
+			return nil, fmt.Errorf("unresolved symbol: %s", name)
 		}
 		return name, nil
 	}
@@ -322,7 +342,34 @@ func truthy(x any) bool {
 }
 
 func eq(a, b any) bool {
-	return fmt.Sprintf("%v", a) == fmt.Sprintf("%v", b)
+	switch av := a.(type) {
+	case bool:
+		bv, ok := b.(bool)
+		return ok && av == bv
+	case float64:
+		switch bv := b.(type) {
+		case float64:
+			return av == bv
+		case int:
+			return av == float64(bv)
+		}
+		return false
+	case int:
+		switch bv := b.(type) {
+		case int:
+			return av == bv
+		case float64:
+			return float64(av) == bv
+		}
+		return false
+	case string:
+		bv, ok := b.(string)
+		return ok && av == bv
+	case nil:
+		return b == nil
+	default:
+		return fmt.Sprintf("%v", a) == fmt.Sprintf("%v", b)
+	}
 }
 
 func cmp(args []Node, env *Env, op string) (any, error) {

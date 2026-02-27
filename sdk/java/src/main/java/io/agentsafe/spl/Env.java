@@ -14,4 +14,5 @@ public class Env {
     public CryptoCallbacks crypto = new CryptoCallbacks();
     public int maxGas = 10_000;
     public boolean sealed = false;
+    public boolean strict = false;
 }

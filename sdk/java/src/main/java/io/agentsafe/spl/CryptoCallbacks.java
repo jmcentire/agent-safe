@@ -9,14 +9,14 @@ import java.util.function.Supplier;
  * Crypto callback functions provided by the host.
  */
 public class CryptoCallbacks {
-    public Supplier<Boolean> dpopOk = () -> true;
-    public Function<List<Node>, Boolean> merkleOk = (tuple) -> true;
-    public BiFunction<String, Double, Boolean> vrfOk = (day, amount) -> true;
+    public Supplier<Boolean> dpopOk = () -> false;
+    public Function<List<Node>, Boolean> merkleOk = (tuple) -> false;
+    public BiFunction<String, Double, Boolean> vrfOk = (day, amount) -> false;
     /**
      * thresh_ok — Threshold co-signature verification.
      * Expected protocol: k-of-n co-signatures where the verifier checks each
      * signature against its corresponding public key and confirms count >= threshold.
      * Not implemented in v0.1 — remains an interface stub.
      */
-    public Supplier<Boolean> threshOk = () -> true;
+    public Supplier<Boolean> threshOk = () -> false;
 }

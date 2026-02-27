@@ -8,7 +8,12 @@ import (
 
 type Node interface{}
 
+const MaxPolicyBytes = 65536 // 64 KB
+
 func Parse(src string) (Node, error) {
+	if len(src) > MaxPolicyBytes {
+		return nil, fmt.Errorf("policy exceeds maximum size of %d bytes", MaxPolicyBytes)
+	}
 	toks := tokenize(src)
 	i := 0
 	var parse func() (Node, error)
