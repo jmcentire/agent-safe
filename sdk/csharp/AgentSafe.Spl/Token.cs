@@ -10,7 +10,7 @@ namespace AgentSafe.Spl;
 public class Token
 {
     [JsonPropertyName("version")]
-    public string Version { get; set; } = "0.1.0";
+    public string Version { get; set; } = "0.2.0";
 
     [JsonPropertyName("policy")]
     public string Policy { get; set; } = "";

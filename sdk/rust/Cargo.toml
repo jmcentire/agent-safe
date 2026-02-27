@@ -1,6 +1,6 @@
 [package]
 name = "agent-safe-spl"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 description = "SPL (Safe Policy Lisp) evaluator for Agent-Safe capability tokens. 150 lines, zero deps core, microseconds."
 license = "MIT"
