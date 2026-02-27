@@ -72,25 +72,30 @@ impl std::error::Error for SplError {}
 
 pub type SplResult = Result<Node, SplError>;
 
+type BoolCallback = Box<dyn Fn() -> bool>;
+type MerkleCallback = Box<dyn Fn(&[Node]) -> bool>;
+type VrfCallback = Box<dyn Fn(&str, f64) -> bool>;
+type CountCallback = Box<dyn Fn(&str, &str) -> i64>;
+
 /// Crypto callback functions provided by the host.
 pub struct CryptoCallbacks {
-    pub dpop_ok: Box<dyn Fn() -> bool>,
-    pub merkle_ok: Box<dyn Fn(&[Node]) -> bool>,
-    pub vrf_ok: Box<dyn Fn(&str, f64) -> bool>,
+    pub dpop_ok: BoolCallback,
+    pub merkle_ok: MerkleCallback,
+    pub vrf_ok: VrfCallback,
     /// thresh_ok — Threshold co-signature verification.
     /// Expected protocol: k-of-n co-signatures where the verifier checks each
     /// signature against its corresponding public key and confirms count >= threshold.
     /// Not implemented in v0.1 — remains an interface stub.
-    pub thresh_ok: Box<dyn Fn() -> bool>,
+    pub thresh_ok: BoolCallback,
 }
 
 impl Default for CryptoCallbacks {
     fn default() -> Self {
         Self {
-            dpop_ok: Box::new(|| true),
-            merkle_ok: Box::new(|_| true),
-            vrf_ok: Box::new(|_, _| true),
-            thresh_ok: Box::new(|| true),
+            dpop_ok: Box::new(|| false),
+            merkle_ok: Box::new(|_| false),
+            vrf_ok: Box::new(|_, _| false),
+            thresh_ok: Box::new(|| false),
         }
     }
 }
@@ -99,10 +104,11 @@ impl Default for CryptoCallbacks {
 pub struct Env {
     pub req: HashMap<String, Node>,
     pub vars: HashMap<String, Node>,
-    pub per_day_count: Box<dyn Fn(&str, &str) -> i64>,
+    pub per_day_count: CountCallback,
     pub crypto: CryptoCallbacks,
     pub max_gas: i64,
     pub sealed: bool,
+    pub strict: bool,
 }
 
 impl Default for Env {
@@ -114,6 +120,7 @@ impl Default for Env {
             crypto: CryptoCallbacks::default(),
             max_gas: 10_000,
             sealed: false,
+            strict: false,
         }
     }
 }

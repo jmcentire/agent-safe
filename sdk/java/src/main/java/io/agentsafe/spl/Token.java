@@ -17,6 +17,7 @@ public final class Token {
     public String expires;
     public String publicKey;
     public String signature;
+    public String popKey;
 
     /**
      * Generate an Ed25519 keypair.
@@ -52,6 +53,21 @@ public final class Token {
     }
 
     /**
+     * Build the canonical signing payload for a token.
+     * Covers all security-relevant fields so sealed, expires, merkle_root, and
+     * hash_chain_commitment cannot be tampered with after signing.
+     */
+    public static byte[] signingPayload(String policy, String merkleRoot, String hashChainCommitment,
+                                         boolean sealed, String expires) {
+        String joined = policy.trim() + "\0" +
+            (merkleRoot != null ? merkleRoot : "") + "\0" +
+            (hashChainCommitment != null ? hashChainCommitment : "") + "\0" +
+            (sealed ? "1" : "0") + "\0" +
+            (expires != null ? expires : "");
+        return joined.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+    }
+
+    /**
      * Mint a signed capability token with options.
      */
     public static Token mint(String policy, String privateKeyHex, boolean sealed, String expires) {
@@ -67,11 +83,11 @@ public final class Token {
             KeyFactory kf = KeyFactory.getInstance("Ed25519");
             PrivateKey privKey = kf.generatePrivate(new PKCS8EncodedKeySpec(privDer));
 
-            byte[] policyBytes = policy.trim().getBytes(java.nio.charset.StandardCharsets.UTF_8);
+            byte[] payload = signingPayload(policy, null, null, sealed, expires);
 
             Signature sig = Signature.getInstance("Ed25519");
             sig.initSign(privKey);
-            sig.update(policyBytes);
+            sig.update(payload);
             byte[] sigBytes = sig.sign();
 
             // Derive public key from private key
@@ -165,13 +181,64 @@ public final class Token {
     }
 
     /**
+     * Create a PoP presentation signature for a token.
+     * The agent signs SHA-256(signing_payload) with its own Ed25519 key.
+     */
+    public static String createPresentationSignature(Token t, String agentPrivateKeyHex) {
+        try {
+            byte[] seed = Crypto.hexToBytes(agentPrivateKeyHex);
+            byte[] pkcs8Prefix = Crypto.hexToBytes("302e020100300506032b657004220420");
+            byte[] privDer = new byte[pkcs8Prefix.length + seed.length];
+            System.arraycopy(pkcs8Prefix, 0, privDer, 0, pkcs8Prefix.length);
+            System.arraycopy(seed, 0, privDer, pkcs8Prefix.length, seed.length);
+
+            KeyFactory kf = KeyFactory.getInstance("Ed25519");
+            PrivateKey privKey = kf.generatePrivate(new PKCS8EncodedKeySpec(privDer));
+
+            byte[] payload = signingPayload(t.policy, t.merkleRoot, t.hashChainCommitment, t.sealed, t.expires);
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] popPayload = md.digest(payload);
+
+            Signature sig = Signature.getInstance("Ed25519");
+            sig.initSign(privKey);
+            sig.update(popPayload);
+            return Crypto.bytesToHex(sig.sign());
+        } catch (Exception e) {
+            throw new SplException("Failed to create presentation signature: " + e.getMessage());
+        }
+    }
+
+    /**
      * Verify a token's signature and evaluate its policy.
      */
     public static Verifier.Result verifyToken(Token t, Env env) {
-        // Verify signature
-        byte[] policyBytes = t.policy.getBytes(java.nio.charset.StandardCharsets.UTF_8);
-        if (!Crypto.verifyEd25519(policyBytes, t.signature, t.publicKey)) {
+        return verifyToken(t, env, null);
+    }
+
+    /**
+     * Verify a token's signature and evaluate its policy, with optional PoP.
+     */
+    public static Verifier.Result verifyToken(Token t, Env env, String presentationSignature) {
+        // Verify signature over full token envelope
+        byte[] payload = signingPayload(t.policy, t.merkleRoot, t.hashChainCommitment, t.sealed, t.expires);
+        if (!Crypto.verifyEd25519(payload, t.signature, t.publicKey)) {
             throw new SplException("invalid signature");
+        }
+
+        // PoP binding: if token has pop_key, require and verify presentation signature
+        if (t.popKey != null && !t.popKey.isEmpty()) {
+            if (presentationSignature == null || presentationSignature.isEmpty()) {
+                throw new SplException("PoP binding requires presentation signature");
+            }
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA-256");
+                byte[] popPayload = md.digest(payload);
+                if (!Crypto.verifyEd25519(popPayload, presentationSignature, t.popKey)) {
+                    throw new SplException("invalid presentation signature");
+                }
+            } catch (java.security.NoSuchAlgorithmException e) {
+                throw new SplException("SHA-256 not available");
+            }
         }
 
         // Parse and evaluate

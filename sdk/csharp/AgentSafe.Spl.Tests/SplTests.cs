@@ -134,7 +134,17 @@ public class SplTests
     }
 
     [Fact] public void Get() => Assert.True(EvalExpr("(= (get req \"actor_pub\") \"K_ai\")"));
-    [Fact] public void CryptoStubs() { Assert.True(EvalExpr("(dpop_ok?)")); Assert.True(EvalExpr("(thresh_ok?)")); }
+    [Fact] public void CryptoStubsDefaultFalse() { Assert.False(EvalExpr("(dpop_ok?)")); Assert.False(EvalExpr("(thresh_ok?)")); }
+
+    [Fact]
+    public void CryptoStubsExplicitTrue()
+    {
+        var env = MakeEnv();
+        env.Crypto.DpopOk = () => true;
+        env.Crypto.ThreshOk = () => true;
+        Assert.True(EvalExpr("(dpop_ok?)", env));
+        Assert.True(EvalExpr("(thresh_ok?)", env));
+    }
     [Fact] public void UnknownOp() => Assert.Throws<SplException>(() => EvalExpr("(bogus 1 2)"));
 
     // --- Gas budget tests ---
@@ -162,6 +172,9 @@ public class SplTests
         if (!File.Exists(policyPath)) return;
         var ast = Parser.Parse(File.ReadAllText(policyPath).Trim());
         var env = MakeEnv();
+        env.Crypto.DpopOk = () => true;
+        env.Crypto.MerkleOk = _ => true;
+        env.Crypto.VrfOk = (_, _) => true;
         Assert.True(Verifier.Verify(ast, env).Allow);
     }
 

@@ -151,11 +151,15 @@ public final class Evaluator {
             case "req" -> Node.str("__req__");
             case "now" -> {
                 Node v = env.vars.get("now");
-                yield v != null ? v : Node.sym(name);
+                if (v != null) yield v;
+                if (env.strict) throw new SplException("Unresolved symbol: " + name);
+                yield Node.sym(name);
             }
             default -> {
                 Node v = env.vars.get(name);
-                yield v != null ? v : Node.sym(name);
+                if (v != null) yield v;
+                if (env.strict) throw new SplException("Unresolved symbol: " + name);
+                yield Node.sym(name);
             }
         };
     }

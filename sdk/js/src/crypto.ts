@@ -3,7 +3,7 @@
  * Uses only node:crypto (zero external deps).
  */
 
-import { createHash, verify as cryptoVerify } from 'node:crypto';
+import { createHash, verify as cryptoVerify, hkdfSync, generateKeyPairSync, createPrivateKey, createPublicKey } from 'node:crypto';
 
 function toHex(buf: Uint8Array): string {
   return Buffer.from(buf).toString('hex');
@@ -89,6 +89,39 @@ export function verifyMerkleProof(
 export function hashTuple(tuple: any[]): string {
   const serialized = JSON.stringify(tuple);
   return toHex(sha256(serialized));
+}
+
+/**
+ * Derive a service-specific Ed25519 keypair using HKDF-SHA256.
+ * Provides unlinkability: different services see different public keys.
+ *
+ * @param masterKeyHex - 32-byte master private key seed (hex)
+ * @param serviceDomain - Service identifier (e.g. "api.example.com")
+ * @returns { publicKey: hex, privateKey: hex }
+ */
+export function deriveServiceKey(
+  masterKeyHex: string,
+  serviceDomain: string,
+): { publicKey: string; privateKey: string } {
+  const masterKey = Buffer.from(masterKeyHex, 'hex');
+  const salt = Buffer.from('agent-safe-v1', 'utf8');
+  const info = Buffer.from(serviceDomain, 'utf8');
+
+  const derived = hkdfSync('sha256', masterKey, salt, info, 32);
+  const seed = Buffer.from(derived);
+
+  // Build Ed25519 private key from derived seed
+  const pkcs8Prefix = Buffer.from('302e020100300506032b657004220420', 'hex');
+  const privDer = Buffer.concat([pkcs8Prefix, seed]);
+  const keyObj = createPrivateKey({ key: privDer, format: 'der', type: 'pkcs8' });
+  const pubKey = createPublicKey(keyObj);
+  const pubDer = pubKey.export({ type: 'spki', format: 'der' });
+  const pubRaw = pubDer.subarray(12);
+
+  return {
+    publicKey: Buffer.from(pubRaw).toString('hex'),
+    privateKey: seed.toString('hex'),
+  };
 }
 
 /**

@@ -135,18 +135,18 @@ def _eval_inner(node: Any, ctx: dict, st: _EvalState) -> Any:
 
     if op == "dpop_ok?":
         fn = crypto.get("dpop_ok") if isinstance(crypto, dict) else getattr(crypto, "dpop_ok", None)
-        return fn() if fn else True
+        return fn() if fn else False
 
     if op == "merkle_ok?":
         evaluated = [_eval(a, ctx, st) for a in args]
         fn = crypto.get("merkle_ok") if isinstance(crypto, dict) else getattr(crypto, "merkle_ok", None)
-        return fn(evaluated) if fn else True
+        return fn(evaluated) if fn else False
 
     if op == "vrf_ok?":
         day = _eval(args[0], ctx, st)
         amount = _eval(args[1], ctx, st)
         fn = crypto.get("vrf_ok") if isinstance(crypto, dict) else getattr(crypto, "vrf_ok", None)
-        return fn(str(day), _to_float(amount)) if fn else True
+        return fn(str(day), _to_float(amount)) if fn else False
 
     # thresh_ok? — Threshold co-signature verification.
     # Expected protocol: k-of-n co-signatures where the verifier checks each
@@ -155,7 +155,7 @@ def _eval_inner(node: Any, ctx: dict, st: _EvalState) -> Any:
     # implementation via the crypto callbacks when integrating.
     if op == "thresh_ok?":
         fn = crypto.get("thresh_ok") if isinstance(crypto, dict) else getattr(crypto, "thresh_ok", None)
-        return fn() if fn else True
+        return fn() if fn else False
 
     raise SPLError(f"Unknown op: {op}")
 
@@ -170,10 +170,16 @@ def _resolve_symbol(x: Any, ctx: dict) -> Any:
             return ctx.get("req", {})
         if x == "now":
             v = ctx.get("vars", {})
-            return v.get("now", x) if isinstance(v, dict) else x
+            if isinstance(v, dict) and "now" in v:
+                return v["now"]
+            if ctx.get("strict"):
+                raise SPLError(f"Unresolved symbol: {x}")
+            return x
         v = ctx.get("vars", {})
         if isinstance(v, dict) and x in v:
             return v[x]
+        if ctx.get("strict"):
+            raise SPLError(f"Unresolved symbol: {x}")
     return x
 
 

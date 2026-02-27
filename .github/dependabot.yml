@@ -1,0 +1,43 @@
+version: 2
+updates:
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # TypeScript (npm)
+  - package-ecosystem: "npm"
+    directory: "/sdk/js"
+    schedule:
+      interval: "weekly"
+
+  # Go
+  - package-ecosystem: "gomod"
+    directory: "/sdk/go"
+    schedule:
+      interval: "weekly"
+
+  # Python (pip)
+  - package-ecosystem: "pip"
+    directory: "/sdk/python"
+    schedule:
+      interval: "weekly"
+
+  # Rust (cargo)
+  - package-ecosystem: "cargo"
+    directory: "/sdk/rust"
+    schedule:
+      interval: "weekly"
+
+  # Java (maven)
+  - package-ecosystem: "maven"
+    directory: "/sdk/java"
+    schedule:
+      interval: "weekly"
+
+  # C# (nuget)
+  - package-ecosystem: "nuget"
+    directory: "/sdk/csharp"
+    schedule:
+      interval: "weekly"

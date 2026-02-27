@@ -34,7 +34,7 @@ go run ./verify ../../examples/policies/family_gifts.spl ../../examples/requests
 # -> ALLOW
 ```
 
-The crypto hooks are stubbed for clarity (`dpop_ok?`, `merkle_ok?`, `vrf_ok?`, `thresh_ok?`). Replace them with your production libraries to go live.
+The crypto hooks default to **deny** (`dpop_ok?`, `merkle_ok?`, `vrf_ok?`, `thresh_ok?`). You must provide real implementations for any predicate your policy uses. This is fail-closed by design -- omitting a callback means the predicate rejects.
 
 ---
 
@@ -177,10 +177,10 @@ export async function handlePayment(req, res) {
     now: new Date().toISOString(),
     per_day_count: (_action: string, _day: string) => 0,
     crypto: {
-      dpop_ok: () => true,                 // TODO: real DPoP check
-      merkle_ok: (_tuple:any) => true,     // TODO: real inclusion check
-      vrf_ok: (_day:string,_amt:number)=> true,
-      thresh_ok: ()=> true
+      dpop_ok: () => verifyDPoP(req),      // REQUIRED: real DPoP check
+      merkle_ok: (t:any) => checkMerkle(t), // REQUIRED: real inclusion check
+      vrf_ok: (d:string,a:number)=> checkVRF(d,a),
+      thresh_ok: ()=> checkThresh()         // omit to deny by default
     }
   };
 
@@ -201,9 +201,9 @@ env := spl.Env{
   AllowedRecipients: []string{"niece@example.com","mom@example.com"},
   PerDayCount: func(action, day string) int { return 0 },
 }
-env.Crypto.DPoPOk = func() bool { return true }      // TODO
-env.Crypto.MerkleOk = func(tuple []any) bool { return true }
-env.Crypto.VRFOk = func(day string, amount float64) bool { return true }
+env.Crypto.DPoPOk = func() bool { return verifyDPoP(req) }      // REQUIRED
+env.Crypto.MerkleOk = func(tuple []any) bool { return checkMerkle(tuple) }
+env.Crypto.VRFOk = func(day string, amount float64) bool { return checkVRF(day, amount) }
 
 allow, err := spl.Verify(ast, env)
 if err != nil || !allow { w.WriteHeader(403); return }
@@ -247,12 +247,15 @@ Metrics to export: `spl_allow_total`, `spl_deny_total`, `spl_eval_ms` (p50/p99),
 
 ## 11) Security hardening checklist
 
-- Enforce **signature verification** over canonical policy bytes before SPL evaluation.  
-- Bind callers with **DPoP/mTLS**; reject bearer‑only tokens.  
-- SPL evaluator must be **total** and **gas‑metered**; no I/O, no recursion.  
-- Keep **token TTLs short**; use `rev_id` + CRLs for immediate kill.  
-- Implement **nonce/idempotency** on write APIs.  
-- Require **step‑up** where leases are impossible (wire‑transfers, irreversible emails).  
+- Enforce **signature verification** over the full token envelope (policy + sealed + expires + merkle_root + hash_chain_commitment) before SPL evaluation.
+- Bind callers with **DPoP/mTLS**; reject bearer‑only tokens.
+- SPL evaluator must be **total** and **gas‑metered**; no I/O, no recursion.
+- Keep **token TTLs short**; use `rev_id` + CRLs for immediate kill.
+- Enable **strict symbol resolution** in production to catch misconfigured policies.
+- Implement **nonce/idempotency** on write APIs.
+- Crypto predicates default to **deny**; always provide real implementations.
+- Use **Merkle proofs** (`merkle_ok?`) instead of plaintext allowlists for sensitive data (email addresses, PII).
+- Require **step‑up** where leases are impossible (wire‑transfers, irreversible emails).
 - Consider **attestation** (WebAuthn for humans; TEE for high‑risk agent runtimes).
 
 ---

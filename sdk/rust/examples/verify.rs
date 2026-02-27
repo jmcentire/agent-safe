@@ -55,9 +55,15 @@ fn main() {
         req,
         vars,
         per_day_count: Box::new(|_, _| 0),
-        crypto: CryptoCallbacks::default(),
+        crypto: CryptoCallbacks {
+            dpop_ok: Box::new(|| true),
+            merkle_ok: Box::new(|_| true),
+            vrf_ok: Box::new(|_, _| true),
+            thresh_ok: Box::new(|| true),
+        },
         max_gas: 10_000,
         sealed: false,
+        strict: false,
     };
 
     match verify(&ast, &env) {
