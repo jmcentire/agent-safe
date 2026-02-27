@@ -125,7 +125,7 @@ export function mint(policy: string, privateKeyHex: string, options: MintOptions
   const pubRaw = pubDer.subarray(12);
 
   const token: Token = {
-    version: '0.1.0',
+    version: '0.2.0',
     policy: policy.trim(),
     merkle_root: options.merkleRoot,
     hash_chain_commitment: options.hashChainCommitment,
