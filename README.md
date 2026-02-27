@@ -140,14 +140,14 @@ See `examples/e2e/` for full mint-verify-attenuate-seal lifecycle examples in Ty
 ## Tests
 
 ```
-TypeScript   40 tests    npm test
-Go           41 tests    go test ./spl/ -v
+TypeScript   43 tests    npm test
+Go           49 tests    go test ./spl/ -v
 Python       45 tests    pytest tests/ -v
-Rust         38 tests    cargo test
-Java         35 tests    mvn test -B
-C#           35 tests    dotnet test
+Rust         40 tests    cargo test
+Java         36 tests    mvn test -B
+C#           36 tests    dotnet test
 ─────────────────────────────────────
-Total       234 tests
+Total       249 tests
 ```
 
 ## Crypto
@@ -159,6 +159,8 @@ Real cryptographic verification, not stubs:
 | **Token signature** | Ed25519 (RFC 8032) | Verify the grantor signed this policy |
 | **Merkle proof** | SHA-256 hash tree | Prove a tuple is in the authorized set |
 | **Hash chain** | Iterated SHA-256 | Offline budget receipts (spend without phoning home) |
+| **PoP binding** | Ed25519 over SHA-256(payload) | Proof-of-possession ties token to agent key |
+| **Key derivation** | HKDF-SHA-256 (RFC 5869) | Per-service unlinkable keypairs from master key |
 
 Shared test vectors in `examples/crypto/` ensure cross-SDK compatibility. `thresh_ok?` remains an interface — provide your own k-of-n co-signature implementation.
 
@@ -169,7 +171,7 @@ Shared test vectors in `examples/crypto/` ensure cross-SDK compatibility. `thres
 | TypeScript | None | `node:crypto` built-in |
 | Go | None | stdlib only |
 | Python | `cryptography` (optional) | Core evaluator has zero deps |
-| Rust | `serde`, `serde_json`, `ed25519-dalek`, `sha2` | Standard crates |
+| Rust | `serde`, `serde_json`, `ed25519-dalek`, `sha2`, `getrandom` | Standard crates |
 | Java | None | JDK 21+ has EdDSA + SHA-256 |
 | C# | None | .NET 10+ stdlib |
 

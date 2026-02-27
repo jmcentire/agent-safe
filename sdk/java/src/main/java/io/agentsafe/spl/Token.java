@@ -136,7 +136,7 @@ public final class Token {
             System.arraycopy(pubDer2, pubDer2.length - 32, pubRaw, 0, 32);
 
             Token t = new Token();
-            t.version = "0.1.0";
+            t.version = "0.2.0";
             t.policy = policy.trim();
             t.sealed = sealed;
             t.expires = expires;

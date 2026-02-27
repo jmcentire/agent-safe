@@ -117,7 +117,7 @@ def mint(
     signature = private_key.sign(payload)
 
     token = {
-        "version": "0.1.0",
+        "version": "0.2.0",
         "policy": policy.strip(),
         "sealed": sealed,
         "public_key": pub_bytes.hex(),
