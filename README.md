@@ -208,6 +208,18 @@ docs/           — Landing page (GitHub Pages)
 
 Threat model: **honest-but-curious operator**. Services follow the protocol but attempt to learn from what they observe. SPL tokens are signed by the grantor; services cannot forge or modify policy.
 
+## Privacy Stack
+
+Agent-Safe is one layer of a larger privacy architecture. Each component addresses a different failure mode.
+
+| Component | What It Does | Link |
+|-----------|-------------|------|
+| **Signet** | Cryptographic vault. Three-tier data model, ZK proofs, Ed25519 root of trust. | [signet.tools](https://signet.tools) |
+| **Agent-Safe (SPL)** | Authorization policy in the token. Local eval in ~2 us. No policy server. | *(this project)* |
+| **Tessera** | Self-validating documents. Hash chain, Ed25519 signatures, embedded validators. | [jmcentire.github.io/tessera](https://jmcentire.github.io/tessera/) |
+| **BlindDB** | Storage the operator can't read. Client-side encryption, opaque record IDs. | [jmcentire.github.io/BlindDB](https://jmcentire.github.io/BlindDB/) |
+| **HermesP2P** | Ephemeral P2P messaging. No servers, no metadata, no persistence. | [hp2p.net](https://hp2p.net) |
+
 ## Links
 
 - [SPEC.md](SPEC.md) — Full language specification
