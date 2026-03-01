@@ -124,7 +124,7 @@ footer a { margin: 0 12px; }
   <div class="problem-grid">
     <div class="problem-card">
       <h4>Latency Tax</h4>
-      <p>OPA/Cedar add 1&ndash;5 ms per decision (network + evaluation). SPL evaluates in ~2 &mu;s. That's 500&ndash;2,500x faster.</p>
+      <p>OPA/Cedar add 1&ndash;5 ms per decision (network + evaluation). SPL evaluates in ~2 &mu;s. That's 100&ndash;1,000x faster with no network in the path.</p>
     </div>
     <div class="problem-card">
       <h4>Throughput Bottleneck</h4>
@@ -283,6 +283,34 @@ footer a { margin: 0 12px; }
     </div>
   </div>
   <p style="color: var(--muted); font-size: 0.85em; margin-top: 16px; text-align: center;">249 tests across 6 SDKs. Shared crypto test vectors ensure cross-language compatibility.</p>
+</section>
+</div>
+
+<!-- Privacy Stack -->
+<div class="container">
+<section>
+  <h2>Privacy Stack</h2>
+  <p style="color: var(--muted); margin-bottom: 16px;">Agent-Safe is one layer of a larger privacy architecture. Each component addresses a different failure mode.</p>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <h4 style="color: var(--accent);"><a href="https://signet.tools" style="color: var(--accent);">Signet</a></h4>
+      <p>Cryptographic vault. Three-tier data model, ZK proofs, Ed25519 root of trust.</p>
+    </div>
+    <div class="problem-card">
+      <h4 style="color: var(--accent);"><a href="https://jmcentire.github.io/tessera/" style="color: var(--accent);">Tessera</a></h4>
+      <p>Self-validating documents. Hash chain, Ed25519 signatures, embedded validators.</p>
+    </div>
+    <div class="problem-card">
+      <h4 style="color: var(--accent);"><a href="https://jmcentire.github.io/BlindDB/" style="color: var(--accent);">BlindDB</a></h4>
+      <p>Storage the operator can't read. Client-side encryption, opaque record IDs.</p>
+    </div>
+  </div>
+  <div class="problem-grid" style="margin-top: 16px;">
+    <div class="problem-card">
+      <h4 style="color: var(--accent);"><a href="https://hp2p.net" style="color: var(--accent);">HermesP2P</a></h4>
+      <p>Ephemeral P2P messaging. No servers, no metadata, no persistence.</p>
+    </div>
+  </div>
 </section>
 </div>
 
