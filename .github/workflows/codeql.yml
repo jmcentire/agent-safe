@@ -39,12 +39,12 @@ jobs:
         with:
           go-version: "1.23"
 
-      - uses: github/codeql-action/init@89a39a4e59826350b863aa6b6252a07ad50cf83e # v4.32.4
+      - uses: github/codeql-action/init@c793b717bc78562f491db7b0e93a3a178b099162 # v4.32.5
         with:
           languages: ${{ matrix.language }}
 
       - if: "!contains(fromJSON('[\"java-kotlin\", \"go\"]'), matrix.language)"
-        uses: github/codeql-action/autobuild@89a39a4e59826350b863aa6b6252a07ad50cf83e # v4.32.4
+        uses: github/codeql-action/autobuild@c793b717bc78562f491db7b0e93a3a178b099162 # v4.32.5
 
       - if: matrix.language == 'java-kotlin'
         run: mvn compile -f sdk/java/pom.xml -q
@@ -52,6 +52,6 @@ jobs:
       - if: matrix.language == 'go'
         run: cd sdk/go && go build ./...
 
-      - uses: github/codeql-action/analyze@89a39a4e59826350b863aa6b6252a07ad50cf83e # v4.32.4
+      - uses: github/codeql-action/analyze@c793b717bc78562f491db7b0e93a3a178b099162 # v4.32.5
         with:
           category: "/language:${{ matrix.language }}"
