@@ -1,0 +1,72 @@
+version: "1"
+project: agent-safe
+constraints:
+  - id: C001
+    name: cross_sdk_consistency
+    description: All 6 SDKs must produce identical results for shared test vectors
+    severity: must
+    classification: null
+    rationale: Cross-SDK divergence is a security vulnerability, not just a bug
+
+  - id: C002
+    name: fail_closed_crypto
+    description: All crypto operations fail closed — no fallback to insecure
+    severity: must
+    classification: AUTH
+    rationale: Crypto failures must reject, never silently accept
+
+  - id: C003
+    name: gas_metering
+    description: Policy evaluation limited to 10,000 operations maximum
+    severity: must
+    classification: null
+    rationale: Unbounded evaluation enables denial-of-service
+
+  - id: C004
+    name: depth_limiting
+    description: Expression nesting limited to 64 levels maximum
+    severity: must
+    classification: null
+    rationale: Deep nesting enables stack overflow attacks
+
+  - id: C005
+    name: policy_size_limit
+    description: Policy text limited to 64 KB maximum
+    severity: must
+    classification: null
+    rationale: Large policies can exhaust parser memory
+
+  - id: C006
+    name: full_envelope_signing
+    description: Signatures cover full envelope (policy + sealed + expires + merkle_root + hash_chain_commitment), not just policy
+    severity: must
+    classification: AUTH
+    rationale: Partial signing allows field substitution attacks
+
+  - id: C007
+    name: zero_runtime_deps
+    description: Core evaluators in JS, Go, Python must have zero runtime dependencies
+    severity: must
+    classification: null
+    rationale: Minimal attack surface; evaluator must be embeddable anywhere
+
+  - id: C008
+    name: no_eval_no_codegen
+    description: No eval(), no dynamic code generation in evaluators
+    severity: must
+    classification: AUTH
+    rationale: Code injection through policy text
+
+  - id: C009
+    name: strict_symbol_resolution
+    description: Undefined symbols must fail evaluation, not resolve to null/false
+    severity: must
+    classification: AUTH
+    rationale: Typos in policy names would silently allow unauthorized actions
+
+  - id: C010
+    name: spec_authoritative
+    description: SPEC.md is the authoritative reference — SDKs implement, never extend
+    severity: must
+    classification: null
+    rationale: SDK extensions create cross-SDK divergence

@@ -1,0 +1,43 @@
+name: agent-safe
+audience: public
+description: >
+  Authorization policy language for AI agents. SPL (Safe Policy Language)
+  evaluates in ~2μs with zero runtime dependencies. Six SDK implementations
+  (TypeScript, Go, Python, Rust, Java, C#) with Ed25519 signing, Merkle
+  proofs, and hash-chain offline budgets.
+
+domains:
+  - authorization
+  - policy-language
+  - cryptographic-tokens
+  - multi-language-SDK
+  - AI-agent-safety
+
+voice:
+  tone: precise, security-first, minimal
+  principles:
+    - Authorization lives in the token, not a policy server
+    - Zero runtime dependencies in core evaluators
+    - Cross-SDK consistency is a security property
+    - Fail closed on all crypto operations
+  anti-patterns:
+    - Adding runtime dependencies to core evaluators
+    - Diverging behavior across SDKs
+    - Trusting unsigned tokens
+    - Policy evaluation with side effects
+
+standards:
+  code_review:
+    - All 6 SDKs must produce identical results for shared test vectors
+    - Crypto operations fail closed (no fallback to insecure)
+    - Gas metering enforced (max 10k ops)
+    - Full-envelope signing (policy + sealed + expires + merkle_root + hash_chain_commitment)
+  documentation:
+    - SPEC.md is the authoritative reference
+    - Cross-SDK test vectors in examples/crypto/
+  communication:
+    - Lead with the security property being enforced
+
+connects_to:
+  - signet
+  - kindex

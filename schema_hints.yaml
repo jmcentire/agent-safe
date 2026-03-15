@@ -1,0 +1,7 @@
+version: "1"
+project: agent-safe
+storage_backends: []
+notes: >
+  Agent-Safe is a pure computation library with no persistent storage.
+  Tokens are ephemeral — evaluated in memory and discarded.
+  Test vectors stored in examples/crypto/ (read-only, version-controlled).
