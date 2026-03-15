@@ -1,0 +1,51 @@
+version: "1"
+project: agent-safe
+components:
+  - id: spl_evaluator
+    role: library
+    authority: policy_evaluation
+    data_access:
+      PUBLIC: read
+
+  - id: spl_parser
+    role: library
+    authority: policy_parsing
+    data_access:
+      PUBLIC: read
+
+  - id: crypto
+    role: library
+    authority: token_verification
+    data_access:
+      AUTH: read
+
+  - id: token
+    role: library
+    authority: token_management
+    data_access:
+      AUTH: read_write
+
+  - id: cli_verifier
+    role: ingress
+    protocol: cli
+    authority: local_verification
+    data_access:
+      PUBLIC: read
+      AUTH: read
+
+edges:
+  - from: cli_verifier
+    to: spl_evaluator
+    tier: internal
+  - from: cli_verifier
+    to: token
+    tier: internal
+  - from: spl_evaluator
+    to: spl_parser
+    tier: internal
+  - from: token
+    to: crypto
+    tier: internal
+  - from: spl_evaluator
+    to: crypto
+    tier: internal

@@ -1,0 +1,25 @@
+version: "1"
+project: agent-safe
+classification_tiers:
+  - name: PUBLIC
+    soak_duration_hours: 0
+    human_gate: false
+  - name: AUTH
+    soak_duration_hours: 72
+    human_gate: true
+
+authority_map:
+  spl_evaluator:
+    domain: policy_evaluation
+    trust_score: 0.95
+  spl_parser:
+    domain: policy_parsing
+    trust_score: 0.95
+  crypto:
+    domain: token_verification
+    trust_score: 1.0
+  token:
+    domain: token_management
+    trust_score: 0.9
+
+canary_eligible: []
