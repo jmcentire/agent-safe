@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.1] - 2026-03-15
+
+### Added
+- CLAUDE.md architecture documentation
+- .kin metadata for Kindex integration
+- Pact adoption files (pact.yaml, task.md, sops.md)
+- Constrain artifacts (constraints.yaml, component_map.yaml, trust_policy.yaml, schema_hints.yaml, prompt.md)
+- Full portfolio standardization
+
 ## [0.2.0] - 2026-02-27
 
 ### Added
