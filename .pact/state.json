@@ -1,0 +1,27 @@
+{
+  "id": "f227c32e7a50",
+  "project_dir": "/Users/jmcentire/Code/agent-safe",
+  "status": "paused",
+  "phase": "interview",
+  "component_tasks": [
+    {
+      "component_id": "root",
+      "status": "pending",
+      "attempts": 0,
+      "last_error": ""
+    }
+  ],
+  "interview_result": null,
+  "total_cost_usd": 0.0,
+  "total_tokens": 0,
+  "last_check_in": "",
+  "created_at": "2026-03-15T18:37:01.381518",
+  "completed_at": "",
+  "pause_reason": "Dry run — adoption not finalized",
+  "phase_cycles": 0,
+  "health_snapshot": {},
+  "processing_register": "",
+  "audit_commit": "",
+  "arbiter_response": {},
+  "constrain_context": {}
+}

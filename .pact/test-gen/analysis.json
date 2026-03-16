@@ -1,0 +1,1348 @@
+{
+  "root_path": "/Users/jmcentire/Code/agent-safe",
+  "language": "python",
+  "source_files": [
+    {
+      "path": "sdk/python/spl/__init__.py",
+      "functions": [],
+      "imports": [
+        "parser",
+        "evaluator",
+        "verifier",
+        "token"
+      ],
+      "classes": []
+    },
+    {
+      "path": "sdk/python/spl/__main__.py",
+      "functions": [
+        {
+          "name": "main",
+          "params": [],
+          "return_type": "",
+          "complexity": 3,
+          "body_source": "def main():\n    if len(sys.argv) < 3:\n        print(\"Usage: python -m spl <policy.spl> <request.json>\", file=sys.stderr)\n        sys.exit(1)\n\n    policy_path = Path(sys.argv[1])\n    request_path = Path(sys.argv[2])\n\n    policy_src = policy_path.read_text().strip()\n    ast = parse(policy_src)\n\n    req = json.loads(request_path.read_text())\n\n    env = {\n        \"vars\": {\n            \"allowed_recipients\": [\"niece@example.com\", \"mom@example.com\"],\n            \"now\": \"2025-10-01T00:00:00Z\",\n        },\n        \"now\": \"2025-10-01T00:00:00Z\",\n        \"per_day_count\": lambda _a, _d: 0,\n        \"crypto\": {\n            \"dpop_ok\": lambda: True,\n            \"merkle_ok\": lambda _t: True,\n            \"vrf_ok\": lambda _d, _a: True,\n            \"thresh_ok\": lambda: True,\n        },\n    }\n\n    result = verify(ast, req, env)\n    print(\"ALLOW\" if result[\"allow\"] else \"DENY\")",
+          "line_number": 11,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": ""
+        }
+      ],
+      "imports": [
+        "json",
+        "sys",
+        "pathlib",
+        "parser",
+        "verifier"
+      ],
+      "classes": []
+    },
+    {
+      "path": "sdk/python/spl/crypto.py",
+      "functions": [
+        {
+          "name": "sha256",
+          "params": [
+            {
+              "name": "data",
+              "type_annotation": "bytes",
+              "default": ""
+            }
+          ],
+          "return_type": "bytes",
+          "complexity": 1,
+          "body_source": "def sha256(data: bytes) -> bytes:\n    \"\"\"SHA-256 hash of data.\"\"\"\n    return hashlib.sha256(data).digest()",
+          "line_number": 13,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "SHA-256 hash of data."
+        },
+        {
+          "name": "sha256_hex",
+          "params": [
+            {
+              "name": "data",
+              "type_annotation": "bytes",
+              "default": ""
+            }
+          ],
+          "return_type": "str",
+          "complexity": 1,
+          "body_source": "def sha256_hex(data: bytes) -> str:\n    \"\"\"SHA-256 hash of data as hex string.\"\"\"\n    return hashlib.sha256(data).hexdigest()",
+          "line_number": 18,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "SHA-256 hash of data as hex string."
+        },
+        {
+          "name": "verify_ed25519",
+          "params": [
+            {
+              "name": "message",
+              "type_annotation": "bytes",
+              "default": ""
+            },
+            {
+              "name": "signature_hex",
+              "type_annotation": "str",
+              "default": ""
+            },
+            {
+              "name": "public_key_hex",
+              "type_annotation": "str",
+              "default": ""
+            }
+          ],
+          "return_type": "bool",
+          "complexity": 3,
+          "body_source": "def verify_ed25519(message: bytes, signature_hex: str, public_key_hex: str) -> bool:\n    \"\"\"Verify an Ed25519 signature over a message.\n\n    Requires the `cryptography` package.\n    \"\"\"\n    try:\n        from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey\n        pub_bytes = bytes.fromhex(public_key_hex)\n        sig_bytes = bytes.fromhex(signature_hex)\n        public_key = Ed25519PublicKey.from_public_bytes(pub_bytes)\n        public_key.verify(sig_bytes, message)\n        return True\n    except ImportError:\n        raise RuntimeError(\n            \"Ed25519 verification requires the 'cryptography' package. \"\n            \"Install with: pip install agent-safe-spl[crypto]\"\n        )\n    except Exception:\n        return False",
+          "line_number": 23,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Verify an Ed25519 signature over a message.\n\nRequires the `cryptography` package."
+        },
+        {
+          "name": "verify_merkle_proof",
+          "params": [
+            {
+              "name": "leaf_data",
+              "type_annotation": "str",
+              "default": ""
+            },
+            {
+              "name": "proof",
+              "type_annotation": "list[dict[str, str]]",
+              "default": ""
+            },
+            {
+              "name": "root_hex",
+              "type_annotation": "str",
+              "default": ""
+            }
+          ],
+          "return_type": "bool",
+          "complexity": 4,
+          "body_source": "def verify_merkle_proof(\n    leaf_data: str,\n    proof: list[dict[str, str]],\n    root_hex: str,\n) -> bool:\n    \"\"\"Verify a Merkle proof for leaf_data against root_hex.\n\n    Args:\n        leaf_data: The leaf value (will be SHA-256 hashed)\n        proof: List of {\"hash\": hex, \"position\": \"left\"|\"right\"}\n        root_hex: Expected root hash in hex\n    \"\"\"\n    try:\n        current = sha256(leaf_data.encode(\"utf-8\"))\n\n        for step in proof:\n            sibling = bytes.fromhex(step[\"hash\"])\n            if step[\"position\"] == \"right\":\n                current = sha256(current + sibling)\n            else:\n                current = sha256(sibling + current)\n\n        return current.hex() == root_hex\n    except Exception:\n        return False",
+          "line_number": 44,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Verify a Merkle proof for leaf_data against root_hex.\n\nArgs:\n    leaf_data: The leaf value (will be SHA-256 hashed)\n    proof: List of {\"hash\": hex, \"position\": \"left\"|\"right\"}\n    root_hex: Expected root hash in hex"
+        },
+        {
+          "name": "hash_tuple",
+          "params": [
+            {
+              "name": "values",
+              "type_annotation": "list[Any]",
+              "default": ""
+            }
+          ],
+          "return_type": "str",
+          "complexity": 1,
+          "body_source": "def hash_tuple(values: list[Any]) -> str:\n    \"\"\"Hash a tuple by JSON-serializing then SHA-256.\"\"\"\n    serialized = json.dumps(values, separators=(\",\", \":\"))\n    return sha256_hex(serialized.encode(\"utf-8\"))",
+          "line_number": 71,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Hash a tuple by JSON-serializing then SHA-256."
+        },
+        {
+          "name": "_hkdf_sha256",
+          "params": [
+            {
+              "name": "ikm",
+              "type_annotation": "bytes",
+              "default": ""
+            },
+            {
+              "name": "salt",
+              "type_annotation": "bytes",
+              "default": ""
+            },
+            {
+              "name": "info",
+              "type_annotation": "bytes",
+              "default": ""
+            },
+            {
+              "name": "length",
+              "type_annotation": "int",
+              "default": ""
+            }
+          ],
+          "return_type": "bytes",
+          "complexity": 3,
+          "body_source": "def _hkdf_sha256(ikm: bytes, salt: bytes, info: bytes, length: int) -> bytes:\n    \"\"\"HKDF-SHA256 (RFC 5869) extract-and-expand. Zero external dependencies.\"\"\"\n    # Extract\n    if not salt:\n        salt = b\"\\x00\" * 32\n    prk = hmac.new(salt, ikm, hashlib.sha256).digest()\n    # Expand\n    out = b\"\"\n    prev = b\"\"\n    i = 1\n    while len(out) < length:\n        prev = hmac.new(prk, prev + info + bytes([i]), hashlib.sha256).digest()\n        out += prev\n        i += 1\n    return out[:length]",
+          "line_number": 77,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "HKDF-SHA256 (RFC 5869) extract-and-expand. Zero external dependencies."
+        },
+        {
+          "name": "derive_service_key",
+          "params": [
+            {
+              "name": "master_key_hex",
+              "type_annotation": "str",
+              "default": ""
+            },
+            {
+              "name": "service_domain",
+              "type_annotation": "str",
+              "default": ""
+            }
+          ],
+          "return_type": "tuple[str, str]",
+          "complexity": 1,
+          "body_source": "def derive_service_key(master_key_hex: str, service_domain: str) -> tuple[str, str]:\n    \"\"\"Derive a service-specific Ed25519 keypair using HKDF-SHA256.\n\n    Provides unlinkability: different services see different public keys.\n\n    Args:\n        master_key_hex: 32-byte master private key seed (hex)\n        service_domain: Service identifier (e.g. \"api.example.com\")\n\n    Returns:\n        (public_key_hex, private_key_hex)\n\n    Requires the `cryptography` package for Ed25519 key generation.\n    \"\"\"\n    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey\n    from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat\n\n    master_key = bytes.fromhex(master_key_hex)\n    salt = b\"agent-safe-v1\"\n    info = service_domain.encode(\"utf-8\")\n    seed = _hkdf_sha256(master_key, salt, info, 32)\n\n    private_key = Ed25519PrivateKey.from_private_bytes(seed)\n    pub_bytes = private_key.public_key().public_bytes(Encoding.Raw, PublicFormat.Raw)\n    return pub_bytes.hex(), seed.hex()",
+          "line_number": 94,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Derive a service-specific Ed25519 keypair using HKDF-SHA256.\n\nProvides unlinkability: different services see different public keys.\n\nArgs:\n    master_key_hex: 32-byte master private key seed (hex)\n    service_domain: Service identifier (e.g. \"api.example.com\")\n\nReturns:\n    (public_key_hex, private_key_hex)\n\nRequires the `cryptography` package for Ed25519 key generation."
+        },
+        {
+          "name": "verify_hash_chain",
+          "params": [
+            {
+              "name": "commitment",
+              "type_annotation": "str",
+              "default": ""
+            },
+            {
+              "name": "preimage_hex",
+              "type_annotation": "str",
+              "default": ""
+            },
+            {
+              "name": "index",
+              "type_annotation": "int",
+              "default": ""
+            },
+            {
+              "name": "chain_length",
+              "type_annotation": "int",
+              "default": ""
+            }
+          ],
+          "return_type": "bool",
+          "complexity": 3,
+          "body_source": "def verify_hash_chain(\n    commitment: str,\n    preimage_hex: str,\n    index: int,\n    chain_length: int,\n) -> bool:\n    \"\"\"Verify a hash chain receipt.\n\n    Hashes preimage_hex (chain_length - index) times and checks\n    it equals the commitment.\n    \"\"\"\n    try:\n        current = bytes.fromhex(preimage_hex)\n        steps = chain_length - index\n\n        for _ in range(steps):\n            current = sha256(current)\n\n        return current.hex() == commitment\n    except Exception:\n        return False",
+          "line_number": 121,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Verify a hash chain receipt.\n\nHashes preimage_hex (chain_length - index) times and checks\nit equals the commitment."
+        }
+      ],
+      "imports": [
+        "hashlib",
+        "hmac",
+        "json",
+        "typing",
+        "cryptography.hazmat.primitives.asymmetric.ed25519",
+        "cryptography.hazmat.primitives.serialization",
+        "cryptography.hazmat.primitives.asymmetric.ed25519"
+      ],
+      "classes": []
+    },
+    {
+      "path": "sdk/python/spl/evaluator.py",
+      "functions": [
+        {
+          "name": "eval_policy",
+          "params": [
+            {
+              "name": "ast",
+              "type_annotation": "Any",
+              "default": ""
+            },
+            {
+              "name": "ctx",
+              "type_annotation": "dict",
+              "default": ""
+            }
+          ],
+          "return_type": "Any",
+          "complexity": 3,
+          "body_source": "def eval_policy(ast: Any, ctx: dict) -> Any:\n    \"\"\"Evaluate an SPL AST within a context dict.\n\n    ctx keys: req, vars, now, per_day_count, crypto, maxGas\n    \"\"\"\n    max_gas = ctx.get(\"maxGas\") or ctx.get(\"max_gas\") or DEFAULT_MAX_GAS\n    state = _EvalState(max_gas)\n    return _eval(ast, ctx, state)",
+          "line_number": 29,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Evaluate an SPL AST within a context dict.\n\nctx keys: req, vars, now, per_day_count, crypto, maxGas"
+        },
+        {
+          "name": "_eval",
+          "params": [
+            {
+              "name": "node",
+              "type_annotation": "Any",
+              "default": ""
+            },
+            {
+              "name": "ctx",
+              "type_annotation": "dict",
+              "default": ""
+            },
+            {
+              "name": "st",
+              "type_annotation": "_EvalState",
+              "default": ""
+            }
+          ],
+          "return_type": "Any",
+          "complexity": 3,
+          "body_source": "def _eval(node: Any, ctx: dict, st: _EvalState) -> Any:\n    st.gas -= 1\n    if st.gas < 0:\n        raise GasExhausted(\"gas budget exceeded\")\n    st.depth += 1\n    if st.depth > MAX_DEPTH:\n        st.depth -= 1\n        raise DepthExceeded(\"max nesting depth exceeded\")\n    try:\n        return _eval_inner(node, ctx, st)\n    finally:\n        st.depth -= 1",
+          "line_number": 39,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": ""
+        },
+        {
+          "name": "_eval_inner",
+          "params": [
+            {
+              "name": "node",
+              "type_annotation": "Any",
+              "default": ""
+            },
+            {
+              "name": "ctx",
+              "type_annotation": "dict",
+              "default": ""
+            },
+            {
+              "name": "st",
+              "type_annotation": "_EvalState",
+              "default": ""
+            }
+          ],
+          "return_type": "Any",
+          "complexity": 39,
+          "body_source": "def _eval_inner(node: Any, ctx: dict, st: _EvalState) -> Any:\n    if not isinstance(node, list):\n        return _resolve_symbol(node, ctx)\n    if len(node) == 0:\n        return None\n    op = node[0]\n    args = node[1:]\n\n    # --- Logical ---\n    if op == \"and\":\n        for a in args:\n            if not _truthy(_eval(a, ctx, st)):\n                return False\n        return True\n\n    if op == \"or\":\n        for a in args:\n            if _truthy(_eval(a, ctx, st)):\n                return True\n        return False\n\n    if op == \"not\":\n        return not _truthy(_eval(args[0], ctx, st))\n\n    # --- Comparison ---\n    if op == \"=\":\n        return _eval(args[0], ctx, st) == _eval(args[1], ctx, st)\n\n    if op in (\"<=\", \"<\", \">=\", \">\"):\n        a = _to_float(_eval(args[0], ctx, st))\n        b = _to_float(_eval(args[1], ctx, st))\n        if op == \"<=\":\n            return a <= b\n        if op == \"<\":\n            return a < b\n        if op == \">=\":\n            return a >= b\n        return a > b\n\n    # --- Sets ---\n    if op in (\"member\", \"in\"):\n        val = _eval(args[0], ctx, st)\n        lst = _eval(args[1], ctx, st)\n        if isinstance(lst, list):\n            return val in lst\n        return False\n\n    if op == \"subset?\":\n        a = _eval(args[0], ctx, st)\n        b = _eval(args[1], ctx, st)\n        if not isinstance(a, list) or not isinstance(b, list):\n            return False\n        return all(item in b for item in a)\n\n    # --- Time ---\n    if op == \"before\":\n        a = _eval(args[0], ctx, st)\n        b = _eval(args[1], ctx, st)\n        return str(a) < str(b)\n\n    # --- Accessors ---\n    if op == \"get\":\n        obj = _resolve_symbol(args[0], ctx)\n        key = _eval(args[1], ctx, st)\n        if isinstance(obj, dict) and isinstance(key, str):\n            return obj.get(key)\n        return None\n\n    if op == \"tuple\":\n        return [_eval(a, ctx, st) for a in args]\n\n    # --- Counter ---\n    if op == \"per-day-count\":\n        action = _eval(args[0], ctx, st)\n        day = _eval(args[1], ctx, st)\n        fn = ctx.get(\"per_day_count\")\n        if fn:\n            return fn(str(action), str(day))\n        return 0\n\n    # --- Crypto predicates ---\n    crypto = ctx.get(\"crypto\", {})\n\n    if op == \"dpop_ok?\":\n        fn = crypto.get(\"dpop_ok\") if isinstance(crypto, dict) else getattr(crypto, \"dpop_ok\", None)\n        return fn() if fn else False\n\n    if op == \"merkle_ok?\":\n        evaluated = [_eval(a, ctx, st) for a in args]\n        fn = crypto.get(\"merkle_ok\") if isinstance(crypto, dict) else getattr(crypto, \"merkle_ok\", None)\n        return fn(evaluated) if fn else False\n\n    if op == \"vrf_ok?\":\n        day = _eval(args[0], ctx, st)\n        amount = _eval(args[1], ctx, st)\n        fn = crypto.get(\"vrf_ok\") if isinstance(crypto, dict) else getattr(crypto, \"vrf_ok\", None)\n        return fn(str(day), _to_float(amount)) if fn else False\n\n    # thresh_ok? — Threshold co-signature verification.\n    # Expected protocol: k-of-n co-signatures where the verifier checks each\n    # signature against its corresponding public key and confirms count >= threshold.\n    # Not implemented in v0.1 — remains an interface stub. Provide your own\n    # implementation via the crypto callbacks when integrating.\n    if op == \"thresh_ok?\":\n        fn = crypto.get(\"thresh_ok\") if isinstance(crypto, dict) else getattr(crypto, \"thresh_ok\", None)\n        return fn() if fn else False\n\n    raise SPLError(f\"Unknown op: {op}\")",
+          "line_number": 53,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": ""
+        },
+        {
+          "name": "_resolve_symbol",
+          "params": [
+            {
+              "name": "x",
+              "type_annotation": "Any",
+              "default": ""
+            },
+            {
+              "name": "ctx",
+              "type_annotation": "dict",
+              "default": ""
+            }
+          ],
+          "return_type": "Any",
+          "complexity": 12,
+          "body_source": "def _resolve_symbol(x: Any, ctx: dict) -> Any:\n    if isinstance(x, str):\n        if x == \"#t\":\n            return True\n        if x == \"#f\":\n            return False\n        if x == \"req\":\n            return ctx.get(\"req\", {})\n        if x == \"now\":\n            v = ctx.get(\"vars\", {})\n            if isinstance(v, dict) and \"now\" in v:\n                return v[\"now\"]\n            if ctx.get(\"strict\"):\n                raise SPLError(f\"Unresolved symbol: {x}\")\n            return x\n        v = ctx.get(\"vars\", {})\n        if isinstance(v, dict) and x in v:\n            return v[x]\n        if ctx.get(\"strict\"):\n            raise SPLError(f\"Unresolved symbol: {x}\")\n    return x",
+          "line_number": 163,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": ""
+        },
+        {
+          "name": "_truthy",
+          "params": [
+            {
+              "name": "v",
+              "type_annotation": "Any",
+              "default": ""
+            }
+          ],
+          "return_type": "bool",
+          "complexity": 4,
+          "body_source": "def _truthy(v: Any) -> bool:\n    if v is None:\n        return False\n    if isinstance(v, bool):\n        return v\n    if isinstance(v, (int, float)):\n        return v != 0\n    return True",
+          "line_number": 186,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": ""
+        },
+        {
+          "name": "_to_float",
+          "params": [
+            {
+              "name": "x",
+              "type_annotation": "Any",
+              "default": ""
+            }
+          ],
+          "return_type": "float",
+          "complexity": 3,
+          "body_source": "def _to_float(x: Any) -> float:\n    if isinstance(x, (int, float)):\n        return float(x)\n    try:\n        return float(x)\n    except (TypeError, ValueError):\n        return 0.0",
+          "line_number": 196,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": ""
+        },
+        {
+          "name": "__init__",
+          "params": [
+            {
+              "name": "self",
+              "type_annotation": "",
+              "default": ""
+            },
+            {
+              "name": "max_gas",
+              "type_annotation": "int",
+              "default": ""
+            }
+          ],
+          "return_type": "",
+          "complexity": 1,
+          "body_source": "    def __init__(self, max_gas: int):\n        self.gas = max_gas\n        self.depth = 0",
+          "line_number": 24,
+          "is_async": false,
+          "is_method": true,
+          "class_name": "",
+          "decorators": [],
+          "docstring": ""
+        }
+      ],
+      "imports": [
+        "typing"
+      ],
+      "classes": [
+        "GasExhausted",
+        "DepthExceeded",
+        "SPLError",
+        "_EvalState"
+      ]
+    },
+    {
+      "path": "sdk/python/spl/parser.py",
+      "functions": [
+        {
+          "name": "tokenize",
+          "params": [
+            {
+              "name": "src",
+              "type_annotation": "str",
+              "default": ""
+            }
+          ],
+          "return_type": "list[str]",
+          "complexity": 9,
+          "body_source": "def tokenize(src: str) -> list[str]:\n    tokens: list[str] = []\n    buf = \"\"\n    in_str = False\n    for ch in src:\n        if in_str:\n            buf += ch\n            if ch == '\"':\n                in_str = False\n                tokens.append(buf)\n                buf = \"\"\n            continue\n        if ch == '\"':\n            if buf.strip():\n                tokens.extend(buf.strip().split())\n            buf = '\"'\n            in_str = True\n            continue\n        if ch in (\"(\", \")\"):\n            if buf.strip():\n                tokens.extend(buf.strip().split())\n            tokens.append(ch)\n            buf = \"\"\n            continue\n        buf += ch\n    if buf.strip():\n        tokens.extend(buf.strip().split())\n    return tokens",
+          "line_number": 9,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": ""
+        },
+        {
+          "name": "_atom",
+          "params": [
+            {
+              "name": "tok",
+              "type_annotation": "str",
+              "default": ""
+            }
+          ],
+          "return_type": "AST",
+          "complexity": 8,
+          "body_source": "def _atom(tok: str) -> AST:\n    if tok == \"#t\":\n        return True\n    if tok == \"#f\":\n        return False\n    # Try number\n    try:\n        if \".\" in tok:\n            return float(tok)\n        return int(tok) if tok.lstrip(\"-\").isdigit() else float(tok)\n    except (ValueError, AttributeError):\n        pass\n    # Quoted string\n    if tok.startswith('\"') and tok.endswith('\"'):\n        return tok[1:-1].replace('\\\\\"', '\"')\n    # Symbol (returned as string)\n    return tok",
+          "line_number": 39,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": ""
+        },
+        {
+          "name": "parse",
+          "params": [
+            {
+              "name": "src",
+              "type_annotation": "str",
+              "default": ""
+            }
+          ],
+          "return_type": "AST",
+          "complexity": 10,
+          "body_source": "def parse(src: str) -> AST:\n    \"\"\"Parse an SPL S-expression string into an AST.\"\"\"\n    if len(src.encode(\"utf-8\")) > MAX_POLICY_BYTES:\n        raise SyntaxError(f\"policy exceeds maximum size of {MAX_POLICY_BYTES} bytes\")\n    tokens = tokenize(src.strip())\n    if not tokens:\n        raise SyntaxError(\"unexpected EOF\")\n    pos = [0]  # mutable index\n\n    def _parse() -> AST:\n        if pos[0] >= len(tokens):\n            raise SyntaxError(\"unexpected EOF\")\n        tok = tokens[pos[0]]\n        pos[0] += 1\n        if tok == \"(\":\n            arr: list[AST] = []\n            while True:\n                if pos[0] >= len(tokens):\n                    raise SyntaxError(\"unterminated (\")\n                if tokens[pos[0]] == \")\":\n                    pos[0] += 1\n                    break\n                arr.append(_parse())\n            return arr\n        if tok == \")\":\n            raise SyntaxError(\"unexpected )\")\n        return _atom(tok)\n\n    result = _parse()\n    if pos[0] != len(tokens):\n        raise SyntaxError(\"extra tokens\")\n    return result",
+          "line_number": 61,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Parse an SPL S-expression string into an AST."
+        },
+        {
+          "name": "_parse",
+          "params": [],
+          "return_type": "AST",
+          "complexity": 7,
+          "body_source": "    def _parse() -> AST:\n        if pos[0] >= len(tokens):\n            raise SyntaxError(\"unexpected EOF\")\n        tok = tokens[pos[0]]\n        pos[0] += 1\n        if tok == \"(\":\n            arr: list[AST] = []\n            while True:\n                if pos[0] >= len(tokens):\n                    raise SyntaxError(\"unterminated (\")\n                if tokens[pos[0]] == \")\":\n                    pos[0] += 1\n                    break\n                arr.append(_parse())\n            return arr\n        if tok == \")\":\n            raise SyntaxError(\"unexpected )\")\n        return _atom(tok)",
+          "line_number": 70,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": ""
+        }
+      ],
+      "imports": [
+        "typing"
+      ],
+      "classes": []
+    },
+    {
+      "path": "sdk/python/spl/token.py",
+      "functions": [
+        {
+          "name": "generate_keypair",
+          "params": [],
+          "return_type": "tuple[str, str]",
+          "complexity": 1,
+          "body_source": "def generate_keypair() -> tuple[str, str]:\n    \"\"\"Generate an Ed25519 keypair.\n\n    Returns:\n        (public_key_hex, private_key_hex)\n\n    Requires the `cryptography` package.\n    \"\"\"\n    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey\n    from cryptography.hazmat.primitives.serialization import (\n        Encoding, PublicFormat, PrivateFormat, NoEncryption,\n    )\n\n    private_key = Ed25519PrivateKey.generate()\n    pub_bytes = private_key.public_key().public_bytes(Encoding.Raw, PublicFormat.Raw)\n    # Extract the 32-byte seed from PKCS8 DER\n    priv_der = private_key.private_bytes(Encoding.DER, PrivateFormat.PKCS8, NoEncryption())\n    priv_seed = priv_der[-32:]  # Last 32 bytes of PKCS8 DER is the seed\n    return pub_bytes.hex(), priv_seed.hex()",
+          "line_number": 16,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Generate an Ed25519 keypair.\n\nReturns:\n    (public_key_hex, private_key_hex)\n\nRequires the `cryptography` package."
+        },
+        {
+          "name": "signing_payload",
+          "params": [
+            {
+              "name": "policy",
+              "type_annotation": "str",
+              "default": ""
+            },
+            {
+              "name": "merkle_root",
+              "type_annotation": "Optional[str]",
+              "default": "None"
+            },
+            {
+              "name": "hash_chain_commitment",
+              "type_annotation": "Optional[str]",
+              "default": "None"
+            },
+            {
+              "name": "sealed",
+              "type_annotation": "bool",
+              "default": "False"
+            },
+            {
+              "name": "expires",
+              "type_annotation": "Optional[str]",
+              "default": "None"
+            }
+          ],
+          "return_type": "bytes",
+          "complexity": 5,
+          "body_source": "def signing_payload(\n    policy: str,\n    merkle_root: Optional[str] = None,\n    hash_chain_commitment: Optional[str] = None,\n    sealed: bool = False,\n    expires: Optional[str] = None,\n) -> bytes:\n    \"\"\"Build the canonical signing payload for a token.\n\n    Covers all security-relevant fields so sealed, expires, merkle_root, and\n    hash_chain_commitment cannot be tampered with after signing.\n    \"\"\"\n    parts = [\n        policy.strip(),\n        merkle_root or \"\",\n        hash_chain_commitment or \"\",\n        \"1\" if sealed else \"0\",\n        expires or \"\",\n    ]\n    return \"\\0\".join(parts).encode(\"utf-8\")",
+          "line_number": 37,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Build the canonical signing payload for a token.\n\nCovers all security-relevant fields so sealed, expires, merkle_root, and\nhash_chain_commitment cannot be tampered with after signing."
+        },
+        {
+          "name": "create_presentation_signature",
+          "params": [
+            {
+              "name": "token",
+              "type_annotation": "dict",
+              "default": ""
+            },
+            {
+              "name": "agent_private_key_hex",
+              "type_annotation": "str",
+              "default": ""
+            }
+          ],
+          "return_type": "str",
+          "complexity": 1,
+          "body_source": "def create_presentation_signature(token: dict, agent_private_key_hex: str) -> str:\n    \"\"\"Create a PoP presentation signature for a token.\n\n    The agent signs SHA-256(signing_payload) with its own Ed25519 key.\n\n    Returns:\n        Hex-encoded presentation signature\n    \"\"\"\n    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey\n\n    payload = signing_payload(\n        token[\"policy\"],\n        token.get(\"merkle_root\"),\n        token.get(\"hash_chain_commitment\"),\n        token.get(\"sealed\", False),\n        token.get(\"expires\"),\n    )\n    pop_payload = sha256(payload)\n\n    seed = bytes.fromhex(agent_private_key_hex)\n    private_key = Ed25519PrivateKey.from_private_bytes(seed)\n    sig = private_key.sign(pop_payload)\n    return sig.hex()",
+          "line_number": 59,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Create a PoP presentation signature for a token.\n\nThe agent signs SHA-256(signing_payload) with its own Ed25519 key.\n\nReturns:\n    Hex-encoded presentation signature"
+        },
+        {
+          "name": "mint",
+          "params": [
+            {
+              "name": "policy",
+              "type_annotation": "str",
+              "default": ""
+            },
+            {
+              "name": "private_key_hex",
+              "type_annotation": "str",
+              "default": ""
+            }
+          ],
+          "return_type": "dict[str, Any]",
+          "complexity": 5,
+          "body_source": "def mint(\n    policy: str,\n    private_key_hex: str,\n    *,\n    merkle_root: Optional[str] = None,\n    hash_chain_commitment: Optional[str] = None,\n    sealed: bool = False,\n    expires: Optional[str] = None,\n    pop_key: Optional[str] = None,\n) -> dict[str, Any]:\n    \"\"\"Mint a signed capability token.\n\n    Args:\n        policy: SPL policy source string\n        private_key_hex: Hex-encoded Ed25519 private key (32-byte seed)\n        merkle_root: Optional Merkle root hex\n        hash_chain_commitment: Optional hash chain commitment hex\n        sealed: Whether the token is sealed (prevents further attenuation)\n        expires: Optional ISO 8601 expiration timestamp\n\n    Returns:\n        Token dict with signature\n\n    Requires the `cryptography` package.\n    \"\"\"\n    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey\n    from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat\n\n    seed = bytes.fromhex(private_key_hex)\n    private_key = Ed25519PrivateKey.from_private_bytes(seed)\n    pub_bytes = private_key.public_key().public_bytes(Encoding.Raw, PublicFormat.Raw)\n\n    payload = signing_payload(policy, merkle_root, hash_chain_commitment, sealed, expires)\n    signature = private_key.sign(payload)\n\n    token = {\n        \"version\": \"0.2.0\",\n        \"policy\": policy.strip(),\n        \"sealed\": sealed,\n        \"public_key\": pub_bytes.hex(),\n        \"signature\": signature.hex(),\n    }\n    if merkle_root:\n        token[\"merkle_root\"] = merkle_root\n    if hash_chain_commitment:\n        token[\"hash_chain_commitment\"] = hash_chain_commitment\n    if expires:\n        token[\"expires\"] = expires\n    if pop_key:\n        token[\"pop_key\"] = pop_key\n\n    return token",
+          "line_number": 84,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Mint a signed capability token.\n\nArgs:\n    policy: SPL policy source string\n    private_key_hex: Hex-encoded Ed25519 private key (32-byte seed)\n    merkle_root: Optional Merkle root hex\n    hash_chain_commitment: Optional hash chain commitment hex\n    sealed: Whether the token is sealed (prevents further attenuation)\n    expires: Optional ISO 8601 expiration timestamp\n\nReturns:\n    Token dict with signature\n\nRequires the `cryptography` package."
+        },
+        {
+          "name": "verify_token",
+          "params": [
+            {
+              "name": "token",
+              "type_annotation": "dict | str",
+              "default": ""
+            },
+            {
+              "name": "req",
+              "type_annotation": "dict[str, Any]",
+              "default": ""
+            }
+          ],
+          "return_type": "dict[str, Any]",
+          "complexity": 19,
+          "body_source": "def verify_token(\n    token: dict | str,\n    req: dict[str, Any],\n    *,\n    vars: Optional[dict[str, Any]] = None,\n    per_day_count: Any = None,\n    crypto: Optional[dict] = None,\n    now: Optional[str] = None,\n    presentation_signature: Optional[str] = None,\n) -> dict[str, Any]:\n    \"\"\"Verify a token's signature and evaluate its policy.\n\n    Args:\n        token: Token dict or JSON string\n        req: Request dict\n        vars: Host variables (e.g. allowed_recipients)\n        per_day_count: Callback(action, day) -> int\n        crypto: Dict of crypto callbacks (dpop_ok, merkle_ok, vrf_ok, thresh_ok)\n        now: Current time as ISO 8601 string (defaults to now)\n\n    Returns:\n        {\"allow\": bool, \"sealed\": bool, \"error\": str | None}\n    \"\"\"\n    if isinstance(token, str):\n        token = json.loads(token)\n\n    t = token\n    sealed = t.get(\"sealed\", False)\n\n    # Check expiration\n    if t.get(\"expires\"):\n        exp = datetime.fromisoformat(t[\"expires\"])\n        current = datetime.fromisoformat(now) if now else datetime.now(timezone.utc)\n        if hasattr(current, 'tzinfo') and current.tzinfo is None:\n            current = current.replace(tzinfo=timezone.utc)\n        if hasattr(exp, 'tzinfo') and exp.tzinfo is None:\n            exp = exp.replace(tzinfo=timezone.utc)\n        if current > exp:\n            return {\"allow\": False, \"sealed\": sealed, \"error\": \"token expired\"}\n\n    # Verify signature over full token envelope\n    payload = signing_payload(\n        t[\"policy\"],\n        t.get(\"merkle_root\"),\n        t.get(\"hash_chain_commitment\"),\n        sealed,\n        t.get(\"expires\"),\n    )\n    if not verify_ed25519(payload, t[\"signature\"], t[\"public_key\"]):\n        return {\"allow\": False, \"sealed\": sealed, \"error\": \"invalid signature\"}\n\n    # PoP binding: if token has pop_key, require and verify presentation signature\n    if t.get(\"pop_key\"):\n        if not presentation_signature:\n            return {\"allow\": False, \"sealed\": sealed, \"error\": \"PoP binding requires presentation signature\"}\n        pop_payload = sha256(payload)\n        if not verify_ed25519(pop_payload, presentation_signature, t[\"pop_key\"]):\n            return {\"allow\": False, \"sealed\": sealed, \"error\": \"invalid presentation signature\"}\n\n    # Parse and evaluate\n    ast = parse(t[\"policy\"])\n\n    ctx_vars = dict(vars or {})\n    if now:\n        ctx_vars[\"now\"] = now\n\n    ctx = {\n        \"req\": req,\n        \"vars\": ctx_vars,\n        \"now\": now or datetime.now(timezone.utc).isoformat(),\n        \"per_day_count\": per_day_count or (lambda _a, _d: 0),\n        \"crypto\": crypto or {},\n    }\n\n    result = eval_policy(ast, ctx)\n    allow = bool(result) if result is not None else False\n\n    return {\"allow\": allow, \"sealed\": sealed}",
+          "line_number": 138,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Verify a token's signature and evaluate its policy.\n\nArgs:\n    token: Token dict or JSON string\n    req: Request dict\n    vars: Host variables (e.g. allowed_recipients)\n    per_day_count: Callback(action, day) -> int\n    crypto: Dict of crypto callbacks (dpop_ok, merkle_ok, vrf_ok, thresh_ok)\n    now: Current time as ISO 8601 string (defaults to now)\n\nReturns:\n    {\"allow\": bool, \"sealed\": bool, \"error\": str | None}"
+        }
+      ],
+      "imports": [
+        "json",
+        "datetime",
+        "typing",
+        "parser",
+        "evaluator",
+        "crypto",
+        "cryptography.hazmat.primitives.asymmetric.ed25519",
+        "cryptography.hazmat.primitives.serialization",
+        "cryptography.hazmat.primitives.asymmetric.ed25519",
+        "cryptography.hazmat.primitives.asymmetric.ed25519",
+        "cryptography.hazmat.primitives.serialization"
+      ],
+      "classes": []
+    },
+    {
+      "path": "sdk/python/spl/types.py",
+      "functions": [],
+      "imports": [
+        "dataclasses",
+        "typing"
+      ],
+      "classes": [
+        "CryptoCallbacks",
+        "Env"
+      ]
+    },
+    {
+      "path": "sdk/python/spl/verifier.py",
+      "functions": [
+        {
+          "name": "verify",
+          "params": [
+            {
+              "name": "policy_ast",
+              "type_annotation": "Any",
+              "default": ""
+            },
+            {
+              "name": "req",
+              "type_annotation": "dict",
+              "default": ""
+            },
+            {
+              "name": "env",
+              "type_annotation": "Any",
+              "default": ""
+            }
+          ],
+          "return_type": "dict",
+          "complexity": 12,
+          "body_source": "def verify(policy_ast: Any, req: dict, env: Any) -> dict:\n    \"\"\"Evaluate an SPL policy AST against a request.\n\n    Args:\n        policy_ast: Parsed SPL AST (from spl.parse)\n        req: Request dict (e.g. {\"actor_pub\": \"K_ai\", \"action\": \"payments.create\", ...})\n        env: Environment — either an Env dataclass or a dict with keys:\n             vars, now, per_day_count, crypto, max_gas/maxGas\n\n    Returns:\n        {\"allow\": bool, \"obligations\": list}\n    \"\"\"\n    if isinstance(env, dict):\n        ctx = {\n            \"req\": req,\n            \"vars\": env.get(\"vars\", {}),\n            \"now\": env.get(\"now\", \"\"),\n            \"per_day_count\": env.get(\"per_day_count\", lambda _a, _d: 0),\n            \"crypto\": env.get(\"crypto\", {}),\n            \"maxGas\": env.get(\"maxGas\") or env.get(\"max_gas\"),\n        }\n    else:\n        # Env dataclass\n        ctx = {\n            \"req\": req,\n            \"vars\": env.vars if hasattr(env, \"vars\") else {},\n            \"now\": env.now if hasattr(env, \"now\") else \"\",\n            \"per_day_count\": env.per_day_count if hasattr(env, \"per_day_count\") else (lambda _a, _d: 0),\n            \"crypto\": env.crypto if hasattr(env, \"crypto\") else {},\n            \"maxGas\": env.max_gas if hasattr(env, \"max_gas\") else None,\n        }\n    sealed = False\n    if isinstance(env, dict):\n        sealed = env.get(\"sealed\", False)\n    elif hasattr(env, \"sealed\"):\n        sealed = env.sealed\n\n    if sealed:\n        return {\"allow\": False, \"sealed\": True, \"error\": \"token is sealed and cannot be attenuated\"}\n\n    result = eval_policy(policy_ast, ctx)\n    allow = bool(result) if result is not None else False\n    return {\"allow\": allow, \"sealed\": False}",
+          "line_number": 7,
+          "is_async": false,
+          "is_method": false,
+          "class_name": "",
+          "decorators": [],
+          "docstring": "Evaluate an SPL policy AST against a request.\n\nArgs:\n    policy_ast: Parsed SPL AST (from spl.parse)\n    req: Request dict (e.g. {\"actor_pub\": \"K_ai\", \"action\": \"payments.create\", ...})\n    env: Environment — either an Env dataclass or a dict with keys:\n         vars, now, per_day_count, crypto, max_gas/maxGas\n\nReturns:\n    {\"allow\": bool, \"obligations\": list}"
+        }
+      ],
+      "imports": [
+        "typing",
+        "evaluator"
+      ],
+      "classes": []
+    },
+    {
+      "path": "examples/e2e/e2e.py",
+      "functions": [],
+      "imports": [
+        "spl"
+      ],
+      "classes": []
+    }
+  ],
+  "test_files": [
+    {
+      "path": "tests/smoke/test_sdk_python_spl___main__.py",
+      "test_functions": [
+        "test_import_sdk_python_spl___main__",
+        "test_main_is_callable"
+      ],
+      "imported_modules": [
+        "pytest",
+        "importlib",
+        "importlib"
+      ],
+      "referenced_names": [
+        "callable",
+        "fn",
+        "getattr",
+        "import_module",
+        "importlib",
+        "mod"
+      ]
+    },
+    {
+      "path": "tests/smoke/test_sdk_python_spl_crypto.py",
+      "test_functions": [
+        "test_import_sdk_python_spl_crypto",
+        "test_sha256_is_callable",
+        "test_sha256_hex_is_callable",
+        "test_verify_ed25519_is_callable",
+        "test_verify_merkle_proof_is_callable",
+        "test_hash_tuple_is_callable",
+        "test_derive_service_key_is_callable",
+        "test_verify_hash_chain_is_callable"
+      ],
+      "imported_modules": [
+        "pytest",
+        "importlib",
+        "importlib",
+        "importlib",
+        "importlib",
+        "importlib",
+        "importlib",
+        "importlib",
+        "importlib"
+      ],
+      "referenced_names": [
+        "callable",
+        "fn",
+        "getattr",
+        "import_module",
+        "importlib",
+        "mod"
+      ]
+    },
+    {
+      "path": "tests/smoke/test_sdk_python_spl_evaluator.py",
+      "test_functions": [
+        "test_import_sdk_python_spl_evaluator",
+        "test_eval_policy_is_callable"
+      ],
+      "imported_modules": [
+        "pytest",
+        "importlib",
+        "importlib"
+      ],
+      "referenced_names": [
+        "callable",
+        "fn",
+        "getattr",
+        "import_module",
+        "importlib",
+        "mod"
+      ]
+    },
+    {
+      "path": "tests/smoke/test_sdk_python_spl_parser.py",
+      "test_functions": [
+        "test_import_sdk_python_spl_parser",
+        "test_tokenize_is_callable",
+        "test_parse_is_callable"
+      ],
+      "imported_modules": [
+        "pytest",
+        "importlib",
+        "importlib",
+        "importlib"
+      ],
+      "referenced_names": [
+        "callable",
+        "fn",
+        "getattr",
+        "import_module",
+        "importlib",
+        "mod"
+      ]
+    },
+    {
+      "path": "tests/smoke/test_sdk_python_spl_token.py",
+      "test_functions": [
+        "test_import_sdk_python_spl_token",
+        "test_generate_keypair_is_callable",
+        "test_signing_payload_is_callable",
+        "test_create_presentation_signature_is_callable",
+        "test_mint_is_callable",
+        "test_verify_token_is_callable"
+      ],
+      "imported_modules": [
+        "pytest",
+        "importlib",
+        "importlib",
+        "importlib",
+        "importlib",
+        "importlib",
+        "importlib"
+      ],
+      "referenced_names": [
+        "callable",
+        "fn",
+        "getattr",
+        "import_module",
+        "importlib",
+        "mod"
+      ]
+    },
+    {
+      "path": "tests/smoke/test_sdk_python_spl_verifier.py",
+      "test_functions": [
+        "test_import_sdk_python_spl_verifier",
+        "test_verify_is_callable"
+      ],
+      "imported_modules": [
+        "pytest",
+        "importlib",
+        "importlib"
+      ],
+      "referenced_names": [
+        "callable",
+        "fn",
+        "getattr",
+        "import_module",
+        "importlib",
+        "mod"
+      ]
+    },
+    {
+      "path": "sdk/python/tests/__init__.py",
+      "test_functions": [],
+      "imported_modules": [],
+      "referenced_names": []
+    },
+    {
+      "path": "sdk/python/tests/test_crypto.py",
+      "test_functions": [
+        "test_valid_signature",
+        "test_tampered_message",
+        "test_cases",
+        "test_cases"
+      ],
+      "imported_modules": [
+        "json",
+        "pathlib",
+        "pytest",
+        "spl.crypto"
+      ],
+      "referenced_names": [
+        "Path",
+        "VECTORS_DIR",
+        "__file__",
+        "dict",
+        "encode",
+        "exists",
+        "json",
+        "leaf_hash",
+        "load_vectors",
+        "loads",
+        "name",
+        "parent",
+        "path",
+        "pytest",
+        "read_text",
+        "resolve",
+        "result",
+        "sha256_hex",
+        "skip",
+        "str",
+        "tc",
+        "v",
+        "verify_ed25519",
+        "verify_hash_chain",
+        "verify_merkle_proof"
+      ]
+    },
+    {
+      "path": "sdk/python/tests/test_evaluator.py",
+      "test_functions": [
+        "test_and_all_true",
+        "test_and_one_false",
+        "test_or_one_true",
+        "test_or_all_false",
+        "test_not_false",
+        "test_not_true",
+        "test_equal_strings",
+        "test_equal_strings_false",
+        "test_less_equal",
+        "test_less_than",
+        "test_greater_equal",
+        "test_greater_than",
+        "test_member_true",
+        "test_member_false",
+        "test_in_alias",
+        "test_subset_true",
+        "test_subset_false",
+        "test_before_true",
+        "test_before_false",
+        "test_get",
+        "test_crypto_stubs",
+        "test_unknown_op"
+      ],
+      "imported_modules": [
+        "pytest",
+        "spl.parser",
+        "spl.verifier"
+      ],
+      "referenced_names": [
+        "Exception",
+        "ast",
+        "e",
+        "env",
+        "eval_expr",
+        "make_env",
+        "parse",
+        "pytest",
+        "raises",
+        "req",
+        "result",
+        "src",
+        "verify"
+      ]
+    },
+    {
+      "path": "sdk/python/tests/test_gas.py",
+      "test_functions": [
+        "test_gas_budget_exceeded",
+        "test_gas_budget_sufficient",
+        "test_error_propagation_in_and",
+        "test_error_propagation_in_or",
+        "test_get_non_map"
+      ],
+      "imported_modules": [
+        "pytest",
+        "spl.parser",
+        "spl.verifier",
+        "spl.evaluator"
+      ],
+      "referenced_names": [
+        "GasExhausted",
+        "SPLError",
+        "ast",
+        "env",
+        "make_env",
+        "overrides",
+        "parse",
+        "pytest",
+        "raises",
+        "result",
+        "update",
+        "verify"
+      ]
+    },
+    {
+      "path": "sdk/python/tests/test_integration.py",
+      "test_functions": [
+        "test_family_gifts_allow",
+        "test_family_gifts_deny_high_amount"
+      ],
+      "imported_modules": [
+        "json",
+        "pathlib",
+        "pytest",
+        "spl.parser",
+        "spl.verifier"
+      ],
+      "referenced_names": [
+        "EXAMPLES_DIR",
+        "Path",
+        "__file__",
+        "env",
+        "exists",
+        "fixture",
+        "json",
+        "loads",
+        "make_env",
+        "parent",
+        "parse",
+        "policy_ast",
+        "policy_path",
+        "pytest",
+        "read_text",
+        "req_path",
+        "request_data",
+        "resolve",
+        "result",
+        "skip",
+        "strip",
+        "verify"
+      ]
+    },
+    {
+      "path": "sdk/python/tests/test_parser.py",
+      "test_functions": [
+        "test_parse_integer",
+        "test_parse_negative_float",
+        "test_parse_string",
+        "test_parse_bool_true",
+        "test_parse_bool_false",
+        "test_parse_symbol",
+        "test_parse_list",
+        "test_parse_nested",
+        "test_parse_strings_with_spaces",
+        "test_unterminated_paren",
+        "test_unexpected_close_paren",
+        "test_extra_tokens"
+      ],
+      "imported_modules": [
+        "pytest",
+        "spl.parser"
+      ],
+      "referenced_names": [
+        "SyntaxError",
+        "ast",
+        "inner",
+        "isinstance",
+        "len",
+        "list",
+        "parse",
+        "pytest",
+        "raises"
+      ]
+    }
+  ],
+  "coverage": {
+    "entries": [
+      {
+        "function_name": "main",
+        "file_path": "sdk/python/spl/__main__.py",
+        "complexity": 3,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "sha256",
+        "file_path": "sdk/python/spl/crypto.py",
+        "complexity": 1,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "sha256_hex",
+        "file_path": "sdk/python/spl/crypto.py",
+        "complexity": 1,
+        "test_count": 1,
+        "covered": true
+      },
+      {
+        "function_name": "verify_ed25519",
+        "file_path": "sdk/python/spl/crypto.py",
+        "complexity": 3,
+        "test_count": 1,
+        "covered": true
+      },
+      {
+        "function_name": "verify_merkle_proof",
+        "file_path": "sdk/python/spl/crypto.py",
+        "complexity": 4,
+        "test_count": 1,
+        "covered": true
+      },
+      {
+        "function_name": "hash_tuple",
+        "file_path": "sdk/python/spl/crypto.py",
+        "complexity": 1,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "_hkdf_sha256",
+        "file_path": "sdk/python/spl/crypto.py",
+        "complexity": 3,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "derive_service_key",
+        "file_path": "sdk/python/spl/crypto.py",
+        "complexity": 1,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "verify_hash_chain",
+        "file_path": "sdk/python/spl/crypto.py",
+        "complexity": 3,
+        "test_count": 1,
+        "covered": true
+      },
+      {
+        "function_name": "eval_policy",
+        "file_path": "sdk/python/spl/evaluator.py",
+        "complexity": 3,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "_eval",
+        "file_path": "sdk/python/spl/evaluator.py",
+        "complexity": 3,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "_eval_inner",
+        "file_path": "sdk/python/spl/evaluator.py",
+        "complexity": 39,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "_resolve_symbol",
+        "file_path": "sdk/python/spl/evaluator.py",
+        "complexity": 12,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "_truthy",
+        "file_path": "sdk/python/spl/evaluator.py",
+        "complexity": 4,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "_to_float",
+        "file_path": "sdk/python/spl/evaluator.py",
+        "complexity": 3,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "__init__",
+        "file_path": "sdk/python/spl/evaluator.py",
+        "complexity": 1,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "tokenize",
+        "file_path": "sdk/python/spl/parser.py",
+        "complexity": 9,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "_atom",
+        "file_path": "sdk/python/spl/parser.py",
+        "complexity": 8,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "parse",
+        "file_path": "sdk/python/spl/parser.py",
+        "complexity": 10,
+        "test_count": 4,
+        "covered": true
+      },
+      {
+        "function_name": "_parse",
+        "file_path": "sdk/python/spl/parser.py",
+        "complexity": 7,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "generate_keypair",
+        "file_path": "sdk/python/spl/token.py",
+        "complexity": 1,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "signing_payload",
+        "file_path": "sdk/python/spl/token.py",
+        "complexity": 5,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "create_presentation_signature",
+        "file_path": "sdk/python/spl/token.py",
+        "complexity": 1,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "mint",
+        "file_path": "sdk/python/spl/token.py",
+        "complexity": 5,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "verify_token",
+        "file_path": "sdk/python/spl/token.py",
+        "complexity": 19,
+        "test_count": 0,
+        "covered": false
+      },
+      {
+        "function_name": "verify",
+        "file_path": "sdk/python/spl/verifier.py",
+        "complexity": 12,
+        "test_count": 3,
+        "covered": true
+      }
+    ]
+  },
+  "security": {
+    "findings": [
+      {
+        "function_name": "parse",
+        "file_path": "sdk/python/spl/parser.py",
+        "line_number": 61,
+        "complexity": 10,
+        "risk_level": "low",
+        "pattern_matched": "variable: tokens",
+        "suggestion": "Ensure branch on 'tokens' is tested with both truthy and falsy values",
+        "covered": true
+      },
+      {
+        "function_name": "parse",
+        "file_path": "sdk/python/spl/parser.py",
+        "line_number": 61,
+        "complexity": 10,
+        "risk_level": "low",
+        "pattern_matched": "variable: tokens",
+        "suggestion": "Ensure branch on 'tokens' is tested with both truthy and falsy values",
+        "covered": true
+      },
+      {
+        "function_name": "parse",
+        "file_path": "sdk/python/spl/parser.py",
+        "line_number": 61,
+        "complexity": 10,
+        "risk_level": "low",
+        "pattern_matched": "variable: tokens",
+        "suggestion": "Ensure branch on 'tokens' is tested with both truthy and falsy values",
+        "covered": true
+      },
+      {
+        "function_name": "parse",
+        "file_path": "sdk/python/spl/parser.py",
+        "line_number": 61,
+        "complexity": 10,
+        "risk_level": "low",
+        "pattern_matched": "variable: tokens",
+        "suggestion": "Ensure branch on 'tokens' is tested with both truthy and falsy values",
+        "covered": true
+      },
+      {
+        "function_name": "parse",
+        "file_path": "sdk/python/spl/parser.py",
+        "line_number": 61,
+        "complexity": 10,
+        "risk_level": "low",
+        "pattern_matched": "variable: tokens",
+        "suggestion": "Ensure branch on 'tokens' is tested with both truthy and falsy values",
+        "covered": true
+      },
+      {
+        "function_name": "_parse",
+        "file_path": "sdk/python/spl/parser.py",
+        "line_number": 70,
+        "complexity": 7,
+        "risk_level": "critical",
+        "pattern_matched": "variable: tokens",
+        "suggestion": "Ensure branch on 'tokens' is tested with both truthy and falsy values",
+        "covered": false
+      },
+      {
+        "function_name": "_parse",
+        "file_path": "sdk/python/spl/parser.py",
+        "line_number": 70,
+        "complexity": 7,
+        "risk_level": "critical",
+        "pattern_matched": "variable: tokens",
+        "suggestion": "Ensure branch on 'tokens' is tested with both truthy and falsy values",
+        "covered": false
+      },
+      {
+        "function_name": "_parse",
+        "file_path": "sdk/python/spl/parser.py",
+        "line_number": 70,
+        "complexity": 7,
+        "risk_level": "critical",
+        "pattern_matched": "variable: tokens",
+        "suggestion": "Ensure branch on 'tokens' is tested with both truthy and falsy values",
+        "covered": false
+      },
+      {
+        "function_name": "verify_token",
+        "file_path": "sdk/python/spl/token.py",
+        "line_number": 138,
+        "complexity": 19,
+        "risk_level": "critical",
+        "pattern_matched": "variable: token",
+        "suggestion": "Ensure branch on 'token' is tested with both truthy and falsy values",
+        "covered": false
+      }
+    ],
+    "analyzed_at": "2026-03-15T18:49:09.817197"
+  }
+}
