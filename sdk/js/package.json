@@ -23,7 +23,16 @@
     "demo": "node dist/index.js ../../examples/policies/family_gifts.spl ../../examples/requests/gift_50_niece.json",
     "prepublishOnly": "npm run build"
   },
-  "keywords": ["agent", "authorization", "capability", "token", "spl", "policy", "ai", "lisp"],
+  "keywords": [
+    "agent",
+    "authorization",
+    "capability",
+    "token",
+    "spl",
+    "policy",
+    "ai",
+    "lisp"
+  ],
   "author": "Jeremy McEntire",
   "license": "MIT",
   "repository": {
@@ -33,7 +42,7 @@
   },
   "homepage": "https://jmcentire.github.io/agent-safe/",
   "devDependencies": {
-    "@types/node": "^25.3.0",
-    "typescript": "^5.9.3"
+    "@types/node": "^25.6.0",
+    "typescript": "^6.0.2"
   }
 }
