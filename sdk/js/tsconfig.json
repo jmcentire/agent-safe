@@ -6,7 +6,8 @@
     "strict": true,
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "declaration": true
+    "declaration": true,
+    "rootDir": "./src"
   },
   "include": [
     "src"
