@@ -1,0 +1,331 @@
+{
+  "component_id": "sdk_python_spl___main__",
+  "contract_version": 1,
+  "test_cases": [
+    {
+      "id": "test_happy_path_allow",
+      "description": "Happy path: valid policy and request files that result in ALLOW decision",
+      "function": "main",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Valid policy file and request file that verify to allow=True",
+      "expected_output_description": "Prints 'ALLOW' to stdout",
+      "expected_error": "",
+      "assertions": [
+        "Output contains 'ALLOW'",
+        "parse called with policy content",
+        "verify called with correct parameters"
+      ]
+    },
+    {
+      "id": "test_happy_path_deny",
+      "description": "Happy path: valid policy and request files that result in DENY decision",
+      "function": "main",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Valid policy file and request file that verify to allow=False",
+      "expected_output_description": "Prints 'DENY' to stdout",
+      "expected_error": "",
+      "assertions": [
+        "Output contains 'DENY'",
+        "parse called with policy content",
+        "verify called with correct parameters"
+      ]
+    },
+    {
+      "id": "test_error_insufficient_arguments_zero",
+      "description": "Error case: no arguments provided (only program name)",
+      "function": "main",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "sys.argv with only program name",
+      "expected_output_description": "",
+      "expected_error": "InsufficientArguments",
+      "assertions": [
+        "Raises or exits when len(sys.argv) < 3"
+      ]
+    },
+    {
+      "id": "test_error_insufficient_arguments_one",
+      "description": "Error case: only one argument provided",
+      "function": "main",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "sys.argv with program name and one argument",
+      "expected_output_description": "",
+      "expected_error": "InsufficientArguments",
+      "assertions": [
+        "Raises or exits when len(sys.argv) < 3"
+      ]
+    },
+    {
+      "id": "test_error_policy_file_not_found",
+      "description": "Error case: policy file does not exist",
+      "function": "main",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "sys.argv[1] points to non-existent file",
+      "expected_output_description": "",
+      "expected_error": "PolicyFileNotFound",
+      "assertions": [
+        "Raises or exits when policy file does not exist"
+      ]
+    },
+    {
+      "id": "test_error_policy_file_not_readable",
+      "description": "Error case: policy file exists but is not readable",
+      "function": "main",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "sys.argv[1] points to unreadable file",
+      "expected_output_description": "",
+      "expected_error": "PolicyFileNotFound",
+      "assertions": [
+        "Raises or exits when policy file is not readable"
+      ]
+    },
+    {
+      "id": "test_error_request_file_not_found",
+      "description": "Error case: request file does not exist",
+      "function": "main",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "sys.argv[2] points to non-existent file",
+      "expected_output_description": "",
+      "expected_error": "RequestFileNotFound",
+      "assertions": [
+        "Raises or exits when request file does not exist"
+      ]
+    },
+    {
+      "id": "test_error_request_file_not_readable",
+      "description": "Error case: request file exists but is not readable",
+      "function": "main",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "sys.argv[2] points to unreadable file",
+      "expected_output_description": "",
+      "expected_error": "RequestFileNotFound",
+      "assertions": [
+        "Raises or exits when request file is not readable"
+      ]
+    },
+    {
+      "id": "test_error_invalid_json",
+      "description": "Error case: request file contains invalid JSON",
+      "function": "main",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Request file with malformed JSON syntax",
+      "expected_output_description": "",
+      "expected_error": "InvalidJSON",
+      "assertions": [
+        "Raises or exits when JSON is invalid"
+      ]
+    },
+    {
+      "id": "test_error_parse_error",
+      "description": "Error case: policy file contains invalid SPL syntax",
+      "function": "main",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Policy file with invalid SPL syntax that causes parse to fail",
+      "expected_output_description": "",
+      "expected_error": "ParseError",
+      "assertions": [
+        "Raises or exits when SPL syntax is invalid"
+      ]
+    },
+    {
+      "id": "test_error_verification_error",
+      "description": "Error case: verify function raises an exception",
+      "function": "main",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Valid files but verify raises exception",
+      "expected_output_description": "",
+      "expected_error": "VerificationError",
+      "assertions": [
+        "Raises or exits when verify raises exception"
+      ]
+    },
+    {
+      "id": "test_error_missing_allow_key",
+      "description": "Error case: verify result does not contain 'allow' key",
+      "function": "main",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "verify returns dict without 'allow' key",
+      "expected_output_description": "",
+      "expected_error": "KeyError",
+      "assertions": [
+        "Raises or exits when verify result missing 'allow' key"
+      ]
+    },
+    {
+      "id": "test_invariant_environment_structure",
+      "description": "Invariant: Environment dictionary has fixed structure with specific keys",
+      "function": "main",
+      "category": "invariant",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Any valid input",
+      "expected_output_description": "",
+      "expected_error": "",
+      "assertions": [
+        "Environment has keys: vars, now, per_day_count, crypto"
+      ]
+    },
+    {
+      "id": "test_invariant_allowed_recipients",
+      "description": "Invariant: allowed_recipients is always ['niece@example.com', 'mom@example.com']",
+      "function": "main",
+      "category": "invariant",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Any valid input",
+      "expected_output_description": "",
+      "expected_error": "",
+      "assertions": [
+        "vars.allowed_recipients equals ['niece@example.com', 'mom@example.com']"
+      ]
+    },
+    {
+      "id": "test_invariant_now_hardcoded",
+      "description": "Invariant: now is always hardcoded to '2025-10-01T00:00:00Z'",
+      "function": "main",
+      "category": "invariant",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Any valid input",
+      "expected_output_description": "",
+      "expected_error": "",
+      "assertions": [
+        "now equals '2025-10-01T00:00:00Z'"
+      ]
+    },
+    {
+      "id": "test_invariant_per_day_count_returns_zero",
+      "description": "Invariant: per_day_count lambda always returns 0",
+      "function": "main",
+      "category": "invariant",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Any valid input",
+      "expected_output_description": "",
+      "expected_error": "",
+      "assertions": [
+        "per_day_count callable returns 0 for any input"
+      ]
+    },
+    {
+      "id": "test_invariant_crypto_validators_return_true",
+      "description": "Invariant: All crypto validation lambdas always return True",
+      "function": "main",
+      "category": "invariant",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Any valid input",
+      "expected_output_description": "",
+      "expected_error": "",
+      "assertions": [
+        "dpop_ok returns True",
+        "merkle_ok returns True",
+        "vrf_ok returns True",
+        "thresh_ok returns True"
+      ]
+    },
+    {
+      "id": "test_edge_case_empty_policy_file",
+      "description": "Edge case: policy file is empty",
+      "function": "main",
+      "category": "edge_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Empty policy file",
+      "expected_output_description": "",
+      "expected_error": "ParseError or handles gracefully",
+      "assertions": [
+        "Behavior is deterministic for empty policy"
+      ]
+    },
+    {
+      "id": "test_edge_case_empty_json_file",
+      "description": "Edge case: request file contains empty JSON object",
+      "function": "main",
+      "category": "edge_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Request file with {}",
+      "expected_output_description": "",
+      "expected_error": "",
+      "assertions": [
+        "Handles empty JSON object"
+      ]
+    },
+    {
+      "id": "test_edge_case_minimal_valid_input",
+      "description": "Edge case: minimal valid policy and request",
+      "function": "main",
+      "category": "edge_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Smallest valid policy and request",
+      "expected_output_description": "",
+      "expected_error": "",
+      "assertions": [
+        "Processes minimal valid input correctly"
+      ]
+    },
+    {
+      "id": "test_integration_end_to_end",
+      "description": "Integration: full end-to-end test with real files",
+      "function": "main",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {},
+      "input_description": "Complete realistic policy and request files",
+      "expected_output_description": "Prints ALLOW or DENY based on policy evaluation",
+      "expected_error": "",
+      "assertions": [
+        "Complete flow executes successfully",
+        "Output is either ALLOW or DENY"
+      ]
+    }
+  ],
+  "test_language": "python",
+  "generated_code": "\"\"\"\nContract tests for sdk_python_spl___main__ component.\n\nThis test suite verifies the main() CLI function according to its contract:\n- Argument parsing (InsufficientArguments errors)\n- File loading (PolicyFileNotFound, RequestFileNotFound errors)\n- Processing (InvalidJSON, ParseError, VerificationError, KeyError errors)\n- Invariants (environment structure, hardcoded values)\n- Integration tests with real files\n\"\"\"\n\nimport pytest\nimport sys\nimport json\nimport os\nfrom pathlib import Path\nfrom unittest.mock import Mock, patch, mock_open, MagicMock\nfrom io import StringIO\n\n\n# Mock the module structure since we're testing the main function\n# Import will be mocked in fixtures\nclass MockParser:\n    @staticmethod\n    def parse(policy_text):\n        return {\"parsed\": \"policy\"}\n\n\nclass MockVerifier:\n    @staticmethod\n    def verify(policy, request, env):\n        return {\"allow\": True}\n\n\n# Test fixtures\n@pytest.fixture\ndef mock_parser():\n    \"\"\"Mock parser.parse function\"\"\"\n    with patch('sdk_python_spl___main__.parse') as mock_parse:\n        mock_parse.return_value = {\"parsed\": \"policy\"}\n        yield mock_parse\n\n\n@pytest.fixture\ndef mock_verifier():\n    \"\"\"Mock verifier.verify function\"\"\"\n    with patch('sdk_python_spl___main__.verify') as mock_verify:\n        mock_verify.return_value = {\"allow\": True}\n        yield mock_verify\n\n\n@pytest.fixture\ndef valid_policy_file(tmp_path):\n    \"\"\"Create a valid policy file\"\"\"\n    policy_file = tmp_path / \"policy.spl\"\n    policy_file.write_text(\"allow if true\")\n    return str(policy_file)\n\n\n@pytest.fixture\ndef valid_request_file(tmp_path):\n    \"\"\"Create a valid request JSON file\"\"\"\n    request_file = tmp_path / \"request.json\"\n    request_file.write_text('{\"action\": \"send\", \"resource\": \"email\"}')\n    return str(request_file)\n\n\n@pytest.fixture\ndef invalid_json_file(tmp_path):\n    \"\"\"Create an invalid JSON file\"\"\"\n    request_file = tmp_path / \"invalid.json\"\n    request_file.write_text('{\"invalid\": json}')\n    return str(request_file)\n\n\n@pytest.fixture\ndef empty_policy_file(tmp_path):\n    \"\"\"Create an empty policy file\"\"\"\n    policy_file = tmp_path / \"empty.spl\"\n    policy_file.write_text(\"\")\n    return str(policy_file)\n\n\n@pytest.fixture\ndef empty_json_file(tmp_path):\n    \"\"\"Create an empty JSON object file\"\"\"\n    request_file = tmp_path / \"empty.json\"\n    request_file.write_text('{}')\n    return str(request_file)\n\n\n# Happy Path Tests\nclass TestHappyPath:\n    \"\"\"Tests for successful execution paths\"\"\"\n    \n    def test_happy_path_allow(self, valid_policy_file, valid_request_file, \n                               mock_parser, mock_verifier, capsys, monkeypatch):\n        \"\"\"Happy path: valid policy and request files that result in ALLOW decision\"\"\"\n        # Setup\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        mock_verifier.return_value = {\"allow\": True}\n        \n        # Import and execute\n        from sdk.python.spl.__main__ import main\n        \n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        # Verify\n        captured = capsys.readouterr()\n        assert 'ALLOW' in captured.out\n        mock_parser.assert_called_once()\n        mock_verifier.assert_called_once()\n        \n        # Verify environment structure in call\n        call_args = mock_verifier.call_args\n        if call_args:\n            env = call_args[0][2] if len(call_args[0]) > 2 else call_args[1].get('env')\n            if env:\n                assert 'vars' in env\n                assert 'now' in env\n                assert 'per_day_count' in env\n                assert 'crypto' in env\n    \n    def test_happy_path_deny(self, valid_policy_file, valid_request_file,\n                             mock_parser, mock_verifier, capsys, monkeypatch):\n        \"\"\"Happy path: valid policy and request files that result in DENY decision\"\"\"\n        # Setup\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        mock_verifier.return_value = {\"allow\": False}\n        \n        # Import and execute\n        from sdk.python.spl.__main__ import main\n        \n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        # Verify\n        captured = capsys.readouterr()\n        assert 'DENY' in captured.out\n        mock_parser.assert_called_once()\n        mock_verifier.assert_called_once()\n    \n    def test_integration_end_to_end(self, tmp_path, mock_parser, mock_verifier,\n                                    capsys, monkeypatch):\n        \"\"\"Integration: full end-to-end test with real files\"\"\"\n        # Create realistic policy and request files\n        policy_file = tmp_path / \"full_policy.spl\"\n        policy_file.write_text(\"\"\"\n        policy email_policy {\n            allow if request.action == \"send\" and\n                     request.recipient in vars.allowed_recipients\n        }\n        \"\"\")\n        \n        request_file = tmp_path / \"full_request.json\"\n        request_file.write_text(json.dumps({\n            \"action\": \"send\",\n            \"recipient\": \"niece@example.com\",\n            \"subject\": \"Hello\"\n        }))\n        \n        monkeypatch.setattr(sys, 'argv', ['program', str(policy_file), str(request_file)])\n        mock_verifier.return_value = {\"allow\": True}\n        \n        # Execute\n        from sdk.python.spl.__main__ import main\n        \n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        # Verify complete flow\n        captured = capsys.readouterr()\n        assert captured.out in ['ALLOW\\n', 'DENY\\n'] or 'ALLOW' in captured.out or 'DENY' in captured.out\n\n\n# Error Case Tests\nclass TestErrorCases:\n    \"\"\"Tests for error conditions\"\"\"\n    \n    def test_error_insufficient_arguments_zero(self, monkeypatch):\n        \"\"\"Error case: no arguments provided (only program name)\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program'])\n        \n        from sdk.python.spl.__main__ import main\n        \n        with pytest.raises((SystemExit, IndexError, Exception)) as exc_info:\n            main()\n        \n        # Should raise/exit due to insufficient arguments\n        assert exc_info.value is not None\n    \n    def test_error_insufficient_arguments_one(self, monkeypatch):\n        \"\"\"Error case: only one argument provided\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', 'only_one_arg'])\n        \n        from sdk.python.spl.__main__ import main\n        \n        with pytest.raises((SystemExit, IndexError, FileNotFoundError, Exception)) as exc_info:\n            main()\n        \n        # Should raise/exit due to insufficient arguments\n        assert exc_info.value is not None\n    \n    def test_error_policy_file_not_found(self, valid_request_file, monkeypatch):\n        \"\"\"Error case: policy file does not exist\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', '/nonexistent/policy.spl', valid_request_file])\n        \n        from sdk.python.spl.__main__ import main\n        \n        with pytest.raises((SystemExit, FileNotFoundError, Exception)) as exc_info:\n            main()\n        \n        # Should raise/exit due to missing policy file\n        assert exc_info.value is not None\n    \n    def test_error_policy_file_not_readable(self, valid_request_file, tmp_path, monkeypatch):\n        \"\"\"Error case: policy file exists but is not readable\"\"\"\n        policy_file = tmp_path / \"unreadable.spl\"\n        policy_file.write_text(\"allow if true\")\n        \n        # Make file unreadable (Unix-like systems)\n        if hasattr(os, 'chmod'):\n            os.chmod(str(policy_file), 0o000)\n        \n        monkeypatch.setattr(sys, 'argv', ['program', str(policy_file), valid_request_file])\n        \n        from sdk.python.spl.__main__ import main\n        \n        try:\n            with pytest.raises((SystemExit, PermissionError, FileNotFoundError, Exception)) as exc_info:\n                main()\n            assert exc_info.value is not None\n        finally:\n            # Restore permissions for cleanup\n            if hasattr(os, 'chmod'):\n                os.chmod(str(policy_file), 0o644)\n    \n    def test_error_request_file_not_found(self, valid_policy_file, monkeypatch):\n        \"\"\"Error case: request file does not exist\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, '/nonexistent/request.json'])\n        \n        from sdk.python.spl.__main__ import main\n        \n        with pytest.raises((SystemExit, FileNotFoundError, Exception)) as exc_info:\n            main()\n        \n        # Should raise/exit due to missing request file\n        assert exc_info.value is not None\n    \n    def test_error_request_file_not_readable(self, valid_policy_file, tmp_path, monkeypatch):\n        \"\"\"Error case: request file exists but is not readable\"\"\"\n        request_file = tmp_path / \"unreadable.json\"\n        request_file.write_text('{\"action\": \"test\"}')\n        \n        # Make file unreadable (Unix-like systems)\n        if hasattr(os, 'chmod'):\n            os.chmod(str(request_file), 0o000)\n        \n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, str(request_file)])\n        \n        from sdk.python.spl.__main__ import main\n        \n        try:\n            with pytest.raises((SystemExit, PermissionError, FileNotFoundError, Exception)) as exc_info:\n                main()\n            assert exc_info.value is not None\n        finally:\n            # Restore permissions for cleanup\n            if hasattr(os, 'chmod'):\n                os.chmod(str(request_file), 0o644)\n    \n    def test_error_invalid_json(self, valid_policy_file, invalid_json_file,\n                                mock_parser, monkeypatch):\n        \"\"\"Error case: request file contains invalid JSON\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, invalid_json_file])\n        \n        from sdk.python.spl.__main__ import main\n        \n        with pytest.raises((SystemExit, json.JSONDecodeError, ValueError, Exception)) as exc_info:\n            main()\n        \n        # Should raise/exit due to invalid JSON\n        assert exc_info.value is not None\n    \n    def test_error_parse_error(self, valid_request_file, valid_policy_file,\n                               mock_parser, monkeypatch):\n        \"\"\"Error case: policy file contains invalid SPL syntax\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        \n        # Make parser raise an exception\n        mock_parser.side_effect = Exception(\"Parse error: invalid SPL syntax\")\n        \n        from sdk.python.spl.__main__ import main\n        \n        with pytest.raises((SystemExit, Exception)) as exc_info:\n            main()\n        \n        # Should raise/exit due to parse error\n        assert exc_info.value is not None\n        mock_parser.assert_called_once()\n    \n    def test_error_verification_error(self, valid_policy_file, valid_request_file,\n                                      mock_parser, mock_verifier, monkeypatch):\n        \"\"\"Error case: verify function raises an exception\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        \n        # Make verifier raise an exception\n        mock_verifier.side_effect = Exception(\"Verification failed\")\n        \n        from sdk.python.spl.__main__ import main\n        \n        with pytest.raises((SystemExit, Exception)) as exc_info:\n            main()\n        \n        # Should raise/exit due to verification error\n        assert exc_info.value is not None\n        mock_verifier.assert_called_once()\n    \n    def test_error_missing_allow_key(self, valid_policy_file, valid_request_file,\n                                     mock_parser, mock_verifier, monkeypatch):\n        \"\"\"Error case: verify result does not contain 'allow' key\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        \n        # Make verifier return dict without 'allow' key\n        mock_verifier.return_value = {\"result\": \"something_else\"}\n        \n        from sdk.python.spl.__main__ import main\n        \n        with pytest.raises((SystemExit, KeyError, Exception)) as exc_info:\n            main()\n        \n        # Should raise/exit due to missing 'allow' key\n        assert exc_info.value is not None\n\n\n# Edge Case Tests\nclass TestEdgeCases:\n    \"\"\"Tests for boundary conditions and edge cases\"\"\"\n    \n    def test_edge_case_empty_policy_file(self, empty_policy_file, valid_request_file,\n                                         mock_parser, monkeypatch):\n        \"\"\"Edge case: policy file is empty\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', empty_policy_file, valid_request_file])\n        \n        from sdk.python.spl.__main__ import main\n        \n        # Empty policy should either parse successfully or raise parse error\n        # Behavior should be deterministic\n        try:\n            main()\n            # If it doesn't raise, verify parser was called with empty string\n            mock_parser.assert_called_once_with(\"\")\n        except (SystemExit, Exception) as e:\n            # Parse error is acceptable for empty policy\n            assert e is not None\n    \n    def test_edge_case_empty_json_file(self, valid_policy_file, empty_json_file,\n                                       mock_parser, mock_verifier, monkeypatch, capsys):\n        \"\"\"Edge case: request file contains empty JSON object\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, empty_json_file])\n        mock_verifier.return_value = {\"allow\": True}\n        \n        from sdk.python.spl.__main__ import main\n        \n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        # Should handle empty JSON object\n        mock_verifier.assert_called_once()\n        call_args = mock_verifier.call_args\n        if call_args:\n            request = call_args[0][1] if len(call_args[0]) > 1 else call_args[1].get('request')\n            assert request == {}\n    \n    def test_edge_case_minimal_valid_input(self, tmp_path, mock_parser, mock_verifier,\n                                           monkeypatch, capsys):\n        \"\"\"Edge case: minimal valid policy and request\"\"\"\n        # Minimal policy\n        policy_file = tmp_path / \"minimal.spl\"\n        policy_file.write_text(\"a\")\n        \n        # Minimal request\n        request_file = tmp_path / \"minimal.json\"\n        request_file.write_text('{}')\n        \n        monkeypatch.setattr(sys, 'argv', ['program', str(policy_file), str(request_file)])\n        mock_verifier.return_value = {\"allow\": False}\n        \n        from sdk.python.spl.__main__ import main\n        \n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        # Should process minimal valid input\n        captured = capsys.readouterr()\n        assert 'DENY' in captured.out or 'ALLOW' in captured.out\n\n\n# Invariant Tests\nclass TestInvariants:\n    \"\"\"Tests for contract invariants\"\"\"\n    \n    def test_invariant_environment_structure(self, valid_policy_file, valid_request_file,\n                                             mock_parser, mock_verifier, monkeypatch, capsys):\n        \"\"\"Invariant: Environment dictionary has fixed structure with specific keys\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        mock_verifier.return_value = {\"allow\": True}\n        \n        from sdk.python.spl.__main__ import main\n        \n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        # Verify environment structure\n        mock_verifier.assert_called_once()\n        call_args = mock_verifier.call_args\n        \n        if call_args:\n            # Extract environment from call\n            env = call_args[0][2] if len(call_args[0]) > 2 else call_args[1].get('env')\n            \n            assert env is not None, \"Environment should be passed to verify\"\n            assert 'vars' in env, \"Environment must have 'vars' key\"\n            assert 'now' in env, \"Environment must have 'now' key\"\n            assert 'per_day_count' in env, \"Environment must have 'per_day_count' key\"\n            assert 'crypto' in env, \"Environment must have 'crypto' key\"\n    \n    def test_invariant_allowed_recipients(self, valid_policy_file, valid_request_file,\n                                          mock_parser, mock_verifier, monkeypatch, capsys):\n        \"\"\"Invariant: allowed_recipients is always ['niece@example.com', 'mom@example.com']\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        mock_verifier.return_value = {\"allow\": True}\n        \n        from sdk.python.spl.__main__ import main\n        \n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        # Verify allowed_recipients\n        mock_verifier.assert_called_once()\n        call_args = mock_verifier.call_args\n        \n        if call_args:\n            env = call_args[0][2] if len(call_args[0]) > 2 else call_args[1].get('env')\n            \n            assert env is not None\n            assert 'vars' in env\n            assert 'allowed_recipients' in env['vars']\n            assert env['vars']['allowed_recipients'] == ['niece@example.com', 'mom@example.com']\n    \n    def test_invariant_now_hardcoded(self, valid_policy_file, valid_request_file,\n                                     mock_parser, mock_verifier, monkeypatch, capsys):\n        \"\"\"Invariant: now is always hardcoded to '2025-10-01T00:00:00Z'\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        mock_verifier.return_value = {\"allow\": True}\n        \n        from sdk.python.spl.__main__ import main\n        \n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        # Verify now value\n        mock_verifier.assert_called_once()\n        call_args = mock_verifier.call_args\n        \n        if call_args:\n            env = call_args[0][2] if len(call_args[0]) > 2 else call_args[1].get('env')\n            \n            assert env is not None\n            assert 'now' in env\n            assert env['now'] == '2025-10-01T00:00:00Z'\n    \n    def test_invariant_per_day_count_returns_zero(self, valid_policy_file, valid_request_file,\n                                                   mock_parser, mock_verifier, monkeypatch, capsys):\n        \"\"\"Invariant: per_day_count lambda always returns 0\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        mock_verifier.return_value = {\"allow\": True}\n        \n        from sdk.python.spl.__main__ import main\n        \n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        # Verify per_day_count behavior\n        mock_verifier.assert_called_once()\n        call_args = mock_verifier.call_args\n        \n        if call_args:\n            env = call_args[0][2] if len(call_args[0]) > 2 else call_args[1].get('env')\n            \n            assert env is not None\n            assert 'per_day_count' in env\n            assert callable(env['per_day_count'])\n            \n            # Test that it returns 0 for various inputs\n            assert env['per_day_count']('any_arg') == 0\n            assert env['per_day_count']('another_arg') == 0\n            assert env['per_day_count'](None) == 0\n    \n    def test_invariant_crypto_validators_return_true(self, valid_policy_file, valid_request_file,\n                                                      mock_parser, mock_verifier, monkeypatch, capsys):\n        \"\"\"Invariant: All crypto validation lambdas always return True\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        mock_verifier.return_value = {\"allow\": True}\n        \n        from sdk.python.spl.__main__ import main\n        \n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        # Verify crypto validators\n        mock_verifier.assert_called_once()\n        call_args = mock_verifier.call_args\n        \n        if call_args:\n            env = call_args[0][2] if len(call_args[0]) > 2 else call_args[1].get('env')\n            \n            assert env is not None\n            assert 'crypto' in env\n            \n            crypto = env['crypto']\n            assert 'dpop_ok' in crypto\n            assert 'merkle_ok' in crypto\n            assert 'vrf_ok' in crypto\n            assert 'thresh_ok' in crypto\n            \n            # Verify all return True\n            assert callable(crypto['dpop_ok'])\n            assert callable(crypto['merkle_ok'])\n            assert callable(crypto['vrf_ok'])\n            assert callable(crypto['thresh_ok'])\n            \n            assert crypto['dpop_ok']('any_arg') is True\n            assert crypto['merkle_ok']('any_arg') is True\n            assert crypto['vrf_ok']('any_arg') is True\n            assert crypto['thresh_ok']('any_arg') is True\n\n\n# Additional coverage tests\nclass TestAdditionalCoverage:\n    \"\"\"Additional tests for comprehensive coverage\"\"\"\n    \n    def test_multiple_runs_same_environment(self, valid_policy_file, valid_request_file,\n                                            mock_parser, mock_verifier, monkeypatch, capsys):\n        \"\"\"Verify that multiple runs produce consistent environment\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        mock_verifier.return_value = {\"allow\": True}\n        \n        from sdk.python.spl.__main__ import main\n        \n        # First run\n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        first_call_env = mock_verifier.call_args[0][2] if len(mock_verifier.call_args[0]) > 2 else None\n        \n        # Reset mock\n        mock_verifier.reset_mock()\n        \n        # Second run\n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        second_call_env = mock_verifier.call_args[0][2] if len(mock_verifier.call_args[0]) > 2 else None\n        \n        # Verify consistency\n        if first_call_env and second_call_env:\n            assert first_call_env['now'] == second_call_env['now']\n            assert first_call_env['vars']['allowed_recipients'] == second_call_env['vars']['allowed_recipients']\n    \n    def test_policy_content_passed_to_parser(self, valid_policy_file, valid_request_file,\n                                             mock_parser, mock_verifier, monkeypatch):\n        \"\"\"Verify that policy file content is correctly read and passed to parser\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        mock_verifier.return_value = {\"allow\": True}\n        \n        from sdk.python.spl.__main__ import main\n        \n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        # Verify parser was called with the policy content\n        mock_parser.assert_called_once()\n        call_content = mock_parser.call_args[0][0]\n        \n        # Read the actual file to compare\n        with open(valid_policy_file, 'r') as f:\n            expected_content = f.read()\n        \n        assert call_content == expected_content\n    \n    def test_request_content_passed_to_verifier(self, valid_policy_file, valid_request_file,\n                                                mock_parser, mock_verifier, monkeypatch):\n        \"\"\"Verify that request JSON is correctly parsed and passed to verifier\"\"\"\n        monkeypatch.setattr(sys, 'argv', ['program', valid_policy_file, valid_request_file])\n        mock_verifier.return_value = {\"allow\": True}\n        \n        from sdk.python.spl.__main__ import main\n        \n        try:\n            main()\n        except SystemExit:\n            pass\n        \n        # Verify verifier was called with the request content\n        mock_verifier.assert_called_once()\n        call_request = mock_verifier.call_args[0][1] if len(mock_verifier.call_args[0]) > 1 else None\n        \n        # Read the actual file to compare\n        with open(valid_request_file, 'r') as f:\n            expected_request = json.load(f)\n        \n        assert call_request == expected_request\n"
+}

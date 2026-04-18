@@ -1,0 +1,199 @@
+{
+  "component_id": "sdk_python_spl_parser",
+  "name": "SPL S-Expression Parser",
+  "description": "Tokenizer and recursive-descent parser for SPL S-expressions. Converts SPL source code strings into abstract syntax trees (AST) consisting of primitives (bool, int, float, str) and nested lists.",
+  "version": 1,
+  "types": [
+    {
+      "name": "AST",
+      "kind": "union",
+      "fields": [],
+      "item_type": "",
+      "variants": [],
+      "inner_types": [
+        "bool",
+        "int",
+        "float",
+        "str",
+        "list[AST]"
+      ],
+      "description": "Abstract syntax tree node - can be bool, int, float, str, or list[AST]"
+    }
+  ],
+  "functions": [
+    {
+      "name": "tokenize",
+      "description": "Tokenizes an SPL S-expression source string into a list of string tokens. Handles parentheses, quoted strings, and whitespace-delimited symbols.",
+      "inputs": [
+        {
+          "name": "src",
+          "type_ref": "str",
+          "required": true,
+          "default": "",
+          "description": "Source code string to tokenize",
+          "validators": []
+        }
+      ],
+      "output_type": "list[str]",
+      "error_cases": [],
+      "preconditions": [],
+      "postconditions": [
+        "Returns a list of tokens including '(', ')', quoted strings (with quotes), and symbols",
+        "String literals are preserved as single tokens with quotes intact",
+        "Whitespace is used to delimit non-string tokens"
+      ],
+      "idempotent": true,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "_atom",
+      "description": "Converts a single token string into an atomic AST value. Handles booleans (#t/#f), numbers (int/float), quoted strings, and symbols.",
+      "inputs": [
+        {
+          "name": "tok",
+          "type_ref": "str",
+          "required": true,
+          "default": "",
+          "description": "Single token string to convert",
+          "validators": []
+        }
+      ],
+      "output_type": "AST",
+      "error_cases": [],
+      "preconditions": [],
+      "postconditions": [
+        "Returns True for '#t', False for '#f'",
+        "Returns int for numeric strings without '.', float for numeric strings with '.'",
+        "Returns unquoted content for strings starting and ending with '\"', with '\\\"' replaced by '\"'",
+        "Returns the token as-is (as str) for all other cases (symbols)"
+      ],
+      "idempotent": true,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "parse",
+      "description": "Parse an SPL S-expression string into an AST. Enforces a maximum policy size of 64KB (65536 bytes) and validates syntax.",
+      "inputs": [
+        {
+          "name": "src",
+          "type_ref": "str",
+          "required": true,
+          "default": "",
+          "description": "SPL S-expression source code to parse",
+          "validators": []
+        }
+      ],
+      "output_type": "AST",
+      "error_cases": [
+        {
+          "name": "policy_too_large",
+          "condition": "len(src.encode('utf-8')) > MAX_POLICY_BYTES (65536)",
+          "error_type": "SyntaxError",
+          "error_data": {
+            "message": "policy exceeds maximum size of 65536 bytes"
+          }
+        },
+        {
+          "name": "empty_source",
+          "condition": "No tokens after tokenizing and stripping",
+          "error_type": "SyntaxError",
+          "error_data": {
+            "message": "unexpected EOF"
+          }
+        },
+        {
+          "name": "unexpected_eof",
+          "condition": "Tokens exhausted during parsing",
+          "error_type": "SyntaxError",
+          "error_data": {
+            "message": "unexpected EOF"
+          }
+        },
+        {
+          "name": "unterminated_list",
+          "condition": "Opening '(' without matching ')'",
+          "error_type": "SyntaxError",
+          "error_data": {
+            "message": "unterminated ("
+          }
+        },
+        {
+          "name": "unexpected_close_paren",
+          "condition": "Closing ')' without matching '('",
+          "error_type": "SyntaxError",
+          "error_data": {
+            "message": "unexpected )"
+          }
+        },
+        {
+          "name": "extra_tokens",
+          "condition": "Tokens remain after parsing complete expression",
+          "error_type": "SyntaxError",
+          "error_data": {
+            "message": "extra tokens"
+          }
+        }
+      ],
+      "preconditions": [
+        "Source must not exceed 65536 bytes when UTF-8 encoded",
+        "Source must contain at least one token after stripping whitespace"
+      ],
+      "postconditions": [
+        "Returns a fully parsed AST representing the S-expression",
+        "All tokens are consumed (no extra tokens remain)",
+        "Nested lists are represented as Python lists"
+      ],
+      "idempotent": true,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    }
+  ],
+  "dependencies": [
+    "typing"
+  ],
+  "dependency_contracts": {},
+  "invariants": [
+    "MAX_POLICY_BYTES = 65536 - Maximum allowed size for policy source in bytes",
+    "Tokenization preserves string literals as complete tokens including quotes",
+    "Parentheses '(' and ')' are always separate tokens",
+    "Boolean literals '#t' and '#f' are converted to Python True and False",
+    "Numeric tokens are converted to int or float based on presence of '.'",
+    "Quoted strings have their quotes removed and escape sequences processed",
+    "All other tokens are treated as symbols (returned as strings)"
+  ],
+  "requires": [],
+  "processing_register": "",
+  "data_access": {
+    "reads": [],
+    "writes": [],
+    "rationale": "Pure parsing module with no data persistence or external I/O",
+    "side_effects": []
+  },
+  "authority": {
+    "domains": [],
+    "rationale": "Parser module does not own any data domains, only processes input"
+  }
+}

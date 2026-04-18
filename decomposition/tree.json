@@ -1,0 +1,128 @@
+{
+  "root_id": "root",
+  "nodes": {
+    "root": {
+      "component_id": "root",
+      "name": "Project Root",
+      "description": "Adopted codebase at /Users/jmcentire/Code/agent-safe",
+      "depth": 0,
+      "parent_id": "",
+      "children": [
+        "sdk"
+      ],
+      "contract": null,
+      "implementation_status": "pending",
+      "test_results": null
+    },
+    "sdk": {
+      "component_id": "sdk",
+      "name": "Sdk",
+      "description": "Package: sdk",
+      "depth": 1,
+      "parent_id": "root",
+      "children": [
+        "sdk_python"
+      ],
+      "contract": null,
+      "implementation_status": "pending",
+      "test_results": null
+    },
+    "sdk_python": {
+      "component_id": "sdk_python",
+      "name": "Python",
+      "description": "Package: sdk/python",
+      "depth": 2,
+      "parent_id": "sdk",
+      "children": [
+        "sdk_python_spl"
+      ],
+      "contract": null,
+      "implementation_status": "pending",
+      "test_results": null
+    },
+    "sdk_python_spl": {
+      "component_id": "sdk_python_spl",
+      "name": "Spl",
+      "description": "Package: sdk/python/spl",
+      "depth": 3,
+      "parent_id": "sdk_python",
+      "children": [
+        "sdk_python_spl___main__",
+        "sdk_python_spl_crypto",
+        "sdk_python_spl_evaluator",
+        "sdk_python_spl_parser",
+        "sdk_python_spl_token",
+        "sdk_python_spl_verifier"
+      ],
+      "contract": null,
+      "implementation_status": "pending",
+      "test_results": null
+    },
+    "sdk_python_spl___main__": {
+      "component_id": "sdk_python_spl___main__",
+      "name": "  Main  ",
+      "description": "Module sdk/python/spl/__main__.py: main",
+      "depth": 4,
+      "parent_id": "sdk_python_spl",
+      "children": [],
+      "contract": null,
+      "implementation_status": "pending",
+      "test_results": null
+    },
+    "sdk_python_spl_crypto": {
+      "component_id": "sdk_python_spl_crypto",
+      "name": "Crypto",
+      "description": "Module sdk/python/spl/crypto.py: sha256, sha256_hex, verify_ed25519, verify_merkle_proof, hash_tuple (+3 more)",
+      "depth": 4,
+      "parent_id": "sdk_python_spl",
+      "children": [],
+      "contract": null,
+      "implementation_status": "pending",
+      "test_results": null
+    },
+    "sdk_python_spl_evaluator": {
+      "component_id": "sdk_python_spl_evaluator",
+      "name": "Evaluator",
+      "description": "Module sdk/python/spl/evaluator.py: eval_policy, _eval, _eval_inner, _resolve_symbol, _truthy (+2 more)",
+      "depth": 4,
+      "parent_id": "sdk_python_spl",
+      "children": [],
+      "contract": null,
+      "implementation_status": "pending",
+      "test_results": null
+    },
+    "sdk_python_spl_parser": {
+      "component_id": "sdk_python_spl_parser",
+      "name": "Parser",
+      "description": "Module sdk/python/spl/parser.py: tokenize, _atom, parse, _parse",
+      "depth": 4,
+      "parent_id": "sdk_python_spl",
+      "children": [],
+      "contract": null,
+      "implementation_status": "pending",
+      "test_results": null
+    },
+    "sdk_python_spl_token": {
+      "component_id": "sdk_python_spl_token",
+      "name": "Token",
+      "description": "Module sdk/python/spl/token.py: generate_keypair, signing_payload, create_presentation_signature, mint, verify_token",
+      "depth": 4,
+      "parent_id": "sdk_python_spl",
+      "children": [],
+      "contract": null,
+      "implementation_status": "pending",
+      "test_results": null
+    },
+    "sdk_python_spl_verifier": {
+      "component_id": "sdk_python_spl_verifier",
+      "name": "Verifier",
+      "description": "Module sdk/python/spl/verifier.py: verify",
+      "depth": 4,
+      "parent_id": "sdk_python_spl",
+      "children": [],
+      "contract": null,
+      "implementation_status": "pending",
+      "test_results": null
+    }
+  }
+}

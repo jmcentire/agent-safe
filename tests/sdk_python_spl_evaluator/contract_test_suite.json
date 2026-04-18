@@ -1,0 +1,869 @@
+{
+  "component_id": "sdk_python_spl_evaluator",
+  "contract_version": 1,
+  "test_cases": [
+    {
+      "id": "test_eval_state_init_happy_path",
+      "description": "Verify _EvalState initializes with correct gas budget and zero depth",
+      "function": "__init__",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "max_gas": "10000"
+      },
+      "input_description": "",
+      "expected_output_description": "State initialized with gas=10000 and depth=0",
+      "expected_error": "",
+      "assertions": [
+        "assert state.gas == 10000",
+        "assert state.depth == 0"
+      ]
+    },
+    {
+      "id": "test_eval_state_init_zero_gas",
+      "description": "Verify _EvalState can initialize with zero gas budget",
+      "function": "__init__",
+      "category": "edge_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "max_gas": "0"
+      },
+      "input_description": "",
+      "expected_output_description": "State initialized with gas=0 and depth=0",
+      "expected_error": "",
+      "assertions": [
+        "assert state.gas == 0",
+        "assert state.depth == 0"
+      ]
+    },
+    {
+      "id": "test_eval_policy_simple_literal",
+      "description": "Verify eval_policy evaluates a simple literal value",
+      "function": "eval_policy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "42",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns the literal value 42",
+      "expected_error": "",
+      "assertions": [
+        "assert result == 42"
+      ]
+    },
+    {
+      "id": "test_eval_policy_logical_and_true",
+      "description": "Verify eval_policy evaluates AND operation with true operands",
+      "function": "eval_policy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['and', True, True]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns True",
+      "expected_error": "",
+      "assertions": [
+        "assert result is True"
+      ]
+    },
+    {
+      "id": "test_eval_policy_logical_or_false",
+      "description": "Verify eval_policy evaluates OR operation with false operands",
+      "function": "eval_policy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['or', False, False]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns False",
+      "expected_error": "",
+      "assertions": [
+        "assert result is False"
+      ]
+    },
+    {
+      "id": "test_eval_policy_not_operation",
+      "description": "Verify eval_policy evaluates NOT operation",
+      "function": "eval_policy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['not', False]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns True",
+      "expected_error": "",
+      "assertions": [
+        "assert result is True"
+      ]
+    },
+    {
+      "id": "test_eval_policy_gas_exhausted",
+      "description": "Verify eval_policy raises GasExhausted when gas budget is exceeded",
+      "function": "eval_policy",
+      "category": "error_case",
+      "setup_description": "Set max_gas to 0",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['and', True, True]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "",
+      "expected_error": "GasExhausted",
+      "assertions": [
+        "pytest.raises(GasExhausted)"
+      ]
+    },
+    {
+      "id": "test_eval_policy_depth_exceeded",
+      "description": "Verify eval_policy raises DepthExceeded when recursion depth exceeds MAX_DEPTH",
+      "function": "eval_policy",
+      "category": "error_case",
+      "setup_description": "Create AST nested 65+ levels deep",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "deeply_nested_ast",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "",
+      "expected_error": "DepthExceeded",
+      "assertions": [
+        "pytest.raises(DepthExceeded)"
+      ]
+    },
+    {
+      "id": "test_eval_policy_unknown_operation",
+      "description": "Verify eval_policy raises SPLError for unknown operation",
+      "function": "eval_policy",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['unknown_op', 1, 2]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "",
+      "expected_error": "SPLError",
+      "assertions": [
+        "pytest.raises(SPLError)"
+      ]
+    },
+    {
+      "id": "test_eval_policy_unresolved_symbol_strict",
+      "description": "Verify eval_policy raises SPLError for unresolved symbol in strict mode",
+      "function": "eval_policy",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "'undefined_var'",
+        "ctx": "{'strict': True, 'vars': {}}"
+      },
+      "input_description": "",
+      "expected_output_description": "",
+      "expected_error": "SPLError",
+      "assertions": [
+        "pytest.raises(SPLError)"
+      ]
+    },
+    {
+      "id": "test_eval_comparison_equals",
+      "description": "Verify eval_policy evaluates equality comparison",
+      "function": "eval_policy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['=', 5, 5]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns True",
+      "expected_error": "",
+      "assertions": [
+        "assert result is True"
+      ]
+    },
+    {
+      "id": "test_eval_comparison_less_than",
+      "description": "Verify eval_policy evaluates less than comparison",
+      "function": "eval_policy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['<', 3, 5]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns True",
+      "expected_error": "",
+      "assertions": [
+        "assert result is True"
+      ]
+    },
+    {
+      "id": "test_eval_set_member",
+      "description": "Verify eval_policy evaluates member operation",
+      "function": "eval_policy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['member', 'a', ['a', 'b', 'c']]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns True",
+      "expected_error": "",
+      "assertions": [
+        "assert result is True"
+      ]
+    },
+    {
+      "id": "test_eval_get_operation",
+      "description": "Verify eval_policy evaluates get operation for dictionary access",
+      "function": "eval_policy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['get', {'key': 'value'}, 'key']",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns 'value'",
+      "expected_error": "",
+      "assertions": [
+        "assert result == 'value'"
+      ]
+    },
+    {
+      "id": "test_eval_nested_expression",
+      "description": "Verify eval_policy evaluates nested expressions correctly",
+      "function": "eval_policy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['and', ['=', 1, 1], ['<', 2, 3]]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns True",
+      "expected_error": "",
+      "assertions": [
+        "assert result is True"
+      ]
+    },
+    {
+      "id": "test_eval_decrements_gas",
+      "description": "Verify _eval decrements gas by 1 for each call",
+      "function": "_eval",
+      "category": "invariant",
+      "setup_description": "Initialize state with gas=100",
+      "mock_dependencies": {},
+      "input_values": {
+        "node": "42",
+        "ctx": "{}",
+        "st": "state"
+      },
+      "input_description": "",
+      "expected_output_description": "Gas is decremented to 99",
+      "expected_error": "",
+      "assertions": [
+        "assert st.gas == 99"
+      ]
+    },
+    {
+      "id": "test_eval_restores_depth",
+      "description": "Verify _eval restores depth to original value after evaluation",
+      "function": "_eval",
+      "category": "invariant",
+      "setup_description": "Initialize state with depth=5",
+      "mock_dependencies": {},
+      "input_values": {
+        "node": "42",
+        "ctx": "{}",
+        "st": "state"
+      },
+      "input_description": "",
+      "expected_output_description": "Depth is restored to 5 after evaluation",
+      "expected_error": "",
+      "assertions": [
+        "assert st.depth == 5"
+      ]
+    },
+    {
+      "id": "test_eval_gas_exhausted_boundary",
+      "description": "Verify _eval raises GasExhausted when gas becomes negative",
+      "function": "_eval",
+      "category": "error_case",
+      "setup_description": "Initialize state with gas=0",
+      "mock_dependencies": {},
+      "input_values": {
+        "node": "42",
+        "ctx": "{}",
+        "st": "state"
+      },
+      "input_description": "",
+      "expected_output_description": "",
+      "expected_error": "GasExhausted",
+      "assertions": [
+        "pytest.raises(GasExhausted)"
+      ]
+    },
+    {
+      "id": "test_eval_depth_exceeded_boundary",
+      "description": "Verify _eval raises DepthExceeded when depth exceeds MAX_DEPTH",
+      "function": "_eval",
+      "category": "error_case",
+      "setup_description": "Initialize state with depth=64",
+      "mock_dependencies": {},
+      "input_values": {
+        "node": "42",
+        "ctx": "{}",
+        "st": "state"
+      },
+      "input_description": "",
+      "expected_output_description": "",
+      "expected_error": "DepthExceeded",
+      "assertions": [
+        "pytest.raises(DepthExceeded)"
+      ]
+    },
+    {
+      "id": "test_eval_inner_all_logical_operations",
+      "description": "Verify _eval_inner handles all logical operations (and, or, not)",
+      "function": "_eval_inner",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "node": "various",
+        "ctx": "{}",
+        "st": "state"
+      },
+      "input_description": "",
+      "expected_output_description": "Correctly evaluates and, or, not operations",
+      "expected_error": "",
+      "assertions": [
+        "results match expected logic"
+      ]
+    },
+    {
+      "id": "test_eval_inner_all_comparison_operations",
+      "description": "Verify _eval_inner handles all comparison operations (=, <=, <, >=, >)",
+      "function": "_eval_inner",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "node": "various",
+        "ctx": "{}",
+        "st": "state"
+      },
+      "input_description": "",
+      "expected_output_description": "Correctly evaluates comparison operations",
+      "expected_error": "",
+      "assertions": [
+        "results match expected comparisons"
+      ]
+    },
+    {
+      "id": "test_eval_inner_unknown_operation",
+      "description": "Verify _eval_inner raises SPLError for unknown operation",
+      "function": "_eval_inner",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "node": "['invalid_op']",
+        "ctx": "{}",
+        "st": "state"
+      },
+      "input_description": "",
+      "expected_output_description": "",
+      "expected_error": "SPLError",
+      "assertions": [
+        "pytest.raises(SPLError)"
+      ]
+    },
+    {
+      "id": "test_eval_inner_index_error",
+      "description": "Verify _eval_inner raises IndexError for insufficient arguments",
+      "function": "_eval_inner",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "node": "['not']",
+        "ctx": "{}",
+        "st": "state"
+      },
+      "input_description": "",
+      "expected_output_description": "",
+      "expected_error": "IndexError",
+      "assertions": [
+        "pytest.raises(IndexError)"
+      ]
+    },
+    {
+      "id": "test_resolve_symbol_special_true",
+      "description": "Verify _resolve_symbol resolves #t to True",
+      "function": "_resolve_symbol",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "x": "'#t'",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns True",
+      "expected_error": "",
+      "assertions": [
+        "assert result is True"
+      ]
+    },
+    {
+      "id": "test_resolve_symbol_special_false",
+      "description": "Verify _resolve_symbol resolves #f to False",
+      "function": "_resolve_symbol",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "x": "'#f'",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns False",
+      "expected_error": "",
+      "assertions": [
+        "assert result is False"
+      ]
+    },
+    {
+      "id": "test_resolve_symbol_from_vars",
+      "description": "Verify _resolve_symbol resolves variable from ctx['vars']",
+      "function": "_resolve_symbol",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "x": "'myvar'",
+        "ctx": "{'vars': {'myvar': 100}}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns 100",
+      "expected_error": "",
+      "assertions": [
+        "assert result == 100"
+      ]
+    },
+    {
+      "id": "test_resolve_symbol_non_string",
+      "description": "Verify _resolve_symbol returns non-string values as-is",
+      "function": "_resolve_symbol",
+      "category": "edge_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "x": "42",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns 42",
+      "expected_error": "",
+      "assertions": [
+        "assert result == 42"
+      ]
+    },
+    {
+      "id": "test_resolve_symbol_strict_mode_error",
+      "description": "Verify _resolve_symbol raises SPLError for unresolved symbol in strict mode",
+      "function": "_resolve_symbol",
+      "category": "error_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "x": "'unknown'",
+        "ctx": "{'strict': True, 'vars': {}}"
+      },
+      "input_description": "",
+      "expected_output_description": "",
+      "expected_error": "SPLError",
+      "assertions": [
+        "pytest.raises(SPLError)"
+      ]
+    },
+    {
+      "id": "test_resolve_symbol_non_strict_returns_original",
+      "description": "Verify _resolve_symbol returns original symbol in non-strict mode",
+      "function": "_resolve_symbol",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "x": "'unknown'",
+        "ctx": "{'strict': False, 'vars': {}}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns 'unknown'",
+      "expected_error": "",
+      "assertions": [
+        "assert result == 'unknown'"
+      ]
+    },
+    {
+      "id": "test_truthy_none_is_false",
+      "description": "Verify _truthy returns False for None",
+      "function": "_truthy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "v": "None"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns False",
+      "expected_error": "",
+      "assertions": [
+        "assert result is False"
+      ]
+    },
+    {
+      "id": "test_truthy_boolean_true",
+      "description": "Verify _truthy returns True for boolean True",
+      "function": "_truthy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "v": "True"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns True",
+      "expected_error": "",
+      "assertions": [
+        "assert result is True"
+      ]
+    },
+    {
+      "id": "test_truthy_boolean_false",
+      "description": "Verify _truthy returns False for boolean False",
+      "function": "_truthy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "v": "False"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns False",
+      "expected_error": "",
+      "assertions": [
+        "assert result is False"
+      ]
+    },
+    {
+      "id": "test_truthy_zero_is_false",
+      "description": "Verify _truthy returns False for zero",
+      "function": "_truthy",
+      "category": "edge_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "v": "0"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns False",
+      "expected_error": "",
+      "assertions": [
+        "assert result is False"
+      ]
+    },
+    {
+      "id": "test_truthy_nonzero_is_true",
+      "description": "Verify _truthy returns True for non-zero number",
+      "function": "_truthy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "v": "42"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns True",
+      "expected_error": "",
+      "assertions": [
+        "assert result is True"
+      ]
+    },
+    {
+      "id": "test_truthy_string_is_true",
+      "description": "Verify _truthy returns True for non-empty string",
+      "function": "_truthy",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "v": "'hello'"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns True",
+      "expected_error": "",
+      "assertions": [
+        "assert result is True"
+      ]
+    },
+    {
+      "id": "test_truthy_empty_string_is_true",
+      "description": "Verify _truthy returns True for empty string",
+      "function": "_truthy",
+      "category": "edge_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "v": "''"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns True (all non-None, non-zero values are true)",
+      "expected_error": "",
+      "assertions": [
+        "assert result is True"
+      ]
+    },
+    {
+      "id": "test_to_float_integer",
+      "description": "Verify _to_float converts integer to float",
+      "function": "_to_float",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "x": "42"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns 42.0",
+      "expected_error": "",
+      "assertions": [
+        "assert result == 42.0"
+      ]
+    },
+    {
+      "id": "test_to_float_string_number",
+      "description": "Verify _to_float converts numeric string to float",
+      "function": "_to_float",
+      "category": "happy_path",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "x": "'3.14'"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns 3.14",
+      "expected_error": "",
+      "assertions": [
+        "assert result == 3.14"
+      ]
+    },
+    {
+      "id": "test_to_float_invalid_string",
+      "description": "Verify _to_float returns 0.0 for non-numeric string",
+      "function": "_to_float",
+      "category": "edge_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "x": "'abc'"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns 0.0 on conversion failure",
+      "expected_error": "",
+      "assertions": [
+        "assert result == 0.0"
+      ]
+    },
+    {
+      "id": "test_to_float_none",
+      "description": "Verify _to_float returns 0.0 for None",
+      "function": "_to_float",
+      "category": "edge_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "x": "None"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns 0.0 on conversion failure",
+      "expected_error": "",
+      "assertions": [
+        "assert result == 0.0"
+      ]
+    },
+    {
+      "id": "test_invariant_gas_monotonic_decrease",
+      "description": "Verify gas decreases monotonically during evaluation",
+      "function": "eval_policy",
+      "category": "invariant",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['and', True, True]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Gas decreases by at least 1 for each eval call",
+      "expected_error": "",
+      "assertions": [
+        "gas values form decreasing sequence"
+      ]
+    },
+    {
+      "id": "test_invariant_depth_tracking",
+      "description": "Verify depth is properly tracked and restored",
+      "function": "eval_policy",
+      "category": "invariant",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['and', ['or', True, False], True]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Depth returns to 0 after evaluation completes",
+      "expected_error": "",
+      "assertions": [
+        "final depth == 0"
+      ]
+    },
+    {
+      "id": "test_short_circuit_and",
+      "description": "Verify AND short-circuits on first false value",
+      "function": "eval_policy",
+      "category": "edge_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['and', False, ['unknown_op']]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns False without evaluating second operand",
+      "expected_error": "",
+      "assertions": [
+        "assert result is False"
+      ]
+    },
+    {
+      "id": "test_short_circuit_or",
+      "description": "Verify OR short-circuits on first true value",
+      "function": "eval_policy",
+      "category": "edge_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['or', True, ['unknown_op']]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns True without evaluating second operand",
+      "expected_error": "",
+      "assertions": [
+        "assert result is True"
+      ]
+    },
+    {
+      "id": "test_empty_list_evaluation",
+      "description": "Verify empty list is returned as-is",
+      "function": "eval_policy",
+      "category": "edge_case",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "[]",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns empty list",
+      "expected_error": "",
+      "assertions": [
+        "assert result == []"
+      ]
+    },
+    {
+      "id": "test_gas_at_limit_plus_one",
+      "description": "Verify evaluation succeeds with gas at exactly required amount",
+      "function": "eval_policy",
+      "category": "edge_case",
+      "setup_description": "Set max_gas to 1 (exactly enough for one eval)",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "42",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Returns 42",
+      "expected_error": "",
+      "assertions": [
+        "assert result == 42"
+      ]
+    },
+    {
+      "id": "test_depth_at_limit",
+      "description": "Verify evaluation succeeds at exactly MAX_DEPTH",
+      "function": "eval_policy",
+      "category": "edge_case",
+      "setup_description": "Create AST nested exactly 64 levels",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "nested_64_levels",
+        "ctx": "{}"
+      },
+      "input_description": "",
+      "expected_output_description": "Evaluation succeeds",
+      "expected_error": "",
+      "assertions": [
+        "result is not None"
+      ]
+    },
+    {
+      "id": "test_context_immutability",
+      "description": "Verify evaluation does not mutate the input context",
+      "function": "eval_policy",
+      "category": "invariant",
+      "setup_description": "",
+      "mock_dependencies": {},
+      "input_values": {
+        "ast": "['and', True, True]",
+        "ctx": "{'vars': {'x': 1}}"
+      },
+      "input_description": "",
+      "expected_output_description": "Context remains unchanged",
+      "expected_error": "",
+      "assertions": [
+        "ctx == original_ctx"
+      ]
+    }
+  ],
+  "test_language": "python",
+  "generated_code": "\"\"\"\nContract Test Suite for SPL Evaluator\nGenerated from contract version 1\nTests cover happy paths, edge cases, error cases, and invariants\n\"\"\"\n\nimport pytest\nfrom unittest.mock import Mock, patch, MagicMock\nfrom typing import Any, Dict\nimport copy\n\n# Import the component under test\nfrom sdk.python.spl.evaluator import (\n    GasExhausted,\n    DepthExceeded,\n    SPLError,\n    _EvalState,\n    eval_policy,\n    _eval,\n    _eval_inner,\n    _resolve_symbol,\n    _truthy,\n    _to_float,\n)\n\n\n# ============================================================================\n# Test Class: _EvalState Initialization\n# ============================================================================\n\nclass TestEvalStateInit:\n    \"\"\"Test suite for _EvalState.__init__\"\"\"\n    \n    def test_eval_state_init_happy_path(self):\n        \"\"\"Verify _EvalState initializes with correct gas budget and zero depth\"\"\"\n        state = _EvalState(10000)\n        assert state.gas == 10000\n        assert state.depth == 0\n    \n    def test_eval_state_init_zero_gas(self):\n        \"\"\"Verify _EvalState can initialize with zero gas budget\"\"\"\n        state = _EvalState(0)\n        assert state.gas == 0\n        assert state.depth == 0\n    \n    def test_eval_state_init_small_gas(self):\n        \"\"\"Verify _EvalState initializes with small gas budget\"\"\"\n        state = _EvalState(5)\n        assert state.gas == 5\n        assert state.depth == 0\n    \n    def test_eval_state_init_large_gas(self):\n        \"\"\"Verify _EvalState initializes with large gas budget\"\"\"\n        state = _EvalState(1000000)\n        assert state.gas == 1000000\n        assert state.depth == 0\n\n\n# ============================================================================\n# Test Class: eval_policy\n# ============================================================================\n\nclass TestEvalPolicy:\n    \"\"\"Test suite for eval_policy entry point\"\"\"\n    \n    def test_eval_policy_simple_literal(self):\n        \"\"\"Verify eval_policy evaluates a simple literal value\"\"\"\n        result = eval_policy(42, {})\n        assert result == 42\n    \n    def test_eval_policy_string_literal(self):\n        \"\"\"Verify eval_policy evaluates a string literal\"\"\"\n        result = eval_policy(\"hello\", {})\n        assert result == \"hello\"\n    \n    def test_eval_policy_logical_and_true(self):\n        \"\"\"Verify eval_policy evaluates AND operation with true operands\"\"\"\n        result = eval_policy(['and', True, True], {})\n        assert result is True\n    \n    def test_eval_policy_logical_and_false(self):\n        \"\"\"Verify eval_policy evaluates AND operation with false operand\"\"\"\n        result = eval_policy(['and', True, False], {})\n        assert result is False\n    \n    def test_eval_policy_logical_or_false(self):\n        \"\"\"Verify eval_policy evaluates OR operation with false operands\"\"\"\n        result = eval_policy(['or', False, False], {})\n        assert result is False\n    \n    def test_eval_policy_logical_or_true(self):\n        \"\"\"Verify eval_policy evaluates OR operation with at least one true operand\"\"\"\n        result = eval_policy(['or', False, True], {})\n        assert result is True\n    \n    def test_eval_policy_not_operation(self):\n        \"\"\"Verify eval_policy evaluates NOT operation\"\"\"\n        result = eval_policy(['not', False], {})\n        assert result is True\n    \n    def test_eval_policy_not_true(self):\n        \"\"\"Verify eval_policy evaluates NOT with true operand\"\"\"\n        result = eval_policy(['not', True], {})\n        assert result is False\n    \n    def test_eval_policy_comparison_equals(self):\n        \"\"\"Verify eval_policy evaluates equality comparison\"\"\"\n        result = eval_policy(['=', 5, 5], {})\n        assert result is True\n    \n    def test_eval_policy_comparison_not_equals(self):\n        \"\"\"Verify eval_policy evaluates inequality\"\"\"\n        result = eval_policy(['=', 5, 3], {})\n        assert result is False\n    \n    def test_eval_policy_comparison_less_than(self):\n        \"\"\"Verify eval_policy evaluates less than comparison\"\"\"\n        result = eval_policy(['<', 3, 5], {})\n        assert result is True\n    \n    def test_eval_policy_comparison_less_than_false(self):\n        \"\"\"Verify eval_policy evaluates less than (false case)\"\"\"\n        result = eval_policy(['<', 5, 3], {})\n        assert result is False\n    \n    def test_eval_policy_comparison_less_equal(self):\n        \"\"\"Verify eval_policy evaluates less than or equal\"\"\"\n        result = eval_policy(['<=', 3, 5], {})\n        assert result is True\n    \n    def test_eval_policy_comparison_less_equal_equal(self):\n        \"\"\"Verify eval_policy evaluates less than or equal (equal case)\"\"\"\n        result = eval_policy(['<=', 5, 5], {})\n        assert result is True\n    \n    def test_eval_policy_comparison_greater_than(self):\n        \"\"\"Verify eval_policy evaluates greater than comparison\"\"\"\n        result = eval_policy(['>', 5, 3], {})\n        assert result is True\n    \n    def test_eval_policy_comparison_greater_equal(self):\n        \"\"\"Verify eval_policy evaluates greater than or equal\"\"\"\n        result = eval_policy(['>=', 5, 3], {})\n        assert result is True\n    \n    def test_eval_policy_set_member(self):\n        \"\"\"Verify eval_policy evaluates member operation\"\"\"\n        result = eval_policy(['member', 'a', ['a', 'b', 'c']], {})\n        assert result is True\n    \n    def test_eval_policy_set_member_false(self):\n        \"\"\"Verify eval_policy evaluates member operation (not in set)\"\"\"\n        result = eval_policy(['member', 'd', ['a', 'b', 'c']], {})\n        assert result is False\n    \n    def test_eval_policy_set_in(self):\n        \"\"\"Verify eval_policy evaluates 'in' operation\"\"\"\n        result = eval_policy(['in', 'a', ['a', 'b', 'c']], {})\n        assert result is True\n    \n    def test_eval_policy_get_operation(self):\n        \"\"\"Verify eval_policy evaluates get operation for dictionary access\"\"\"\n        result = eval_policy(['get', {'key': 'value'}, 'key'], {})\n        assert result == 'value'\n    \n    def test_eval_policy_get_missing_key(self):\n        \"\"\"Verify eval_policy returns None for missing dictionary key\"\"\"\n        result = eval_policy(['get', {'key': 'value'}, 'missing'], {})\n        assert result is None\n    \n    def test_eval_policy_nested_expression(self):\n        \"\"\"Verify eval_policy evaluates nested expressions correctly\"\"\"\n        result = eval_policy(['and', ['=', 1, 1], ['<', 2, 3]], {})\n        assert result is True\n    \n    def test_eval_policy_nested_complex(self):\n        \"\"\"Verify eval_policy evaluates complex nested expressions\"\"\"\n        result = eval_policy(['or', ['and', True, False], ['=', 5, 5]], {})\n        assert result is True\n    \n    def test_eval_policy_with_context_vars(self):\n        \"\"\"Verify eval_policy resolves variables from context\"\"\"\n        ctx = {'vars': {'x': 10, 'y': 20}}\n        result = eval_policy(['<', 'x', 'y'], ctx)\n        assert result is True\n    \n    def test_eval_policy_symbol_resolution(self):\n        \"\"\"Verify eval_policy resolves symbols correctly\"\"\"\n        ctx = {'vars': {'myvar': 42}}\n        result = eval_policy('myvar', ctx)\n        assert result == 42\n    \n    def test_eval_policy_special_symbol_true(self):\n        \"\"\"Verify eval_policy resolves #t to True\"\"\"\n        result = eval_policy('#t', {})\n        assert result is True\n    \n    def test_eval_policy_special_symbol_false(self):\n        \"\"\"Verify eval_policy resolves #f to False\"\"\"\n        result = eval_policy('#f', {})\n        assert result is False\n    \n    def test_eval_policy_gas_exhausted(self):\n        \"\"\"Verify eval_policy raises GasExhausted when gas budget is exceeded\"\"\"\n        # Patch DEFAULT_MAX_GAS or use deeply nested AST\n        with patch('sdk_python_spl_evaluator.DEFAULT_MAX_GAS', 0):\n            with pytest.raises(GasExhausted):\n                eval_policy(['and', True, True], {})\n    \n    def test_eval_policy_depth_exceeded(self):\n        \"\"\"Verify eval_policy raises DepthExceeded when recursion depth exceeds MAX_DEPTH\"\"\"\n        # Create deeply nested AST (65+ levels)\n        ast = True\n        for _ in range(65):\n            ast = ['not', ast]\n        \n        with pytest.raises(DepthExceeded):\n            eval_policy(ast, {})\n    \n    def test_eval_policy_unknown_operation(self):\n        \"\"\"Verify eval_policy raises SPLError for unknown operation\"\"\"\n        with pytest.raises(SPLError):\n            eval_policy(['unknown_op', 1, 2], {})\n    \n    def test_eval_policy_unresolved_symbol_strict(self):\n        \"\"\"Verify eval_policy raises SPLError for unresolved symbol in strict mode\"\"\"\n        ctx = {'strict': True, 'vars': {}}\n        with pytest.raises(SPLError):\n            eval_policy('undefined_var', ctx)\n    \n    def test_eval_policy_unresolved_symbol_non_strict(self):\n        \"\"\"Verify eval_policy returns symbol as-is in non-strict mode\"\"\"\n        ctx = {'strict': False, 'vars': {}}\n        result = eval_policy('undefined_var', ctx)\n        assert result == 'undefined_var'\n    \n    def test_eval_policy_short_circuit_and(self):\n        \"\"\"Verify AND short-circuits on first false value\"\"\"\n        # The second operand would raise an error if evaluated\n        result = eval_policy(['and', False, ['unknown_op']], {})\n        assert result is False\n    \n    def test_eval_policy_short_circuit_or(self):\n        \"\"\"Verify OR short-circuits on first true value\"\"\"\n        # The second operand would raise an error if evaluated\n        result = eval_policy(['or', True, ['unknown_op']], {})\n        assert result is True\n    \n    def test_eval_policy_empty_list_evaluation(self):\n        \"\"\"Verify empty list is returned as-is\"\"\"\n        result = eval_policy([], {})\n        assert result == []\n    \n    def test_eval_policy_context_immutability(self):\n        \"\"\"Verify evaluation does not mutate the input context\"\"\"\n        original_ctx = {'vars': {'x': 1}, 'strict': False}\n        ctx = copy.deepcopy(original_ctx)\n        eval_policy(['and', True, True], ctx)\n        assert ctx == original_ctx\n    \n    def test_eval_policy_tuple_operation(self):\n        \"\"\"Verify eval_policy evaluates tuple operation\"\"\"\n        result = eval_policy(['tuple', 1, 2, 3], {})\n        assert result == (1, 2, 3)\n    \n    def test_eval_policy_subset(self):\n        \"\"\"Verify eval_policy evaluates subset? operation\"\"\"\n        result = eval_policy(['subset?', ['a', 'b'], ['a', 'b', 'c']], {})\n        assert result is True\n    \n    def test_eval_policy_subset_false(self):\n        \"\"\"Verify eval_policy evaluates subset? operation (false case)\"\"\"\n        result = eval_policy(['subset?', ['a', 'd'], ['a', 'b', 'c']], {})\n        assert result is False\n\n\n# ============================================================================\n# Test Class: _eval\n# ============================================================================\n\nclass Test_Eval:\n    \"\"\"Test suite for _eval internal function\"\"\"\n    \n    def test_eval_decrements_gas(self):\n        \"\"\"Verify _eval decrements gas by 1 for each call\"\"\"\n        state = _EvalState(100)\n        _eval(42, {}, state)\n        assert state.gas == 99\n    \n    def test_eval_restores_depth(self):\n        \"\"\"Verify _eval restores depth to original value after evaluation\"\"\"\n        state = _EvalState(100)\n        state.depth = 5\n        _eval(42, {}, state)\n        assert state.depth == 5\n    \n    def test_eval_increments_depth_during_call(self):\n        \"\"\"Verify _eval increments depth during evaluation\"\"\"\n        state = _EvalState(100)\n        initial_depth = state.depth\n        \n        # We need to observe depth during the call, so we'll use a mock\n        with patch('sdk_python_spl_evaluator._eval_inner') as mock_eval_inner:\n            def check_depth(node, ctx, st):\n                assert st.depth == initial_depth + 1\n                return node\n            \n            mock_eval_inner.side_effect = check_depth\n            _eval(42, {}, state)\n    \n    def test_eval_gas_exhausted_boundary(self):\n        \"\"\"Verify _eval raises GasExhausted when gas becomes negative\"\"\"\n        state = _EvalState(0)\n        with pytest.raises(GasExhausted):\n            _eval(42, {}, state)\n    \n    def test_eval_depth_exceeded_boundary(self):\n        \"\"\"Verify _eval raises DepthExceeded when depth exceeds MAX_DEPTH\"\"\"\n        state = _EvalState(100)\n        state.depth = 64\n        with pytest.raises(DepthExceeded):\n            _eval(42, {}, state)\n    \n    def test_eval_depth_at_limit(self):\n        \"\"\"Verify _eval succeeds at exactly MAX_DEPTH - 1\"\"\"\n        state = _EvalState(100)\n        state.depth = 63\n        result = _eval(42, {}, state)\n        assert result == 42\n    \n    def test_eval_multiple_calls_gas_tracking(self):\n        \"\"\"Verify multiple _eval calls correctly track gas\"\"\"\n        state = _EvalState(100)\n        _eval(1, {}, state)\n        _eval(2, {}, state)\n        _eval(3, {}, state)\n        assert state.gas == 97\n\n\n# ============================================================================\n# Test Class: _eval_inner\n# ============================================================================\n\nclass Test_EvalInner:\n    \"\"\"Test suite for _eval_inner core evaluation logic\"\"\"\n    \n    def test_eval_inner_all_logical_operations(self):\n        \"\"\"Verify _eval_inner handles all logical operations (and, or, not)\"\"\"\n        state = _EvalState(1000)\n        \n        # Test 'and'\n        result = _eval_inner(['and', True, True], {}, state)\n        assert result is True\n        \n        result = _eval_inner(['and', True, False], {}, state)\n        assert result is False\n        \n        # Test 'or'\n        result = _eval_inner(['or', False, False], {}, state)\n        assert result is False\n        \n        result = _eval_inner(['or', False, True], {}, state)\n        assert result is True\n        \n        # Test 'not'\n        result = _eval_inner(['not', True], {}, state)\n        assert result is False\n        \n        result = _eval_inner(['not', False], {}, state)\n        assert result is True\n    \n    def test_eval_inner_all_comparison_operations(self):\n        \"\"\"Verify _eval_inner handles all comparison operations (=, <=, <, >=, >)\"\"\"\n        state = _EvalState(1000)\n        \n        # Test '='\n        result = _eval_inner(['=', 5, 5], {}, state)\n        assert result is True\n        \n        result = _eval_inner(['=', 5, 3], {}, state)\n        assert result is False\n        \n        # Test '<='\n        result = _eval_inner(['<=', 3, 5], {}, state)\n        assert result is True\n        \n        result = _eval_inner(['<=', 5, 5], {}, state)\n        assert result is True\n        \n        # Test '<'\n        result = _eval_inner(['<', 3, 5], {}, state)\n        assert result is True\n        \n        result = _eval_inner(['<', 5, 5], {}, state)\n        assert result is False\n        \n        # Test '>='\n        result = _eval_inner(['>=', 5, 3], {}, state)\n        assert result is True\n        \n        result = _eval_inner(['>=', 5, 5], {}, state)\n        assert result is True\n        \n        # Test '>'\n        result = _eval_inner(['>', 5, 3], {}, state)\n        assert result is True\n        \n        result = _eval_inner(['>', 5, 5], {}, state)\n        assert result is False\n    \n    def test_eval_inner_set_operations(self):\n        \"\"\"Verify _eval_inner handles set operations (member, in, subset?)\"\"\"\n        state = _EvalState(1000)\n        \n        # Test 'member'\n        result = _eval_inner(['member', 'a', ['a', 'b', 'c']], {}, state)\n        assert result is True\n        \n        result = _eval_inner(['member', 'd', ['a', 'b', 'c']], {}, state)\n        assert result is False\n        \n        # Test 'in'\n        result = _eval_inner(['in', 'a', ['a', 'b', 'c']], {}, state)\n        assert result is True\n        \n        # Test 'subset?'\n        result = _eval_inner(['subset?', ['a', 'b'], ['a', 'b', 'c']], {}, state)\n        assert result is True\n        \n        result = _eval_inner(['subset?', ['a', 'd'], ['a', 'b', 'c']], {}, state)\n        assert result is False\n    \n    def test_eval_inner_accessor_operations(self):\n        \"\"\"Verify _eval_inner handles accessor operations (get, tuple)\"\"\"\n        state = _EvalState(1000)\n        \n        # Test 'get'\n        result = _eval_inner(['get', {'key': 'value'}, 'key'], {}, state)\n        assert result == 'value'\n        \n        result = _eval_inner(['get', {'key': 'value'}, 'missing'], {}, state)\n        assert result is None\n        \n        # Test 'tuple'\n        result = _eval_inner(['tuple', 1, 2, 3], {}, state)\n        assert result == (1, 2, 3)\n    \n    def test_eval_inner_time_operation(self):\n        \"\"\"Verify _eval_inner handles time operation (before)\"\"\"\n        state = _EvalState(1000)\n        \n        # Test 'before'\n        result = _eval_inner(['before', 100, 200], {}, state)\n        assert result is True\n        \n        result = _eval_inner(['before', 200, 100], {}, state)\n        assert result is False\n    \n    def test_eval_inner_crypto_operations_with_mocks(self):\n        \"\"\"Verify _eval_inner handles crypto operations with mocked context\"\"\"\n        state = _EvalState(1000)\n        \n        # Mock crypto context\n        mock_crypto = {\n            'dpop_ok?': Mock(return_value=True),\n            'merkle_ok?': Mock(return_value=True),\n            'vrf_ok?': Mock(return_value=True),\n            'thresh_ok?': Mock(return_value=True),\n        }\n        ctx = {'crypto': mock_crypto}\n        \n        # Test 'dpop_ok?'\n        result = _eval_inner(['dpop_ok?', 'arg1', 'arg2'], ctx, state)\n        assert result is True\n        \n        # Test 'merkle_ok?'\n        result = _eval_inner(['merkle_ok?', 'arg1', 'arg2'], ctx, state)\n        assert result is True\n        \n        # Test 'vrf_ok?'\n        result = _eval_inner(['vrf_ok?', 'arg1', 'arg2'], ctx, state)\n        assert result is True\n        \n        # Test 'thresh_ok?'\n        result = _eval_inner(['thresh_ok?', 'arg1', 'arg2'], ctx, state)\n        assert result is True\n    \n    def test_eval_inner_counter_operation_with_mock(self):\n        \"\"\"Verify _eval_inner handles counter operation with mocked context\"\"\"\n        state = _EvalState(1000)\n        \n        # Mock per-day-count context\n        mock_counter = Mock(return_value=5)\n        ctx = {'per_day_count': mock_counter}\n        \n        # Test 'per-day-count'\n        result = _eval_inner(['per-day-count', 'user_id'], ctx, state)\n        assert result == 5\n    \n    def test_eval_inner_unknown_operation(self):\n        \"\"\"Verify _eval_inner raises SPLError for unknown operation\"\"\"\n        state = _EvalState(1000)\n        with pytest.raises(SPLError):\n            _eval_inner(['invalid_op'], {}, state)\n    \n    def test_eval_inner_index_error(self):\n        \"\"\"Verify _eval_inner raises IndexError for insufficient arguments\"\"\"\n        state = _EvalState(1000)\n        with pytest.raises(IndexError):\n            _eval_inner(['not'], {}, state)\n    \n    def test_eval_inner_literal_passthrough(self):\n        \"\"\"Verify _eval_inner returns literals as-is\"\"\"\n        state = _EvalState(1000)\n        \n        result = _eval_inner(42, {}, state)\n        assert result == 42\n        \n        result = _eval_inner(\"hello\", {}, state)\n        assert result == \"hello\"\n        \n        result = _eval_inner(None, {}, state)\n        assert result is None\n\n\n# ============================================================================\n# Test Class: _resolve_symbol\n# ============================================================================\n\nclass Test_ResolveSymbol:\n    \"\"\"Test suite for _resolve_symbol\"\"\"\n    \n    def test_resolve_symbol_special_true(self):\n        \"\"\"Verify _resolve_symbol resolves #t to True\"\"\"\n        result = _resolve_symbol('#t', {})\n        assert result is True\n    \n    def test_resolve_symbol_special_false(self):\n        \"\"\"Verify _resolve_symbol resolves #f to False\"\"\"\n        result = _resolve_symbol('#f', {})\n        assert result is False\n    \n    def test_resolve_symbol_special_req(self):\n        \"\"\"Verify _resolve_symbol resolves 'req' from context\"\"\"\n        ctx = {'req': {'user': 'alice'}}\n        result = _resolve_symbol('req', ctx)\n        assert result == {'user': 'alice'}\n    \n    def test_resolve_symbol_special_now(self):\n        \"\"\"Verify _resolve_symbol resolves 'now' from context\"\"\"\n        ctx = {'now': 1234567890}\n        result = _resolve_symbol('now', ctx)\n        assert result == 1234567890\n    \n    def test_resolve_symbol_from_vars(self):\n        \"\"\"Verify _resolve_symbol resolves variable from ctx['vars']\"\"\"\n        ctx = {'vars': {'myvar': 100}}\n        result = _resolve_symbol('myvar', ctx)\n        assert result == 100\n    \n    def test_resolve_symbol_non_string(self):\n        \"\"\"Verify _resolve_symbol returns non-string values as-is\"\"\"\n        result = _resolve_symbol(42, {})\n        assert result == 42\n        \n        result = _resolve_symbol([1, 2, 3], {})\n        assert result == [1, 2, 3]\n        \n        result = _resolve_symbol({'key': 'value'}, {})\n        assert result == {'key': 'value'}\n    \n    def test_resolve_symbol_strict_mode_error(self):\n        \"\"\"Verify _resolve_symbol raises SPLError for unresolved symbol in strict mode\"\"\"\n        ctx = {'strict': True, 'vars': {}}\n        with pytest.raises(SPLError):\n            _resolve_symbol('unknown', ctx)\n    \n    def test_resolve_symbol_non_strict_returns_original(self):\n        \"\"\"Verify _resolve_symbol returns original symbol in non-strict mode\"\"\"\n        ctx = {'strict': False, 'vars': {}}\n        result = _resolve_symbol('unknown', ctx)\n        assert result == 'unknown'\n    \n    def test_resolve_symbol_no_strict_key_returns_original(self):\n        \"\"\"Verify _resolve_symbol returns original when strict key is missing\"\"\"\n        ctx = {'vars': {}}\n        result = _resolve_symbol('unknown', ctx)\n        assert result == 'unknown'\n    \n    def test_resolve_symbol_empty_string(self):\n        \"\"\"Verify _resolve_symbol handles empty string\"\"\"\n        ctx = {'vars': {}}\n        result = _resolve_symbol('', ctx)\n        assert result == ''\n    \n    def test_resolve_symbol_unicode(self):\n        \"\"\"Verify _resolve_symbol handles Unicode symbols\"\"\"\n        ctx = {'vars': {'日本語': 'japanese', 'émoji': '🎉'}}\n        result = _resolve_symbol('日本語', ctx)\n        assert result == 'japanese'\n        \n        result = _resolve_symbol('émoji', ctx)\n        assert result == '🎉'\n\n\n# ============================================================================\n# Test Class: _truthy\n# ============================================================================\n\nclass Test_Truthy:\n    \"\"\"Test suite for _truthy\"\"\"\n    \n    def test_truthy_none_is_false(self):\n        \"\"\"Verify _truthy returns False for None\"\"\"\n        result = _truthy(None)\n        assert result is False\n    \n    def test_truthy_boolean_true(self):\n        \"\"\"Verify _truthy returns True for boolean True\"\"\"\n        result = _truthy(True)\n        assert result is True\n    \n    def test_truthy_boolean_false(self):\n        \"\"\"Verify _truthy returns False for boolean False\"\"\"\n        result = _truthy(False)\n        assert result is False\n    \n    def test_truthy_zero_is_false(self):\n        \"\"\"Verify _truthy returns False for zero\"\"\"\n        result = _truthy(0)\n        assert result is False\n        \n        result = _truthy(0.0)\n        assert result is False\n    \n    def test_truthy_nonzero_is_true(self):\n        \"\"\"Verify _truthy returns True for non-zero number\"\"\"\n        result = _truthy(42)\n        assert result is True\n        \n        result = _truthy(-1)\n        assert result is True\n        \n        result = _truthy(3.14)\n        assert result is True\n    \n    def test_truthy_string_is_true(self):\n        \"\"\"Verify _truthy returns True for non-empty string\"\"\"\n        result = _truthy('hello')\n        assert result is True\n    \n    def test_truthy_empty_string_is_true(self):\n        \"\"\"Verify _truthy returns True for empty string\"\"\"\n        result = _truthy('')\n        assert result is True\n    \n    def test_truthy_list_is_true(self):\n        \"\"\"Verify _truthy returns True for list\"\"\"\n        result = _truthy([1, 2, 3])\n        assert result is True\n        \n        result = _truthy([])\n        assert result is True\n    \n    def test_truthy_dict_is_true(self):\n        \"\"\"Verify _truthy returns True for dict\"\"\"\n        result = _truthy({'key': 'value'})\n        assert result is True\n        \n        result = _truthy({})\n        assert result is True\n    \n    def test_truthy_object_is_true(self):\n        \"\"\"Verify _truthy returns True for arbitrary objects\"\"\"\n        result = _truthy(object())\n        assert result is True\n\n\n# ============================================================================\n# Test Class: _to_float\n# ============================================================================\n\nclass Test_ToFloat:\n    \"\"\"Test suite for _to_float\"\"\"\n    \n    def test_to_float_integer(self):\n        \"\"\"Verify _to_float converts integer to float\"\"\"\n        result = _to_float(42)\n        assert result == 42.0\n        assert isinstance(result, float)\n    \n    def test_to_float_float(self):\n        \"\"\"Verify _to_float returns float as-is\"\"\"\n        result = _to_float(3.14)\n        assert result == 3.14\n        assert isinstance(result, float)\n    \n    def test_to_float_string_number(self):\n        \"\"\"Verify _to_float converts numeric string to float\"\"\"\n        result = _to_float('3.14')\n        assert result == 3.14\n    \n    def test_to_float_string_integer(self):\n        \"\"\"Verify _to_float converts integer string to float\"\"\"\n        result = _to_float('42')\n        assert result == 42.0\n    \n    def test_to_float_invalid_string(self):\n        \"\"\"Verify _to_float returns 0.0 for non-numeric string\"\"\"\n        result = _to_float('abc')\n        assert result == 0.0\n    \n    def test_to_float_none(self):\n        \"\"\"Verify _to_float returns 0.0 for None\"\"\"\n        result = _to_float(None)\n        assert result == 0.0\n    \n    def test_to_float_empty_string(self):\n        \"\"\"Verify _to_float returns 0.0 for empty string\"\"\"\n        result = _to_float('')\n        assert result == 0.0\n    \n    def test_to_float_negative_number(self):\n        \"\"\"Verify _to_float handles negative numbers\"\"\"\n        result = _to_float(-42)\n        assert result == -42.0\n        \n        result = _to_float('-3.14')\n        assert result == -3.14\n    \n    def test_to_float_scientific_notation(self):\n        \"\"\"Verify _to_float handles scientific notation\"\"\"\n        result = _to_float('1e3')\n        assert result == 1000.0\n        \n        result = _to_float('1.5e-2')\n        assert result == 0.015\n    \n    def test_to_float_list(self):\n        \"\"\"Verify _to_float returns 0.0 for list\"\"\"\n        result = _to_float([1, 2, 3])\n        assert result == 0.0\n    \n    def test_to_float_dict(self):\n        \"\"\"Verify _to_float returns 0.0 for dict\"\"\"\n        result = _to_float({'key': 'value'})\n        assert result == 0.0\n\n\n# ============================================================================\n# Test Class: Resource Limits and Invariants\n# ============================================================================\n\nclass TestResourceLimits:\n    \"\"\"Test suite for resource limit enforcement and invariants\"\"\"\n    \n    def test_invariant_gas_monotonic_decrease(self):\n        \"\"\"Verify gas decreases monotonically during evaluation\"\"\"\n        state = _EvalState(1000)\n        gas_values = [state.gas]\n        \n        # Perform multiple evaluations\n        _eval(True, {}, state)\n        gas_values.append(state.gas)\n        \n        _eval(42, {}, state)\n        gas_values.append(state.gas)\n        \n        _eval(\"hello\", {}, state)\n        gas_values.append(state.gas)\n        \n        # Verify gas values form decreasing sequence\n        for i in range(len(gas_values) - 1):\n            assert gas_values[i] > gas_values[i + 1]\n    \n    def test_invariant_depth_tracking(self):\n        \"\"\"Verify depth is properly tracked and restored\"\"\"\n        state = _EvalState(1000)\n        assert state.depth == 0\n        \n        # Evaluate nested expression\n        _eval(['and', ['or', True, False], True], {}, state)\n        \n        # Depth should be restored to 0 after evaluation\n        assert state.depth == 0\n    \n    def test_gas_at_limit_plus_one(self):\n        \"\"\"Verify evaluation succeeds with gas at exactly required amount\"\"\"\n        # One eval call requires gas=1\n        with patch('sdk_python_spl_evaluator.DEFAULT_MAX_GAS', 1):\n            result = eval_policy(42, {})\n            assert result == 42\n    \n    def test_gas_at_limit_minus_one(self):\n        \"\"\"Verify evaluation fails with gas just below required amount\"\"\"\n        # Zero gas should fail\n        with patch('sdk_python_spl_evaluator.DEFAULT_MAX_GAS', 0):\n            with pytest.raises(GasExhausted):\n                eval_policy(42, {})\n    \n    def test_depth_at_limit(self):\n        \"\"\"Verify evaluation succeeds at exactly MAX_DEPTH\"\"\"\n        # Create AST nested exactly 64 levels\n        ast = True\n        for _ in range(63):  # 63 levels of nesting + 1 initial = 64\n            ast = ['not', ast]\n        \n        result = eval_policy(ast, {})\n        # Result should be True if 63 is odd, False if even\n        assert isinstance(result, bool)\n    \n    def test_depth_at_limit_plus_one(self):\n        \"\"\"Verify evaluation fails at MAX_DEPTH + 1\"\"\"\n        # Create AST nested 65 levels\n        ast = True\n        for _ in range(65):\n            ast = ['not', ast]\n        \n        with pytest.raises(DepthExceeded):\n            eval_policy(ast, {})\n    \n    def test_complex_nested_gas_consumption(self):\n        \"\"\"Verify gas consumption for complex nested expressions\"\"\"\n        state = _EvalState(1000)\n        initial_gas = state.gas\n        \n        # Evaluate complex expression\n        ast = ['and', ['or', ['=', 1, 1], ['<', 2, 3]], ['not', False]]\n        _eval(ast, {}, state)\n        \n        # Gas should have decreased\n        assert state.gas < initial_gas\n        # Gas should decrease by at least the number of nodes\n        # (exact amount depends on implementation)\n        assert initial_gas - state.gas > 0\n    \n    def test_gas_exhaustion_mid_evaluation(self):\n        \"\"\"Verify gas exhaustion is detected mid-evaluation\"\"\"\n        state = _EvalState(2)  # Very limited gas\n        \n        # Try to evaluate expression that requires more gas\n        with pytest.raises(GasExhausted):\n            _eval(['and', ['or', True, False], ['=', 1, 1]], {}, state)\n\n\n# ============================================================================\n# Test Class: Edge Cases and Security\n# ============================================================================\n\nclass TestEdgeCasesAndSecurity:\n    \"\"\"Test suite for edge cases and security concerns\"\"\"\n    \n    def test_single_element_list(self):\n        \"\"\"Verify single-element list with operation is handled\"\"\"\n        # A list with only an operation and no arguments\n        state = _EvalState(100)\n        with pytest.raises((IndexError, SPLError)):\n            _eval_inner(['not'], {}, state)\n    \n    def test_nested_empty_lists(self):\n        \"\"\"Verify nested empty lists are handled\"\"\"\n        result = eval_policy([[], [], []], {})\n        assert result == [[], [], []]\n    \n    def test_very_large_numbers(self):\n        \"\"\"Verify handling of very large numbers\"\"\"\n        result = eval_policy(['<', 10**100, 10**101], {})\n        assert result is True\n    \n    def test_floating_point_comparison(self):\n        \"\"\"Verify floating point comparison\"\"\"\n        result = eval_policy(['=', 0.1 + 0.2, 0.3], {})\n        # Note: This might be False due to floating point precision\n        assert isinstance(result, bool)\n    \n    def test_mixed_type_comparison(self):\n        \"\"\"Verify mixed type comparison\"\"\"\n        # Comparing string with number\n        result = eval_policy(['=', '42', 42], {})\n        assert result is False\n    \n    def test_unicode_in_operations(self):\n        \"\"\"Verify Unicode strings in operations\"\"\"\n        result = eval_policy(['=', '日本語', '日本語'], {})\n        assert result is True\n        \n        result = eval_policy(['member', '🎉', ['🎉', '🎊', '🎈']], {})\n        assert result is True\n    \n    def test_null_values_in_expressions(self):\n        \"\"\"Verify None/null values in expressions\"\"\"\n        result = eval_policy(['=', None, None], {})\n        assert result is True\n        \n        result = eval_policy(['not', None], {})\n        assert result is True  # None is falsy, so not None is True\n    \n    def test_recursive_data_structures(self):\n        \"\"\"Verify handling of recursive/circular data structures\"\"\"\n        circular = {'key': 'value'}\n        circular['self'] = circular\n        \n        # Should not crash\n        result = eval_policy(['get', circular, 'key'], {})\n        assert result == 'value'\n    \n    def test_and_with_many_operands(self):\n        \"\"\"Verify AND with many operands\"\"\"\n        result = eval_policy(['and', True, True, True, True, True], {})\n        assert result is True\n        \n        result = eval_policy(['and', True, True, False, True, True], {})\n        assert result is False\n    \n    def test_or_with_many_operands(self):\n        \"\"\"Verify OR with many operands\"\"\"\n        result = eval_policy(['or', False, False, False, False, False], {})\n        assert result is False\n        \n        result = eval_policy(['or', False, False, True, False, False], {})\n        assert result is True\n    \n    def test_deterministic_evaluation(self):\n        \"\"\"Verify evaluation is deterministic\"\"\"\n        ast = ['and', ['=', 1, 1], ['<', 2, 3], ['not', False]]\n        ctx = {'vars': {'x': 10}}\n        \n        result1 = eval_policy(ast, ctx)\n        result2 = eval_policy(ast, ctx)\n        result3 = eval_policy(ast, ctx)\n        \n        assert result1 == result2 == result3\n    \n    def test_context_isolation(self):\n        \"\"\"Verify contexts are isolated between evaluations\"\"\"\n        ctx1 = {'vars': {'x': 1}}\n        ctx2 = {'vars': {'x': 2}}\n        \n        result1 = eval_policy('x', ctx1)\n        result2 = eval_policy('x', ctx2)\n        \n        assert result1 == 1\n        assert result2 == 2\n        assert ctx1['vars']['x'] == 1  # Unchanged\n        assert ctx2['vars']['x'] == 2  # Unchanged\n    \n    def test_subset_empty_sets(self):\n        \"\"\"Verify subset? with empty sets\"\"\"\n        result = eval_policy(['subset?', [], []], {})\n        assert result is True\n        \n        result = eval_policy(['subset?', [], ['a', 'b']], {})\n        assert result is True\n    \n    def test_get_with_nested_dicts(self):\n        \"\"\"Verify get with nested dictionaries\"\"\"\n        data = {'level1': {'level2': {'level3': 'deep_value'}}}\n        result = eval_policy(['get', ['get', ['get', data, 'level1'], 'level2'], 'level3'], {})\n        assert result == 'deep_value'\n    \n    def test_tuple_empty(self):\n        \"\"\"Verify tuple with no arguments\"\"\"\n        result = eval_policy(['tuple'], {})\n        assert result == ()\n    \n    def test_tuple_single_element(self):\n        \"\"\"Verify tuple with single element\"\"\"\n        result = eval_policy(['tuple', 42], {})\n        assert result == (42,)\n    \n    def test_before_equal_timestamps(self):\n        \"\"\"Verify before with equal timestamps\"\"\"\n        result = eval_policy(['before', 100, 100], {})\n        assert result is False\n    \n    def test_comparison_with_converted_types(self):\n        \"\"\"Verify comparisons use type conversion\"\"\"\n        # Assuming _to_float is used for numeric comparisons\n        result = eval_policy(['<', '3', '5'], {})\n        # This depends on implementation details\n        assert isinstance(result, bool)\n\n\n# ============================================================================\n# Test Class: Mocked Dependencies\n# ============================================================================\n\nclass TestMockedDependencies:\n    \"\"\"Test suite for operations with mocked dependencies\"\"\"\n    \n    def test_per_day_count_called_correctly(self):\n        \"\"\"Verify per-day-count calls the mocked function correctly\"\"\"\n        mock_counter = Mock(return_value=42)\n        ctx = {'per_day_count': mock_counter}\n        \n        result = eval_policy(['per-day-count', 'user123'], ctx)\n        \n        assert result == 42\n        mock_counter.assert_called_once()\n    \n    def test_dpop_ok_called_correctly(self):\n        \"\"\"Verify dpop_ok? calls the mocked function correctly\"\"\"\n        mock_dpop = Mock(return_value=True)\n        ctx = {'crypto': {'dpop_ok?': mock_dpop}}\n        \n        result = eval_policy(['dpop_ok?', 'arg1', 'arg2'], ctx)\n        \n        assert result is True\n        mock_dpop.assert_called_once()\n    \n    def test_merkle_ok_called_correctly(self):\n        \"\"\"Verify merkle_ok? calls the mocked function correctly\"\"\"\n        mock_merkle = Mock(return_value=False)\n        ctx = {'crypto': {'merkle_ok?': mock_merkle}}\n        \n        result = eval_policy(['merkle_ok?', 'proof', 'root'], ctx)\n        \n        assert result is False\n        mock_merkle.assert_called_once()\n    \n    def test_vrf_ok_called_correctly(self):\n        \"\"\"Verify vrf_ok? calls the mocked function correctly\"\"\"\n        mock_vrf = Mock(return_value=True)\n        ctx = {'crypto': {'vrf_ok?': mock_vrf}}\n        \n        result = eval_policy(['vrf_ok?', 'proof', 'message'], ctx)\n        \n        assert result is True\n        mock_vrf.assert_called_once()\n    \n    def test_thresh_ok_called_correctly(self):\n        \"\"\"Verify thresh_ok? calls the mocked function correctly\"\"\"\n        mock_thresh = Mock(return_value=True)\n        ctx = {'crypto': {'thresh_ok?': mock_thresh}}\n        \n        result = eval_policy(['thresh_ok?', 'sigs', 'threshold'], ctx)\n        \n        assert result is True\n        mock_thresh.assert_called_once()\n    \n    def test_crypto_operations_without_context(self):\n        \"\"\"Verify crypto operations fail gracefully without context\"\"\"\n        # Without crypto context, should raise an error\n        with pytest.raises((KeyError, AttributeError, SPLError)):\n            eval_policy(['dpop_ok?', 'arg1', 'arg2'], {})\n    \n    def test_per_day_count_without_context(self):\n        \"\"\"Verify per-day-count fails gracefully without context\"\"\"\n        # Without per_day_count context, should raise an error\n        with pytest.raises((KeyError, AttributeError, SPLError)):\n            eval_policy(['per-day-count', 'user123'], {})\n\n\n# ============================================================================\n# Test Class: Complex Integration Scenarios\n# ============================================================================\n\nclass TestComplexIntegration:\n    \"\"\"Test suite for complex integration scenarios\"\"\"\n    \n    def test_complex_policy_evaluation(self):\n        \"\"\"Verify complex policy with multiple operations\"\"\"\n        ctx = {\n            'vars': {\n                'user_role': 'admin',\n                'user_age': 25,\n                'resource_owner': 'admin'\n            },\n            'strict': False\n        }\n        \n        # Policy: user is admin AND age >= 18 AND is resource owner\n        ast = [\n            'and',\n            ['=', 'user_role', 'admin'],\n            ['>=', 'user_age', 18],\n            ['=', 'user_role', 'resource_owner']\n        ]\n        \n        result = eval_policy(ast, ctx)\n        assert result is True\n    \n    def test_complex_policy_with_nested_conditions(self):\n        \"\"\"Verify complex nested policy evaluation\"\"\"\n        ctx = {\n            'vars': {\n                'is_premium': True,\n                'credits': 100,\n                'daily_limit': 50\n            },\n            'per_day_count': Mock(return_value=30)\n        }\n        \n        # Policy: (is_premium OR credits > 0) AND daily_count < daily_limit\n        ast = [\n            'and',\n            ['or', 'is_premium', ['>', 'credits', 0]],\n            ['<', ['per-day-count', 'user'], 'daily_limit']\n        ]\n        \n        result = eval_policy(ast, ctx)\n        assert result is True\n    \n    def test_policy_with_set_operations(self):\n        \"\"\"Verify policy using set operations\"\"\"\n        ctx = {\n            'vars': {\n                'user_permissions': ['read', 'write', 'execute'],\n                'required_permissions': ['read', 'write']\n            }\n        }\n        \n        # Policy: required_permissions is subset of user_permissions\n        ast = ['subset?', 'required_permissions', 'user_permissions']\n        \n        result = eval_policy(ast, ctx)\n        assert result is True\n    \n    def test_policy_with_time_constraints(self):\n        \"\"\"Verify policy with time-based constraints\"\"\"\n        ctx = {\n            'vars': {\n                'expiry_time': 2000000000\n            },\n            'now': 1500000000\n        }\n        \n        # Policy: current time is before expiry\n        ast = ['before', 'now', 'expiry_time']\n        \n        result = eval_policy(ast, ctx)\n        assert result is True\n    \n    def test_policy_with_nested_data_access(self):\n        \"\"\"Verify policy with nested data structure access\"\"\"\n        ctx = {\n            'vars': {\n                'request': {\n                    'headers': {\n                        'authorization': 'Bearer token123'\n                    }\n                }\n            }\n        }\n        \n        # Access nested data\n        ast = ['=', \n               ['get', ['get', 'request', 'headers'], 'authorization'],\n               'Bearer token123'\n        ]\n        \n        result = eval_policy(ast, ctx)\n        assert result is True\n    \n    def test_deny_by_default_behavior(self):\n        \"\"\"Verify deny-by-default behavior in strict mode\"\"\"\n        ctx = {'strict': True, 'vars': {}}\n        \n        # Unresolved symbol should fail in strict mode\n        with pytest.raises(SPLError):\n            eval_policy('undefined_permission', ctx)\n    \n    def test_allow_by_default_behavior(self):\n        \"\"\"Verify allow-by-default behavior in non-strict mode\"\"\"\n        ctx = {'strict': False, 'vars': {}}\n        \n        # Unresolved symbol returns as-is in non-strict mode\n        result = eval_policy('undefined_permission', ctx)\n        assert result == 'undefined_permission'\n\n\nif __name__ == '__main__':\n    pytest.main([__file__, '-v'])\n"
+}

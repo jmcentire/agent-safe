@@ -1,0 +1,197 @@
+{
+  "component_id": "sdk_python_spl___main__",
+  "name": "SPL CLI Main Entry Point",
+  "description": "CLI entry point for the SPL (Security Policy Language) interpreter. Parses a policy file and evaluates it against a request JSON file, outputting ALLOW or DENY decisions.",
+  "version": 1,
+  "types": [],
+  "functions": [
+    {
+      "name": "main",
+      "description": "Main CLI function that reads a policy file and request JSON from command-line arguments, parses the policy, verifies it against the request with a hardcoded environment, and prints ALLOW or DENY to stdout.",
+      "inputs": [],
+      "output_type": "None",
+      "error_cases": [
+        {
+          "name": "InsufficientArguments",
+          "condition": "len(sys.argv) < 3",
+          "error_type": "SystemExit",
+          "error_data": {
+            "exit_code": "1",
+            "message": "Usage: python -m spl <policy.spl> <request.json>"
+          }
+        },
+        {
+          "name": "PolicyFileNotFound",
+          "condition": "sys.argv[1] does not exist or is not readable",
+          "error_type": "FileNotFoundError",
+          "error_data": {}
+        },
+        {
+          "name": "RequestFileNotFound",
+          "condition": "sys.argv[2] does not exist or is not readable",
+          "error_type": "FileNotFoundError",
+          "error_data": {}
+        },
+        {
+          "name": "InvalidJSON",
+          "condition": "request file does not contain valid JSON",
+          "error_type": "json.JSONDecodeError",
+          "error_data": {}
+        },
+        {
+          "name": "ParseError",
+          "condition": "policy file contains invalid SPL syntax",
+          "error_type": "Exception",
+          "error_data": {
+            "source": "parse function"
+          }
+        },
+        {
+          "name": "VerificationError",
+          "condition": "verify function raises an exception",
+          "error_type": "Exception",
+          "error_data": {
+            "source": "verify function"
+          }
+        },
+        {
+          "name": "KeyError",
+          "condition": "verify result does not contain 'allow' key",
+          "error_type": "KeyError",
+          "error_data": {
+            "key": "allow"
+          }
+        }
+      ],
+      "preconditions": [
+        "sys.argv must contain at least 3 elements (program name + 2 arguments)",
+        "sys.argv[1] must be a valid path to a readable .spl file",
+        "sys.argv[2] must be a valid path to a readable .json file",
+        "The policy file must contain parseable SPL syntax",
+        "The request file must contain valid JSON",
+        "The verify result must be a dict-like object with an 'allow' key"
+      ],
+      "postconditions": [
+        "Prints 'ALLOW' or 'DENY' to stdout based on verification result",
+        "Does not return (implicitly returns None)"
+      ],
+      "idempotent": false,
+      "side_effects": [
+        "Reads file from sys.argv[1] (policy file)",
+        "Reads file from sys.argv[2] (request file)",
+        "Writes usage message to stderr if argument count < 3",
+        "Calls sys.exit(1) if argument count < 3",
+        "Writes ALLOW or DENY to stdout"
+      ],
+      "structured_side_effects": [
+        {
+          "kind": "reads_file",
+          "target": "sys.argv[1] (policy file)",
+          "description": "Reads policy source code from file path provided as first CLI argument"
+        },
+        {
+          "kind": "reads_file",
+          "target": "sys.argv[2] (request file)",
+          "description": "Reads request JSON data from file path provided as second CLI argument"
+        },
+        {
+          "kind": "logging",
+          "target": "stderr",
+          "description": "Prints usage message to stderr when insufficient arguments provided"
+        },
+        {
+          "kind": "logging",
+          "target": "stdout",
+          "description": "Prints ALLOW or DENY decision to stdout"
+        }
+      ],
+      "performance_budget": null
+    }
+  ],
+  "dependencies": [
+    "json",
+    "sys",
+    "pathlib.Path",
+    ".parser.parse",
+    ".verifier.verify"
+  ],
+  "dependency_contracts": {
+    ".parser": [
+      "parse"
+    ],
+    ".verifier": [
+      "verify"
+    ],
+    "json": [
+      "loads"
+    ],
+    "sys": [
+      "argv",
+      "exit",
+      "stderr"
+    ],
+    "pathlib": [
+      "Path"
+    ]
+  },
+  "invariants": [
+    "Environment dictionary has fixed structure with 'vars', 'now', 'per_day_count', and 'crypto' keys",
+    "allowed_recipients is always ['niece@example.com', 'mom@example.com']",
+    "now is always hardcoded to '2025-10-01T00:00:00Z'",
+    "per_day_count lambda always returns 0",
+    "All crypto validation lambdas (dpop_ok, merkle_ok, vrf_ok, thresh_ok) always return True"
+  ],
+  "requires": [
+    "sys.argv"
+  ],
+  "processing_register": "",
+  "data_access": {
+    "reads": [
+      "filesystem"
+    ],
+    "writes": [
+      "stdout",
+      "stderr"
+    ],
+    "rationale": "Reads policy and request files from filesystem, writes verification results to stdout and error messages to stderr",
+    "side_effects": [
+      {
+        "type": "file_read",
+        "classification": "filesystem",
+        "fields": [
+          "policy_path",
+          "request_path"
+        ],
+        "rationale": "Reads SPL policy source and JSON request data from files specified in command-line arguments"
+      },
+      {
+        "type": "stdout_write",
+        "classification": "output_stream",
+        "fields": [
+          "ALLOW/DENY decision"
+        ],
+        "rationale": "Writes verification decision to stdout"
+      },
+      {
+        "type": "stderr_write",
+        "classification": "error_stream",
+        "fields": [
+          "usage message"
+        ],
+        "rationale": "Writes usage information to stderr on invalid invocation"
+      },
+      {
+        "type": "process_exit",
+        "classification": "process_control",
+        "fields": [
+          "exit_code"
+        ],
+        "rationale": "Terminates process with exit code 1 when insufficient arguments provided"
+      }
+    ]
+  },
+  "authority": {
+    "domains": [],
+    "rationale": null
+  }
+}

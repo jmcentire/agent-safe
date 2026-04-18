@@ -1,0 +1,464 @@
+{
+  "component_id": "sdk_python_spl_evaluator",
+  "name": "SPL AST Evaluator",
+  "description": "Tree-walk evaluator for SPL (Security Policy Language) ASTs with gas and depth metering. Implements 20 built-in operations including logical operators, comparisons, set operations, time operations, accessors, counters, and cryptographic predicates. Enforces resource limits via gas budget (default 10,000) and maximum recursion depth (64).",
+  "version": 1,
+  "types": [
+    {
+      "name": "GasExhausted",
+      "kind": "struct",
+      "fields": [],
+      "item_type": "",
+      "variants": [],
+      "inner_types": [],
+      "description": "Exception raised when gas budget is exhausted during evaluation"
+    },
+    {
+      "name": "DepthExceeded",
+      "kind": "struct",
+      "fields": [],
+      "item_type": "",
+      "variants": [],
+      "inner_types": [],
+      "description": "Exception raised when maximum nesting depth is exceeded during evaluation"
+    },
+    {
+      "name": "SPLError",
+      "kind": "struct",
+      "fields": [],
+      "item_type": "",
+      "variants": [],
+      "inner_types": [],
+      "description": "Exception raised for SPL evaluation errors (unknown operations, unresolved symbols in strict mode)"
+    },
+    {
+      "name": "_EvalState",
+      "kind": "struct",
+      "fields": [
+        {
+          "name": "gas",
+          "type_ref": "int",
+          "required": true,
+          "default": "",
+          "description": "Remaining gas budget",
+          "validators": []
+        },
+        {
+          "name": "depth",
+          "type_ref": "int",
+          "required": true,
+          "default": "",
+          "description": "Current recursion depth",
+          "validators": []
+        }
+      ],
+      "item_type": "",
+      "variants": [],
+      "inner_types": [],
+      "description": "Internal state for tracking gas consumption and recursion depth during evaluation"
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "description": "Initialize evaluation state with a maximum gas budget and zero depth",
+      "inputs": [
+        {
+          "name": "self",
+          "type_ref": "_EvalState",
+          "required": true,
+          "default": "",
+          "description": "",
+          "validators": []
+        },
+        {
+          "name": "max_gas",
+          "type_ref": "int",
+          "required": true,
+          "default": "",
+          "description": "Maximum gas budget for evaluation",
+          "validators": []
+        }
+      ],
+      "output_type": "None",
+      "error_cases": [],
+      "preconditions": [],
+      "postconditions": [
+        "self.gas == max_gas",
+        "self.depth == 0"
+      ],
+      "idempotent": false,
+      "side_effects": [
+        "mutates_state"
+      ],
+      "structured_side_effects": [
+        {
+          "kind": "mutates_state",
+          "target": "self.gas",
+          "description": "Sets gas to max_gas"
+        },
+        {
+          "kind": "mutates_state",
+          "target": "self.depth",
+          "description": "Sets depth to 0"
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "eval_policy",
+      "description": "Evaluate an SPL AST within a context dictionary. Entry point for policy evaluation with automatic gas/depth metering setup.",
+      "inputs": [
+        {
+          "name": "ast",
+          "type_ref": "Any",
+          "required": true,
+          "default": "",
+          "description": "SPL abstract syntax tree (typically list or symbol)",
+          "validators": []
+        },
+        {
+          "name": "ctx",
+          "type_ref": "dict",
+          "required": true,
+          "default": "",
+          "description": "Context dictionary with keys: req, vars, now, per_day_count, crypto, maxGas/max_gas",
+          "validators": []
+        }
+      ],
+      "output_type": "Any",
+      "error_cases": [
+        {
+          "name": "gas_exhausted",
+          "condition": "Gas budget is exhausted during evaluation",
+          "error_type": "GasExhausted",
+          "error_data": {}
+        },
+        {
+          "name": "depth_exceeded",
+          "condition": "Recursion depth exceeds MAX_DEPTH (64)",
+          "error_type": "DepthExceeded",
+          "error_data": {}
+        },
+        {
+          "name": "unknown_operation",
+          "condition": "AST contains unknown operation",
+          "error_type": "SPLError",
+          "error_data": {}
+        },
+        {
+          "name": "unresolved_symbol",
+          "condition": "Symbol cannot be resolved and ctx['strict'] is True",
+          "error_type": "SPLError",
+          "error_data": {}
+        }
+      ],
+      "preconditions": [
+        "ctx is a dict"
+      ],
+      "postconditions": [
+        "Returns evaluation result of AST"
+      ],
+      "idempotent": false,
+      "side_effects": [
+        "Calls functions from ctx['per_day_count'] and ctx['crypto'] if present"
+      ],
+      "structured_side_effects": [
+        {
+          "kind": "mutates_state",
+          "target": "EvalState",
+          "description": "Creates and modifies internal evaluation state"
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "_eval",
+      "description": "Internal recursive evaluator with gas and depth metering. Decrements gas, increments depth, delegates to _eval_inner, and restores depth.",
+      "inputs": [
+        {
+          "name": "node",
+          "type_ref": "Any",
+          "required": true,
+          "default": "",
+          "description": "AST node to evaluate",
+          "validators": []
+        },
+        {
+          "name": "ctx",
+          "type_ref": "dict",
+          "required": true,
+          "default": "",
+          "description": "Evaluation context",
+          "validators": []
+        },
+        {
+          "name": "st",
+          "type_ref": "_EvalState",
+          "required": true,
+          "default": "",
+          "description": "Evaluation state tracking gas and depth",
+          "validators": []
+        }
+      ],
+      "output_type": "Any",
+      "error_cases": [
+        {
+          "name": "gas_exhausted",
+          "condition": "st.gas < 0 after decrement",
+          "error_type": "GasExhausted",
+          "error_data": {
+            "message": "gas budget exceeded"
+          }
+        },
+        {
+          "name": "depth_exceeded",
+          "condition": "st.depth > MAX_DEPTH (64) after increment",
+          "error_type": "DepthExceeded",
+          "error_data": {
+            "message": "max nesting depth exceeded"
+          }
+        }
+      ],
+      "preconditions": [],
+      "postconditions": [
+        "st.depth is restored to original value after evaluation",
+        "st.gas is decremented by 1"
+      ],
+      "idempotent": false,
+      "side_effects": [
+        "Mutates st.gas and st.depth"
+      ],
+      "structured_side_effects": [
+        {
+          "kind": "mutates_state",
+          "target": "st.gas",
+          "description": "Decrements gas by 1"
+        },
+        {
+          "kind": "mutates_state",
+          "target": "st.depth",
+          "description": "Increments before evaluation, decrements after"
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "_eval_inner",
+      "description": "Core evaluation logic handling all 20 SPL built-in operations: logical (and, or, not), comparison (=, <=, <, >=, >), sets (member, in, subset?), time (before), accessors (get, tuple), counter (per-day-count), and crypto predicates (dpop_ok?, merkle_ok?, vrf_ok?, thresh_ok?)",
+      "inputs": [
+        {
+          "name": "node",
+          "type_ref": "Any",
+          "required": true,
+          "default": "",
+          "description": "AST node to evaluate",
+          "validators": []
+        },
+        {
+          "name": "ctx",
+          "type_ref": "dict",
+          "required": true,
+          "default": "",
+          "description": "Evaluation context",
+          "validators": []
+        },
+        {
+          "name": "st",
+          "type_ref": "_EvalState",
+          "required": true,
+          "default": "",
+          "description": "Evaluation state",
+          "validators": []
+        }
+      ],
+      "output_type": "Any",
+      "error_cases": [
+        {
+          "name": "unknown_operation",
+          "condition": "node[0] does not match any known operation",
+          "error_type": "SPLError",
+          "error_data": {
+            "message": "Unknown op: {op}"
+          }
+        },
+        {
+          "name": "index_error",
+          "condition": "Insufficient arguments for operation (e.g., 'not' with no args)",
+          "error_type": "IndexError",
+          "error_data": {}
+        }
+      ],
+      "preconditions": [],
+      "postconditions": [
+        "Returns evaluated result based on operation type"
+      ],
+      "idempotent": false,
+      "side_effects": [
+        "May call ctx['per_day_count'] function",
+        "May call ctx['crypto'] callbacks (dpop_ok, merkle_ok, vrf_ok, thresh_ok)"
+      ],
+      "structured_side_effects": [
+        {
+          "kind": "network_call",
+          "target": "ctx['per_day_count']",
+          "description": "Calls external counter function if provided"
+        },
+        {
+          "kind": "network_call",
+          "target": "ctx['crypto']",
+          "description": "Calls crypto verification functions if provided"
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "_resolve_symbol",
+      "description": "Resolve a symbol to its value from context. Handles special symbols (#t, #f, req, now) and variable lookups from ctx['vars']. In strict mode, raises SPLError for unresolved symbols.",
+      "inputs": [
+        {
+          "name": "x",
+          "type_ref": "Any",
+          "required": true,
+          "default": "",
+          "description": "Symbol or value to resolve",
+          "validators": []
+        },
+        {
+          "name": "ctx",
+          "type_ref": "dict",
+          "required": true,
+          "default": "",
+          "description": "Context dictionary containing vars, req, and strict flag",
+          "validators": []
+        }
+      ],
+      "output_type": "Any",
+      "error_cases": [
+        {
+          "name": "unresolved_symbol",
+          "condition": "x is a string symbol not in vars and ctx['strict'] is True",
+          "error_type": "SPLError",
+          "error_data": {
+            "message": "Unresolved symbol: {x}"
+          }
+        }
+      ],
+      "preconditions": [],
+      "postconditions": [
+        "Returns resolved value or original input if not a symbol"
+      ],
+      "idempotent": false,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "_truthy",
+      "description": "Convert a value to boolean using SPL truthiness rules: None is false, booleans as-is, numbers are false if zero, all other values are true.",
+      "inputs": [
+        {
+          "name": "v",
+          "type_ref": "Any",
+          "required": true,
+          "default": "",
+          "description": "Value to test for truthiness",
+          "validators": []
+        }
+      ],
+      "output_type": "bool",
+      "error_cases": [],
+      "preconditions": [],
+      "postconditions": [
+        "Returns boolean representation of value"
+      ],
+      "idempotent": false,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "_to_float",
+      "description": "Convert a value to float. Returns 0.0 if conversion fails (TypeError or ValueError).",
+      "inputs": [
+        {
+          "name": "x",
+          "type_ref": "Any",
+          "required": true,
+          "default": "",
+          "description": "Value to convert to float",
+          "validators": []
+        }
+      ],
+      "output_type": "float",
+      "error_cases": [],
+      "preconditions": [],
+      "postconditions": [
+        "Returns float representation, or 0.0 on conversion failure"
+      ],
+      "idempotent": false,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    }
+  ],
+  "dependencies": [
+    "typing"
+  ],
+  "dependency_contracts": {},
+  "invariants": [
+    "DEFAULT_MAX_GAS = 10,000",
+    "MAX_DEPTH = 64",
+    "Gas is decremented by 1 for each _eval call",
+    "Depth is incremented before evaluation and decremented after",
+    "Evaluation stops when gas < 0 or depth > MAX_DEPTH"
+  ],
+  "requires": [],
+  "processing_register": "",
+  "data_access": {
+    "reads": [
+      "context_dictionary"
+    ],
+    "writes": [],
+    "rationale": "Reads from context dict (ctx) to access variables, request data, and callback functions. Does not persist state between calls.",
+    "side_effects": [
+      {
+        "type": "external_function_call",
+        "classification": "callback",
+        "fields": [
+          "per_day_count",
+          "dpop_ok",
+          "merkle_ok",
+          "vrf_ok",
+          "thresh_ok"
+        ],
+        "rationale": "Invokes callback functions provided in ctx['per_day_count'] and ctx['crypto'] for external operations"
+      }
+    ]
+  },
+  "authority": {
+    "domains": [
+      "spl_evaluation",
+      "policy_language"
+    ],
+    "rationale": "This component is the authoritative evaluator for SPL AST execution with resource metering"
+  }
+}

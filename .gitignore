@@ -22,3 +22,6 @@ obj/
 
 # Internal planning
 AUDIT_PLAN.md
+
+# Claude Code local settings
+.claude/settings.local.json

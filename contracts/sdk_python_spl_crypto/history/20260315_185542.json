@@ -1,0 +1,399 @@
+{
+  "component_id": "sdk_python_spl_crypto",
+  "name": "SPL Crypto Module",
+  "description": "Real cryptographic implementations for SPL token verification, including SHA-256 hashing, Ed25519 signature verification, Merkle proof verification, HKDF key derivation, and hash chain verification. Ed25519 operations require the optional 'cryptography' package, while hash operations use only stdlib (hashlib, hmac).",
+  "version": 1,
+  "types": [],
+  "functions": [
+    {
+      "name": "sha256",
+      "description": "Computes SHA-256 hash of input data and returns raw digest bytes.",
+      "inputs": [
+        {
+          "name": "data",
+          "type_ref": "bytes",
+          "required": true,
+          "default": "",
+          "description": "Input data to hash",
+          "validators": []
+        }
+      ],
+      "output_type": "bytes",
+      "error_cases": [],
+      "preconditions": [],
+      "postconditions": [
+        "Returns 32-byte SHA-256 digest"
+      ],
+      "idempotent": false,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "sha256_hex",
+      "description": "Computes SHA-256 hash of input data and returns hex-encoded string.",
+      "inputs": [
+        {
+          "name": "data",
+          "type_ref": "bytes",
+          "required": true,
+          "default": "",
+          "description": "Input data to hash",
+          "validators": []
+        }
+      ],
+      "output_type": "str",
+      "error_cases": [],
+      "preconditions": [],
+      "postconditions": [
+        "Returns 64-character hex string representing SHA-256 digest"
+      ],
+      "idempotent": false,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "verify_ed25519",
+      "description": "Verifies an Ed25519 signature over a message using a public key. Requires the 'cryptography' package to be installed.",
+      "inputs": [
+        {
+          "name": "message",
+          "type_ref": "bytes",
+          "required": true,
+          "default": "",
+          "description": "Message that was signed",
+          "validators": []
+        },
+        {
+          "name": "signature_hex",
+          "type_ref": "str",
+          "required": true,
+          "default": "",
+          "description": "Ed25519 signature as hex string",
+          "validators": []
+        },
+        {
+          "name": "public_key_hex",
+          "type_ref": "str",
+          "required": true,
+          "default": "",
+          "description": "Ed25519 public key as hex string",
+          "validators": []
+        }
+      ],
+      "output_type": "bool",
+      "error_cases": [
+        {
+          "name": "cryptography_not_installed",
+          "condition": "The 'cryptography' package is not installed",
+          "error_type": "RuntimeError",
+          "error_data": {
+            "message": "Ed25519 verification requires the 'cryptography' package. Install with: pip install agent-safe-spl[crypto]"
+          }
+        }
+      ],
+      "preconditions": [],
+      "postconditions": [
+        "Returns True if signature is valid",
+        "Returns False if signature is invalid or hex decoding fails"
+      ],
+      "idempotent": false,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "verify_merkle_proof",
+      "description": "Verifies a Merkle proof for leaf_data against an expected root hash. Leaf data is UTF-8 encoded and hashed, then combined with proof steps to reconstruct the root.",
+      "inputs": [
+        {
+          "name": "leaf_data",
+          "type_ref": "str",
+          "required": true,
+          "default": "",
+          "description": "Leaf value that will be SHA-256 hashed",
+          "validators": []
+        },
+        {
+          "name": "proof",
+          "type_ref": "list[dict[str, str]]",
+          "required": true,
+          "default": "",
+          "description": "List of proof steps with 'hash' (hex) and 'position' ('left' or 'right') keys",
+          "validators": []
+        },
+        {
+          "name": "root_hex",
+          "type_ref": "str",
+          "required": true,
+          "default": "",
+          "description": "Expected Merkle root hash as hex string",
+          "validators": []
+        }
+      ],
+      "output_type": "bool",
+      "error_cases": [],
+      "preconditions": [],
+      "postconditions": [
+        "Returns True if computed root matches root_hex",
+        "Returns False on any exception (invalid hex, missing keys, etc.)"
+      ],
+      "idempotent": false,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "hash_tuple",
+      "description": "Hashes a list of values by JSON-serializing them (compact format) and then computing SHA-256 hex digest.",
+      "inputs": [
+        {
+          "name": "values",
+          "type_ref": "list[Any]",
+          "required": true,
+          "default": "",
+          "description": "List of values to hash (must be JSON-serializable)",
+          "validators": []
+        }
+      ],
+      "output_type": "str",
+      "error_cases": [],
+      "preconditions": [
+        "values must be JSON-serializable"
+      ],
+      "postconditions": [
+        "Returns hex-encoded SHA-256 hash of compact JSON representation"
+      ],
+      "idempotent": false,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "_hkdf_sha256",
+      "description": "HKDF-SHA256 (RFC 5869) extract-and-expand key derivation function. Uses only stdlib (no external dependencies).",
+      "inputs": [
+        {
+          "name": "ikm",
+          "type_ref": "bytes",
+          "required": true,
+          "default": "",
+          "description": "Input keying material",
+          "validators": []
+        },
+        {
+          "name": "salt",
+          "type_ref": "bytes",
+          "required": true,
+          "default": "",
+          "description": "Salt value (defaults to 32 zero bytes if empty)",
+          "validators": []
+        },
+        {
+          "name": "info",
+          "type_ref": "bytes",
+          "required": true,
+          "default": "",
+          "description": "Context and application specific information",
+          "validators": []
+        },
+        {
+          "name": "length",
+          "type_ref": "int",
+          "required": true,
+          "default": "",
+          "description": "Desired output key length in bytes",
+          "validators": []
+        }
+      ],
+      "output_type": "bytes",
+      "error_cases": [],
+      "preconditions": [],
+      "postconditions": [
+        "Returns derived key material of exactly 'length' bytes",
+        "Uses 32 zero bytes as salt if input salt is empty"
+      ],
+      "idempotent": false,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "derive_service_key",
+      "description": "Derives a service-specific Ed25519 keypair using HKDF-SHA256 for unlinkability. Different services see different public keys derived from the same master key. Requires the 'cryptography' package.",
+      "inputs": [
+        {
+          "name": "master_key_hex",
+          "type_ref": "str",
+          "required": true,
+          "default": "",
+          "description": "32-byte master private key seed as hex string",
+          "validators": []
+        },
+        {
+          "name": "service_domain",
+          "type_ref": "str",
+          "required": true,
+          "default": "",
+          "description": "Service identifier (e.g., 'api.example.com')",
+          "validators": []
+        }
+      ],
+      "output_type": "tuple[str, str]",
+      "error_cases": [
+        {
+          "name": "cryptography_not_installed",
+          "condition": "The 'cryptography' package is not installed",
+          "error_type": "ImportError",
+          "error_data": {}
+        },
+        {
+          "name": "invalid_hex",
+          "condition": "master_key_hex is not valid hex",
+          "error_type": "ValueError",
+          "error_data": {}
+        }
+      ],
+      "preconditions": [
+        "master_key_hex must be valid hex encoding 32 bytes"
+      ],
+      "postconditions": [
+        "Returns tuple of (public_key_hex, private_key_hex)",
+        "Uses fixed salt 'agent-safe-v1' for HKDF",
+        "Derives 32-byte seed using HKDF with service_domain as info parameter"
+      ],
+      "idempotent": false,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    },
+    {
+      "name": "verify_hash_chain",
+      "description": "Verifies a hash chain receipt by hashing the preimage (chain_length - index) times and comparing to the commitment.",
+      "inputs": [
+        {
+          "name": "commitment",
+          "type_ref": "str",
+          "required": true,
+          "default": "",
+          "description": "Expected final hash value as hex string",
+          "validators": []
+        },
+        {
+          "name": "preimage_hex",
+          "type_ref": "str",
+          "required": true,
+          "default": "",
+          "description": "Starting preimage value as hex string",
+          "validators": []
+        },
+        {
+          "name": "index",
+          "type_ref": "int",
+          "required": true,
+          "default": "",
+          "description": "Current index in the hash chain",
+          "validators": []
+        },
+        {
+          "name": "chain_length",
+          "type_ref": "int",
+          "required": true,
+          "default": "",
+          "description": "Total length of the hash chain",
+          "validators": []
+        }
+      ],
+      "output_type": "bool",
+      "error_cases": [],
+      "preconditions": [],
+      "postconditions": [
+        "Returns True if hashing preimage (chain_length - index) times equals commitment",
+        "Returns False on any exception (invalid hex, etc.)"
+      ],
+      "idempotent": false,
+      "side_effects": [],
+      "structured_side_effects": [
+        {
+          "kind": "none",
+          "target": "",
+          "description": ""
+        }
+      ],
+      "performance_budget": null
+    }
+  ],
+  "dependencies": [
+    "hashlib",
+    "hmac",
+    "json",
+    "typing",
+    "cryptography.hazmat.primitives.asymmetric.ed25519",
+    "cryptography.hazmat.primitives.serialization"
+  ],
+  "dependency_contracts": {},
+  "invariants": [
+    "SHA-256 always produces 32-byte (256-bit) digests",
+    "HKDF salt defaults to 32 zero bytes when empty or falsy",
+    "HKDF uses fixed salt 'agent-safe-v1' for service key derivation",
+    "Ed25519 public keys are 32 bytes",
+    "Ed25519 private keys are 32 bytes"
+  ],
+  "requires": [],
+  "processing_register": "",
+  "data_access": {
+    "reads": [],
+    "writes": [],
+    "rationale": "Pure cryptographic functions with no persistent data access",
+    "side_effects": []
+  },
+  "authority": {
+    "domains": [
+      "cryptography"
+    ],
+    "rationale": "Module provides cryptographic primitives for hashing, signature verification, key derivation, and Merkle/hash-chain verification"
+  }
+}
