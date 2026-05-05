@@ -159,6 +159,17 @@ describe('Eval', () => {
     assert.equal(evalExpr('(before now "2025-01-01T00:00:00Z")'), false);
   });
 
+  it('(get vars "key") resolves the same as bare-symbol `key`', () => {
+    const env = makeEnv();
+    (env.vars as any).max_amount = 50;
+    const bare = parseSExpr('(<= (get req "amount") max_amount)');
+    const viaGet = parseSExpr('(<= (get req "amount") (get vars "max_amount"))');
+    assert.equal(verify(bare, { amount: 30 }, env).allow, true);
+    assert.equal(verify(viaGet, { amount: 30 }, env).allow, true);
+    assert.equal(verify(bare, { amount: 100 }, env).allow, false);
+    assert.equal(verify(viaGet, { amount: 100 }, env).allow, false);
+  });
+
   it('`now` resolves from ctx.now alone (no vars.now needed)', () => {
     // Regression for: resolveSymbol previously read ctx.vars?.now and
     // ignored ctx.now. verifyToken sets ctx.now (not ctx.vars.now), so
