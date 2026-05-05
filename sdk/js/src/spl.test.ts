@@ -159,6 +159,28 @@ describe('Eval', () => {
     assert.equal(evalExpr('(before now "2025-01-01T00:00:00Z")'), false);
   });
 
+  it('`now` resolves from ctx.now alone (no vars.now needed)', () => {
+    // Regression for: resolveSymbol previously read ctx.vars?.now and
+    // ignored ctx.now. verifyToken sets ctx.now (not ctx.vars.now), so
+    // any policy using `(before now ...)` silently string-compared the
+    // symbol name "now" against the target.
+    const env = {
+      vars: {},
+      now: '2025-10-01T00:00:00Z',
+      per_day_count: (_a: string, _d: string) => 0,
+      crypto: {
+        dpop_ok: () => true,
+        merkle_ok: () => true,
+        vrf_ok: () => true,
+        thresh_ok: () => true,
+      },
+    };
+    const past = parseSExpr('(before now "2026-01-01T00:00:00Z")');
+    const future = parseSExpr('(before now "2025-01-01T00:00:00Z")');
+    assert.equal(verify(past, {}, env).allow, true);
+    assert.equal(verify(future, {}, env).allow, false);
+  });
+
   it('get', () => {
     const env = makeEnv();
     const ast = parseSExpr('(= (get req "actor_pub") "K_ai")');
