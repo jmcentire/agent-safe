@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0] - 2026-05-05
+
+### Fixed
+- **`now` symbol resolution (sdk/js)** — `resolveSymbol` previously read `ctx.vars?.now`, but `verify`/`verifyToken` set `ctx.now`. Any policy using `(before now <expires>)` silently resolved the symbol's name as the literal string "now" and string-compared. Now reads from `ctx.now` first; falls back to `ctx.vars?.now` for backward compatibility; throws under `ctx.strict`.
+
+### Added
+- **`vars` symbol binding (sdk/js)** — `(get vars "key")` now resolves to the same value as the bare-symbol form `key`, mirroring how `req` works. Bare-symbol var lookup continues to work unchanged.
+
 ## [0.2.1] - 2026-03-15
 
 ### Added

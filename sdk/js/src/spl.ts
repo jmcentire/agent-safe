@@ -162,7 +162,20 @@ function resolveSymbol(x: S, ctx: any): any {
     if (name === '#t') return true;
     if (name === '#f') return false;
     if (name === 'req') return ctx.req;
-    if (name === 'now') return ctx.vars?.now ?? name;
+    // `vars` resolves to the whole vars object so `(get vars "key")` reads
+    // the same value as the bare symbol `key`. Mirrors how `req` behaves.
+    if (name === 'vars') return ctx.vars ?? {};
+    // `now` reads from `ctx.now` (the canonical location, set by `verify`
+    // and `verifyToken`). For backward compatibility we also check
+    // `ctx.vars?.now` since older callers may have populated vars directly.
+    // Falling back to the symbol name preserves the historical behaviour
+    // when no `now` is set, but `ctx.strict` callers will throw.
+    if (name === 'now') {
+      const value = ctx.now ?? ctx.vars?.now;
+      if (value !== undefined) return value;
+      if (ctx.strict) throw new Error('Unresolved symbol: now');
+      return name;
+    }
     if (ctx.vars && name in ctx.vars) return ctx.vars[name];
     if (ctx.strict) throw new Error('Unresolved symbol: ' + name);
     return name;
