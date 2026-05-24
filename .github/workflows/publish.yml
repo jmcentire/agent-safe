@@ -1,25 +1,50 @@
 name: Publish Packages
 
+# Trusted Publishing (OIDC) — no NPM_TOKEN / no CARGO_REGISTRY_TOKEN.
+# Per-package setup on the registry (one-time):
+#   agent-safe-spl     (npm): npmjs.com -> Settings -> Publishing access ->
+#                              GitHub Actions, repo jmcentire/agent-safe,
+#                              workflow publish.yml, environment npm-publish
+#   @agentsafe/spl-cli (npm): same wiring, separate Trusted Publisher entry
+#   agent-safe-spl     (PyPI): pypi.org -> project -> Publishing -> Add a
+#                              new pending publisher (env: pypi)
+#   agent-safe-spl     (crates.io): Trusted Publishing currently in beta;
+#                              if not enabled, keep the token path.
+
 on:
   release:
     types: [published]
 
 jobs:
-  publish-npm:
+  publish-npm-sdk:
     runs-on: ubuntu-latest
+    environment: npm-publish
     permissions:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://registry.npmjs.org
-      - run: cd sdk/js && npm ci && npm run build && npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        continue-on-error: true
+          cache: npm
+          cache-dependency-path: sdk/js/package-lock.json
+      - run: npm ci
+        working-directory: sdk/js
+      - run: npm test
+        working-directory: sdk/js
+      - run: npm run build
+        working-directory: sdk/js
+      - run: npm publish --provenance --access public
+        working-directory: sdk/js
+
+  # cli/js (@agentsafe/spl-cli) is not yet publishable — its source
+  # imports the SDK via relative path (../../../sdk/js/dist/spl.js)
+  # rather than depending on the agent-safe-spl package. Refactor to
+  # `import { ... } from 'agent-safe-spl'`, add a package-lock.json
+  # and a `test` script, then add a publish-npm-cli job mirroring
+  # publish-npm-sdk above.
 
   publish-pypi:
     runs-on: ubuntu-latest
@@ -27,8 +52,8 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - run: pip install build
@@ -40,9 +65,8 @@ jobs:
   publish-crates:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: dtolnay/rust-toolchain@stable
       - run: cd sdk/rust && cargo publish
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
-        continue-on-error: true
