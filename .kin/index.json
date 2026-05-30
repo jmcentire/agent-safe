@@ -1,0 +1,1271 @@
+{
+  "domains": [
+    "c#",
+    "code",
+    "go",
+    "java",
+    "python",
+    "rust",
+    "typescript"
+  ],
+  "node_count": 114,
+  "nodes": [
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-0246aaf1eaee",
+      "title": "sdk/python/tests/test_gas.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-0bf6aa453bd8",
+      "title": "examples/e2e/e2e.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-0c3a64823151",
+      "title": "contracts/sdk_python_spl___main__/interface.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-mod-agent-safe-135b4d665636",
+      "title": "sdk/js/src/spl.test.ts",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-mod-agent-safe-17d2613f5798",
+      "title": "sdk/java/src/main/java/io/agentsafe/spl/Evaluator.java",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-17d8026734d6",
+      "title": "sdk/python/spl/crypto.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-mod-agent-safe-18577d3b2d8f",
+      "title": "examples/e2e/e2e.go",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-1cf754e42ee6",
+      "title": "sdk/python/spl/verifier.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-agent-safe-29533f875656",
+      "title": "sdk/rust/src/evaluator.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-mod-agent-safe-296a3916486e",
+      "title": "sdk/go/spl/crypto.go",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-mod-agent-safe-2c17b2c8cc23",
+      "title": "sdk/java/src/main/java/io/agentsafe/spl/Token.java",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-agent-safe-2cadd29e2332",
+      "title": "sdk/rust/examples/verify.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-mod-agent-safe-308051bb39dd",
+      "title": "cli/js/src/index.ts",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-mod-agent-safe-3616dd039555",
+      "title": "sdk/go/spl/token.go",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-agent-safe-3a938092d367",
+      "title": "sdk/rust/src/crypto.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-mod-agent-safe-44ade7b522af",
+      "title": "sdk/csharp/AgentSafe.Spl.Tests/SplTests.cs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-45851be93607",
+      "title": "sdk/python/spl/token.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-51c417e354d2",
+      "title": "contracts/sdk_python_spl_crypto/interface.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-mod-agent-safe-58a04c4f73e0",
+      "title": "sdk/js/src/token.ts",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-agent-safe-6346f27175b1",
+      "title": "sdk/rust/src/parser.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-mod-agent-safe-66153400f40b",
+      "title": "sdk/java/src/test/java/io/agentsafe/spl/SplTest.java",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-6d5bc8d460d1",
+      "title": "sdk/python/spl/parser.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-agent-safe-714582afaae3",
+      "title": "sdk/rust/src/verifier.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-mod-agent-safe-72ee543339ce",
+      "title": "sdk/java/src/main/java/io/agentsafe/spl/SplException.java",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-mod-agent-safe-7f56000be355",
+      "title": "sdk/java/src/main/java/io/agentsafe/spl/Crypto.java",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-mod-agent-safe-864caab7488b",
+      "title": "examples/e2e/e2e.ts",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-mod-agent-safe-893f9bbc50cb",
+      "title": "sdk/java/src/main/java/io/agentsafe/spl/Verifier.java",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-8b2796fd3096",
+      "title": "contracts/sdk_python_spl_evaluator/interface.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-mod-agent-safe-8daa53b2093e",
+      "title": "sdk/go/spl/eval.go",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-mod-agent-safe-911747dea94b",
+      "title": "sdk/csharp/AgentSafe.Spl/Verifier.cs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-mod-agent-safe-91e067cb9b0f",
+      "title": "sdk/js/src/spl.ts",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-mod-agent-safe-924bf178fff7",
+      "title": "sdk/js/src/index.ts",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-mod-agent-safe-93376014cae7",
+      "title": "sdk/go/spl/parser.go",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-958bbff10e63",
+      "title": "sdk/python/tests/test_evaluator.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-972386ee2f49",
+      "title": "sdk/python/spl/types.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-mod-agent-safe-9b413c59a956",
+      "title": "sdk/csharp/AgentSafe.Spl/Evaluator.cs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-mod-agent-safe-9e5946d9ebba",
+      "title": "sdk/java/src/main/java/io/agentsafe/spl/Env.java",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-9e8bac1945d8",
+      "title": "sdk/python/spl/evaluator.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-a03b5cd8e2c6",
+      "title": "sdk/python/tests/test_integration.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-a225e7fcefe8",
+      "title": "sdk/python/tests/test_parser.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-mod-agent-safe-a3867624f774",
+      "title": "sdk/js/src/crypto.ts",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-agent-safe-a8b4e080c431",
+      "title": "sdk/rust/src/lib.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-af2f80080f97",
+      "title": "contracts/sdk_python_spl_parser/interface.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-mod-agent-safe-b2e130f6eefb",
+      "title": "sdk/csharp/AgentSafe.Spl/Token.cs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-b66a2d6d4963",
+      "title": "sdk/python/tests/test_crypto.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-mod-agent-safe-bc12479341bb",
+      "title": "sdk/csharp/AgentSafe.Spl/Parser.cs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-mod-agent-safe-beff1e2d2873",
+      "title": "sdk/js/src/crypto.test.ts",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-agent-safe-bfd50a2a5755",
+      "title": "sdk/rust/src/token.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-mod-agent-safe-c2d7b39731f3",
+      "title": "sdk/java/src/main/java/io/agentsafe/spl/Parser.java",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-c4d4f0d01f40",
+      "title": "sdk/python/spl/__init__.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-agent-safe-cace2f7f6fff",
+      "title": "sdk/rust/tests/integration.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-mod-agent-safe-cc889846f244",
+      "title": "sdk/csharp/AgentSafe.Spl/Env.cs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-mod-agent-safe-d027216fc0a0",
+      "title": "sdk/js/src/bench.ts",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-mod-agent-safe-d23bcc7a26c2",
+      "title": "sdk/java/src/main/java/io/agentsafe/spl/Node.java",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-mod-agent-safe-d3f2d7c54062",
+      "title": "sdk/csharp/AgentSafe.Spl/SplException.cs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-mod-agent-safe-d447330b692c",
+      "title": "sdk/go/verify/verify.go",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-mod-agent-safe-db830be8680e",
+      "title": "sdk/java/src/main/java/io/agentsafe/spl/CryptoCallbacks.java",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-mod-agent-safe-e7973715c62c",
+      "title": "sdk/csharp/AgentSafe.Spl/Node.cs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-mod-agent-safe-ee4f92c985d0",
+      "title": "examples/crypto/generate_vectors.go",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-agent-safe-f395aab771bf",
+      "title": "sdk/python/spl/__main__.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-mod-agent-safe-f4b74211a51c",
+      "title": "sdk/csharp/AgentSafe.Spl/Crypto.cs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-mod-agent-safe-fda8f7a3e0f7",
+      "title": "sdk/rust/src/types.rs",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-mod-agent-safe-ffcf6dbb9681",
+      "title": "sdk/js/src/verify.ts",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-sym-agent-safe-00c9e9654c21",
+      "title": "Sym",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-agent-safe-01ec4c10f060",
+      "title": "VerifyResult",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-agent-safe-1ac983bf5ee0",
+      "title": "DepthExceeded",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-sym-agent-safe-1acd7838fbc6",
+      "title": "CryptoCallbacks",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-agent-safe-1bb39a360f3e",
+      "title": "CryptoCallbacks",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-sym-agent-safe-2438cc757cbf",
+      "title": "Verifier",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-sym-agent-safe-28d130a15fa5",
+      "title": "spl.Token",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-sym-agent-safe-349afd3f9da5",
+      "title": "Token",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-agent-safe-3a1df430fb2c",
+      "title": "TestEd25519",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-agent-safe-3a668f7a1b36",
+      "title": "SplError",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-sym-agent-safe-3b52c947ae91",
+      "title": "spl.VerifyTokenResult",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-sym-agent-safe-3ff21d35b036",
+      "title": "VerifyTokenOptions",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-agent-safe-4006adb9a3ef",
+      "title": "EvalState",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-sym-agent-safe-473d8313b6b5",
+      "title": "Token",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-agent-safe-483c30bffbc2",
+      "title": "MerkleProofStep",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-sym-agent-safe-49743a53ae18",
+      "title": "Parser",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-sym-agent-safe-51da15f62b98",
+      "title": "Token",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-sym-agent-safe-52bd85562750",
+      "title": "Crypto",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-sym-agent-safe-52d43ef66f90",
+      "title": "Evaluator",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-sym-agent-safe-651d0d15e1d9",
+      "title": "spl.VerifyTokenOptions",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-sym-agent-safe-7a6bbb9cb56b",
+      "title": "SplException",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-agent-safe-7a74da777776",
+      "title": "TestMerkleProof",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-sym-agent-safe-7ca1322c5b11",
+      "title": "spl.Env",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-sym-agent-safe-7cd6ecf8def4",
+      "title": "spl.MerkleProofStep",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-sym-agent-safe-8104b83075b4",
+      "title": "CryptoCallbacks",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-sym-agent-safe-835e51d3d584",
+      "title": "Node",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-agent-safe-87342165bd78",
+      "title": "DepthExceeded",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-agent-safe-9461514f445a",
+      "title": "Env",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-agent-safe-951d3b2e2edc",
+      "title": "VerifyTokenResult",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-sym-agent-safe-98e11f01966a",
+      "title": "Verifier",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-sym-agent-safe-a4caf7baaec1",
+      "title": "Env",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-agent-safe-a7f87e80ee6c",
+      "title": "GasExhausted",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-agent-safe-a82425c7542c",
+      "title": "TestHashChain",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-sym-agent-safe-abbd50d32aad",
+      "title": "spl.Node",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-agent-safe-ac4c7496d8f6",
+      "title": "Token",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-sym-agent-safe-b31f0788f9e0",
+      "title": "SplTest",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-agent-safe-b6948be3b4cf",
+      "title": "SPLError",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "go"
+      ],
+      "id": "code-sym-agent-safe-b9135c563ac5",
+      "title": "spl.MintOptions",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-agent-safe-bfacad00f48e",
+      "title": "Env",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-sym-agent-safe-cee7676adaee",
+      "title": "Evaluator",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "typescript"
+      ],
+      "id": "code-sym-agent-safe-cee7f30c4f4b",
+      "title": "MintOptions",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-agent-safe-cfba126499e7",
+      "title": "CryptoCallbacks",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-sym-agent-safe-ddae5352364e",
+      "title": "Crypto",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-sym-agent-safe-e108b61bde37",
+      "title": "Env",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-sym-agent-safe-e4af73ef9dfc",
+      "title": "SplTests",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-agent-safe-e4eaf53d1f89",
+      "title": "Node",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-agent-safe-e5a97a4df21d",
+      "title": "GasExhausted",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "java"
+      ],
+      "id": "code-sym-agent-safe-e6b2d1cf0e38",
+      "title": "Parser",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "c#",
+        "code"
+      ],
+      "id": "code-sym-agent-safe-edeb4d0f4470",
+      "title": "SplException",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-agent-safe-f12902990b55",
+      "title": "SPLError",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "rust"
+      ],
+      "id": "code-sym-agent-safe-f220cca142f1",
+      "title": "MintOptions",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:46:56",
+      "weight": 0.5
+    }
+  ],
+  "repo": "agent-safe",
+  "source_updated_at": "2026-05-30T14:46:56",
+  "version": 1
+}

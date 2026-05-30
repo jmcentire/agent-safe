@@ -1,4194 +1,557 @@
 {
-  "version": "1.0.0",
-  "project": {
-    "name": "agent-safe",
-    "description": "Code map exported from Kindex for agent-safe.",
-    "languages": [
-      "C#",
-      "Go",
-      "Java",
-      "Python",
-      "Rust",
-      "TypeScript",
-      "typescript"
-    ],
-    "frameworks": [],
-    "analyzedAt": "2026-05-24T14:43:32",
-    "gitCommitHash": "a73c833cc3ccca4827bce902766bda83fc381644"
-  },
-  "nodes": [
-    {
-      "id": "code-mod-agent-safe-45851be93607",
-      "type": "file",
-      "name": "sdk/python/spl/token.py",
-      "filePath": "sdk/python/spl/token.py",
-      "summary": "Language: Python | Path: sdk/python/spl/token.py | ~138 lines ## Functions - create_presentation_signature(token: dict, agent_private_key_hex: str) -> str",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 5,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-a8b4e080c431",
-      "type": "file",
-      "name": "sdk/rust/src/lib.rs",
-      "filePath": "sdk/rust/src/lib.rs",
-      "summary": "Language: Rust | Path: sdk/rust/src/lib.rs | ~6 lines",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-958bbff10e63",
-      "type": "file",
-      "name": "sdk/python/tests/test_evaluator.py",
-      "filePath": "sdk/python/tests/test_evaluator.py",
-      "summary": "Language: Python | Path: sdk/python/tests/test_evaluator.py | ~144 lines ## Functions - eval_expr(src, env=None)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 24,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-cace2f7f6fff",
-      "type": "file",
-      "name": "sdk/rust/tests/integration.rs",
-      "filePath": "sdk/rust/tests/integration.rs",
-      "summary": "Language: Rust | Path: sdk/rust/tests/integration.rs | ~313 lines ## Functions - eval_expr(src: &str, env: Env) -> Result<bool, String>",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 29,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-2cadd29e2332",
-      "type": "file",
-      "name": "sdk/rust/examples/verify.rs",
-      "filePath": "sdk/rust/examples/verify.rs",
-      "summary": "Language: Rust | Path: sdk/rust/examples/verify.rs | ~78 lines ## Functions - json_to_node(v: &serde_json::Value) -> Node",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 2,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-0c3a64823151",
-      "type": "file",
-      "name": "contracts/sdk_python_spl___main__/interface.py",
-      "filePath": "contracts/sdk_python_spl___main__/interface.py",
-      "summary": "Language: Python | Path: contracts/sdk_python_spl___main__/interface.py | ~12 lines ## Functions - main() -> None",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-f395aab771bf",
-      "type": "file",
-      "name": "sdk/python/spl/__main__.py",
-      "filePath": "sdk/python/spl/__main__.py",
-      "summary": "Language: Python | Path: sdk/python/spl/__main__.py | ~11 lines ## Functions - main()",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-0246aaf1eaee",
-      "type": "file",
-      "name": "sdk/python/tests/test_gas.py",
-      "filePath": "sdk/python/tests/test_gas.py",
-      "summary": "Language: Python | Path: sdk/python/tests/test_gas.py | ~54 lines ## Functions - make_env(**overrides)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 6,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-a225e7fcefe8",
-      "type": "file",
-      "name": "sdk/python/tests/test_parser.py",
-      "filePath": "sdk/python/tests/test_parser.py",
-      "summary": "Language: Python | Path: sdk/python/tests/test_parser.py | ~59 lines ## Functions - test_extra_tokens()",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 12,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-1cf754e42ee6",
-      "type": "file",
-      "name": "sdk/python/spl/verifier.py",
-      "filePath": "sdk/python/spl/verifier.py",
-      "summary": "Language: Python | Path: sdk/python/spl/verifier.py | ~7 lines ## Functions - verify(policy_ast: Any, req: dict, env: Any) -> dict",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-beff1e2d2873",
-      "type": "file",
-      "name": "sdk/js/src/crypto.test.ts",
-      "filePath": "sdk/js/src/crypto.test.ts",
-      "summary": "Language: TypeScript | Path: sdk/js/src/crypto.test.ts | ~53 lines ## Functions - loadVectors()",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 2,
-      "languageNotes": {
-        "language": "TypeScript",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-d447330b692c",
-      "type": "file",
-      "name": "sdk/go/verify/verify.go",
-      "filePath": "sdk/go/verify/verify.go",
-      "summary": "Language: Go | Path: sdk/go/verify/verify.go | ~12 lines",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-ee4f92c985d0",
-      "type": "file",
-      "name": "examples/crypto/generate_vectors.go",
-      "filePath": "examples/crypto/generate_vectors.go",
-      "summary": "Language: Go | Path: examples/crypto/generate_vectors.go | ~201 lines",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-18577d3b2d8f",
-      "type": "file",
-      "name": "examples/e2e/e2e.go",
-      "filePath": "examples/e2e/e2e.go",
-      "summary": "Language: Go | Path: examples/e2e/e2e.go | ~120 lines",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-87342165bd78",
-      "type": "class",
-      "name": "DepthExceeded",
-      "filePath": "sdk/python/spl/evaluator.py",
-      "summary": "class DepthExceeded(RuntimeError) (sdk/python/spl/evaluator.py:13)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-1ac983bf5ee0",
-      "type": "class",
-      "name": "DepthExceeded",
-      "filePath": "contracts/sdk_python_spl_evaluator/interface.py",
-      "summary": "class DepthExceeded (contracts/sdk_python_spl_evaluator/interface.py:16)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-a7f87e80ee6c",
-      "type": "class",
-      "name": "GasExhausted",
-      "filePath": "sdk/python/spl/evaluator.py",
-      "summary": "class GasExhausted(RuntimeError) (sdk/python/spl/evaluator.py:9)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-e5a97a4df21d",
-      "type": "class",
-      "name": "GasExhausted",
-      "filePath": "contracts/sdk_python_spl_evaluator/interface.py",
-      "summary": "class GasExhausted (contracts/sdk_python_spl_evaluator/interface.py:12)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-cee7676adaee",
-      "type": "class",
-      "name": "Evaluator",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Evaluator.java",
-      "summary": "class Evaluator (sdk/java/src/main/java/io/agentsafe/spl/Evaluator.java:9)",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-49743a53ae18",
-      "type": "class",
-      "name": "Parser",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Parser.cs",
-      "summary": "class Parser (sdk/csharp/AgentSafe.Spl/Parser.cs:3)",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-e6b2d1cf0e38",
-      "type": "class",
-      "name": "Parser",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Parser.java",
-      "summary": "class Parser (sdk/java/src/main/java/io/agentsafe/spl/Parser.java:9)",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-edeb4d0f4470",
-      "type": "class",
-      "name": "SplException",
-      "filePath": "sdk/csharp/AgentSafe.Spl/SplException.cs",
-      "summary": "class SplException(Exception) (sdk/csharp/AgentSafe.Spl/SplException.cs:3)",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-7a6bbb9cb56b",
-      "type": "class",
-      "name": "SplException",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/SplException.java",
-      "summary": "class SplException(RuntimeException) (sdk/java/src/main/java/io/agentsafe/spl/SplException.java:3)",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-cfba126499e7",
-      "type": "class",
-      "name": "CryptoCallbacks",
-      "filePath": "sdk/rust/src/types.rs",
-      "summary": "class CryptoCallbacks (sdk/rust/src/types.rs:81)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-3a668f7a1b36",
-      "type": "class",
-      "name": "SplError",
-      "filePath": "sdk/rust/src/types.rs",
-      "summary": "class SplError (sdk/rust/src/types.rs:63)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-52bd85562750",
-      "type": "class",
-      "name": "Crypto",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Crypto.cs",
-      "summary": "class Crypto (sdk/csharp/AgentSafe.Spl/Crypto.cs:11)",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-1acd7838fbc6",
-      "type": "class",
-      "name": "CryptoCallbacks",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Env.cs",
-      "summary": "class CryptoCallbacks (sdk/csharp/AgentSafe.Spl/Env.cs:3)",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-ddae5352364e",
-      "type": "class",
-      "name": "Crypto",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Crypto.java",
-      "summary": "class Crypto (sdk/java/src/main/java/io/agentsafe/spl/Crypto.java:13)",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-8104b83075b4",
-      "type": "class",
-      "name": "CryptoCallbacks",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/CryptoCallbacks.java",
-      "summary": "class CryptoCallbacks (sdk/java/src/main/java/io/agentsafe/spl/CryptoCallbacks.java:11)",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-f12902990b55",
-      "type": "class",
-      "name": "SPLError",
-      "filePath": "sdk/python/spl/evaluator.py",
-      "summary": "class SPLError(RuntimeError) (sdk/python/spl/evaluator.py:17)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-b6948be3b4cf",
-      "type": "class",
-      "name": "SPLError",
-      "filePath": "contracts/sdk_python_spl_evaluator/interface.py",
-      "summary": "class SPLError (contracts/sdk_python_spl_evaluator/interface.py:20)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-52d43ef66f90",
-      "type": "class",
-      "name": "Evaluator",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Evaluator.cs",
-      "summary": "class Evaluator (sdk/csharp/AgentSafe.Spl/Evaluator.cs:3)",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-51da15f62b98",
-      "type": "class",
-      "name": "Token",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Token.java",
-      "summary": "class Token (sdk/java/src/main/java/io/agentsafe/spl/Token.java:11)",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-864caab7488b",
-      "type": "file",
-      "name": "examples/e2e/e2e.ts",
-      "filePath": "examples/e2e/e2e.ts",
-      "summary": "Language: TypeScript | Path: examples/e2e/e2e.ts | ~82 lines",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "TypeScript",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-0bf6aa453bd8",
-      "type": "file",
-      "name": "examples/e2e/e2e.py",
-      "filePath": "examples/e2e/e2e.py",
-      "summary": "Language: Python | Path: examples/e2e/e2e.py | ~74 lines",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-349afd3f9da5",
-      "type": "class",
-      "name": "Token",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Token.cs",
-      "summary": "class Token (sdk/csharp/AgentSafe.Spl/Token.cs:10)",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-e7973715c62c",
-      "type": "file",
-      "name": "sdk/csharp/AgentSafe.Spl/Node.cs",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Node.cs",
-      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Node.cs | ~4 lines",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-d23bcc7a26c2",
-      "type": "file",
-      "name": "sdk/java/src/main/java/io/agentsafe/spl/Node.java",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Node.java",
-      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Node.java | ~51 lines ## Classes - Node",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-893f9bbc50cb",
-      "type": "file",
-      "name": "sdk/java/src/main/java/io/agentsafe/spl/Verifier.java",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Verifier.java",
-      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Verifier.java | ~15 lines ## Classes - Verifier",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-98e11f01966a",
-      "type": "class",
-      "name": "Verifier",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Verifier.java",
-      "summary": "class Verifier (sdk/java/src/main/java/io/agentsafe/spl/Verifier.java:6)",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-d3f2d7c54062",
-      "type": "file",
-      "name": "sdk/csharp/AgentSafe.Spl/SplException.cs",
-      "filePath": "sdk/csharp/AgentSafe.Spl/SplException.cs",
-      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/SplException.cs | ~5 lines ## Classes - SplException(Exception)",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-72ee543339ce",
-      "type": "file",
-      "name": "sdk/java/src/main/java/io/agentsafe/spl/SplException.java",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/SplException.java",
-      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/SplException.java | ~4 lines ## Classes - SplException(RuntimeException)",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-2438cc757cbf",
-      "type": "class",
-      "name": "Verifier",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Verifier.cs",
-      "summary": "class Verifier (sdk/csharp/AgentSafe.Spl/Verifier.cs:3)",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-f4b74211a51c",
-      "type": "file",
-      "name": "sdk/csharp/AgentSafe.Spl/Crypto.cs",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Crypto.cs",
-      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Crypto.cs | ~115 lines ## Classes - Crypto",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-cc889846f244",
-      "type": "file",
-      "name": "sdk/csharp/AgentSafe.Spl/Env.cs",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Env.cs",
-      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Env.cs | ~25 lines ## Classes - CryptoCallbacks",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 2,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-7f56000be355",
-      "type": "file",
-      "name": "sdk/java/src/main/java/io/agentsafe/spl/Crypto.java",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Crypto.java",
-      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Crypto.java | ~213 lines ## Classes - Crypto",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-db830be8680e",
-      "type": "file",
-      "name": "sdk/java/src/main/java/io/agentsafe/spl/CryptoCallbacks.java",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/CryptoCallbacks.java",
-      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/CryptoCallbacks.java | ~21 lines ## Classes - CryptoCallbacks",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-9b413c59a956",
-      "type": "file",
-      "name": "sdk/csharp/AgentSafe.Spl/Evaluator.cs",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Evaluator.cs",
-      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Evaluator.cs | ~123 lines ## Classes - Evaluator",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-17d2613f5798",
-      "type": "file",
-      "name": "sdk/java/src/main/java/io/agentsafe/spl/Evaluator.java",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Evaluator.java",
-      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Evaluator.java | ~147 lines ## Classes - Evaluator",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-b2e130f6eefb",
-      "type": "file",
-      "name": "sdk/csharp/AgentSafe.Spl/Token.cs",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Token.cs",
-      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Token.cs | ~108 lines ## Classes - Token",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-bc12479341bb",
-      "type": "file",
-      "name": "sdk/csharp/AgentSafe.Spl/Parser.cs",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Parser.cs",
-      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Parser.cs | ~98 lines ## Classes - Parser",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-c2d7b39731f3",
-      "type": "file",
-      "name": "sdk/java/src/main/java/io/agentsafe/spl/Parser.java",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Parser.java",
-      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Parser.java | ~96 lines ## Classes - Parser",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-911747dea94b",
-      "type": "file",
-      "name": "sdk/csharp/AgentSafe.Spl/Verifier.cs",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Verifier.cs",
-      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Verifier.cs | ~7 lines ## Classes - Verifier",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-835e51d3d584",
-      "type": "class",
-      "name": "Node",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Node.java",
-      "summary": "class Node (sdk/java/src/main/java/io/agentsafe/spl/Node.java:9)",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-b31f0788f9e0",
-      "type": "class",
-      "name": "SplTest",
-      "filePath": "sdk/java/src/test/java/io/agentsafe/spl/SplTest.java",
-      "summary": "class SplTest (sdk/java/src/test/java/io/agentsafe/spl/SplTest.java:9)",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-e4af73ef9dfc",
-      "type": "class",
-      "name": "SplTests",
-      "filePath": "sdk/csharp/AgentSafe.Spl.Tests/SplTests.cs",
-      "summary": "class SplTests (sdk/csharp/AgentSafe.Spl.Tests/SplTests.cs:6)",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-e4eaf53d1f89",
-      "type": "class",
-      "name": "Node",
-      "filePath": "sdk/rust/src/types.rs",
-      "summary": "class Node (sdk/rust/src/types.rs:6)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-3a938092d367",
-      "type": "file",
-      "name": "sdk/rust/src/crypto.rs",
-      "filePath": "sdk/rust/src/crypto.rs",
-      "summary": "Language: Rust | Path: sdk/rust/src/crypto.rs | ~116 lines ## Classes - MerkleProofStep",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 9,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-fda8f7a3e0f7",
-      "type": "file",
-      "name": "sdk/rust/src/types.rs",
-      "filePath": "sdk/rust/src/types.rs",
-      "summary": "Language: Rust | Path: sdk/rust/src/types.rs | ~115 lines ## Classes - CryptoCallbacks",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 4,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-29533f875656",
-      "type": "file",
-      "name": "sdk/rust/src/evaluator.rs",
-      "filePath": "sdk/rust/src/evaluator.rs",
-      "summary": "Language: Rust | Path: sdk/rust/src/evaluator.rs | ~219 lines ## Classes - EvalState",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 8,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-6346f27175b1",
-      "type": "file",
-      "name": "sdk/rust/src/parser.rs",
-      "filePath": "sdk/rust/src/parser.rs",
-      "summary": "Language: Rust | Path: sdk/rust/src/parser.rs | ~204 lines ## Functions - flush_buf(buf: &mut String, tokens: &mut Vec<String>)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 5,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-bfd50a2a5755",
-      "type": "file",
-      "name": "sdk/rust/src/token.rs",
-      "filePath": "sdk/rust/src/token.rs",
-      "summary": "Language: Rust | Path: sdk/rust/src/token.rs | ~143 lines ## Classes - MintOptions",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 9,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-714582afaae3",
-      "type": "file",
-      "name": "sdk/rust/src/verifier.rs",
-      "filePath": "sdk/rust/src/verifier.rs",
-      "summary": "Language: Rust | Path: sdk/rust/src/verifier.rs | ~11 lines ## Classes - VerifyResult",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 2,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-91e067cb9b0f",
-      "type": "file",
-      "name": "sdk/js/src/spl.ts",
-      "filePath": "sdk/js/src/spl.ts",
-      "summary": "Language: TypeScript | Path: sdk/js/src/spl.ts | ~186 lines ## Classes - Sym",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 8,
-      "languageNotes": {
-        "language": "TypeScript",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-00c9e9654c21",
-      "type": "class",
-      "name": "Sym",
-      "filePath": "sdk/js/src/spl.ts",
-      "summary": "class Sym (sdk/js/src/spl.ts:2)",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "TypeScript",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-135b4d665636",
-      "type": "file",
-      "name": "sdk/js/src/spl.test.ts",
-      "filePath": "sdk/js/src/spl.test.ts",
-      "summary": "Language: TypeScript | Path: sdk/js/src/spl.test.ts | ~291 lines ## Functions - evalExpr()",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 2,
-      "languageNotes": {
-        "language": "TypeScript",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-9e5946d9ebba",
-      "type": "file",
-      "name": "sdk/java/src/main/java/io/agentsafe/spl/Env.java",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Env.java",
-      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Env.java | ~17 lines ## Classes - Env",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-f220cca142f1",
-      "type": "class",
-      "name": "MintOptions",
-      "filePath": "sdk/rust/src/token.rs",
-      "summary": "class MintOptions (sdk/rust/src/token.rs:31) [Merged from: MintOptions] class MintOptions (sdk/js/src/token.ts:22)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-ac4c7496d8f6",
-      "type": "class",
-      "name": "Token",
-      "filePath": "sdk/rust/src/token.rs",
-      "summary": "class Token (sdk/rust/src/token.rs:13) [Merged from: Token] class Token (sdk/js/src/token.ts:10)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-b66a2d6d4963",
-      "type": "file",
-      "name": "sdk/python/tests/test_crypto.py",
-      "filePath": "sdk/python/tests/test_crypto.py",
-      "summary": "Language: Python | Path: sdk/python/tests/test_crypto.py | ~48 lines ## Classes - TestEd25519",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 4,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-c4d4f0d01f40",
-      "type": "file",
-      "name": "sdk/python/spl/__init__.py",
-      "filePath": "sdk/python/spl/__init__.py",
-      "summary": "Language: Python | Path: sdk/python/spl/__init__.py | ~6 lines",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-51c417e354d2",
-      "type": "file",
-      "name": "contracts/sdk_python_spl_crypto/interface.py",
-      "filePath": "contracts/sdk_python_spl_crypto/interface.py",
-      "summary": "Language: Python | Path: contracts/sdk_python_spl_crypto/interface.py | ~137 lines ## Functions - derive_service_key( master_key_hex: str, service_domain: str, ) -> tuple[str,str]",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 8,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-17d8026734d6",
-      "type": "file",
-      "name": "sdk/python/spl/crypto.py",
-      "filePath": "sdk/python/spl/crypto.py",
-      "summary": "Language: Python | Path: sdk/python/spl/crypto.py | ~121 lines ## Functions - derive_service_key(master_key_hex: str, service_domain: str) -> tuple[str,str]",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 8,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-308051bb39dd",
-      "type": "file",
-      "name": "cli/js/src/index.ts",
-      "filePath": "cli/js/src/index.ts",
-      "summary": "Language: TypeScript | Path: cli/js/src/index.ts | ~27 lines",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "TypeScript",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-924bf178fff7",
-      "type": "file",
-      "name": "sdk/js/src/index.ts",
-      "filePath": "sdk/js/src/index.ts",
-      "summary": "Language: TypeScript | Path: sdk/js/src/index.ts | ~31 lines",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "TypeScript",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-ffcf6dbb9681",
-      "type": "file",
-      "name": "sdk/js/src/verify.ts",
-      "filePath": "sdk/js/src/verify.ts",
-      "summary": "Language: TypeScript | Path: sdk/js/src/verify.ts | ~22 lines ## Functions - verify()",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "TypeScript",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-58a04c4f73e0",
-      "type": "file",
-      "name": "sdk/js/src/token.ts",
-      "filePath": "sdk/js/src/token.ts",
-      "summary": "Language: TypeScript | Path: sdk/js/src/token.ts | ~196 lines ## Classes - MintOptions",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 8,
-      "languageNotes": {
-        "language": "TypeScript",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-3ff21d35b036",
-      "type": "class",
-      "name": "VerifyTokenOptions",
-      "filePath": "sdk/js/src/token.ts",
-      "summary": "class VerifyTokenOptions (sdk/js/src/token.ts:30)",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "TypeScript",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-93376014cae7",
-      "type": "file",
-      "name": "sdk/go/spl/parser.go",
-      "filePath": "sdk/go/spl/parser.go",
-      "summary": "Language: Go | Path: sdk/go/spl/parser.go | ~69 lines ## Classes - Node",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-abbd50d32aad",
-      "type": "class",
-      "name": "spl.Node",
-      "filePath": "sdk/go/spl/parser.go",
-      "summary": "class Node (sdk/go/spl/parser.go:9)",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-951d3b2e2edc",
-      "type": "class",
-      "name": "VerifyTokenResult",
-      "filePath": "sdk/rust/src/token.rs",
-      "summary": "class VerifyTokenResult (sdk/rust/src/token.rs:127)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-d027216fc0a0",
-      "type": "file",
-      "name": "sdk/js/src/bench.ts",
-      "filePath": "sdk/js/src/bench.ts",
-      "summary": "Language: TypeScript | Path: sdk/js/src/bench.ts | ~59 lines",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "TypeScript",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-66153400f40b",
-      "type": "file",
-      "name": "sdk/java/src/test/java/io/agentsafe/spl/SplTest.java",
-      "filePath": "sdk/java/src/test/java/io/agentsafe/spl/SplTest.java",
-      "summary": "Language: Java | Path: sdk/java/src/test/java/io/agentsafe/spl/SplTest.java | ~184 lines ## Classes - SplTest",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-3a1df430fb2c",
-      "type": "class",
-      "name": "TestEd25519",
-      "filePath": "sdk/python/tests/test_crypto.py",
-      "summary": "class TestEd25519 (sdk/python/tests/test_crypto.py:17) ## Methods - test_tampered_message(self)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 2,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-a82425c7542c",
-      "type": "class",
-      "name": "TestHashChain",
-      "filePath": "sdk/python/tests/test_crypto.py",
-      "summary": "class TestHashChain (sdk/python/tests/test_crypto.py:47) ## Methods - test_cases(self)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-7a74da777776",
-      "type": "class",
-      "name": "TestMerkleProof",
-      "filePath": "sdk/python/tests/test_crypto.py",
-      "summary": "class TestMerkleProof (sdk/python/tests/test_crypto.py:35) ## Methods - test_cases(self)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-01ec4c10f060",
-      "type": "class",
-      "name": "VerifyResult",
-      "filePath": "sdk/rust/src/verifier.rs",
-      "summary": "class VerifyResult (sdk/rust/src/verifier.rs:5)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-af2f80080f97",
-      "type": "file",
-      "name": "contracts/sdk_python_spl_parser/interface.py",
-      "filePath": "contracts/sdk_python_spl_parser/interface.py",
-      "summary": "Language: Python | Path: contracts/sdk_python_spl_parser/interface.py | ~49 lines ## Functions - parse( src: str, ) -> AST",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 3,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-6d5bc8d460d1",
-      "type": "file",
-      "name": "sdk/python/spl/parser.py",
-      "filePath": "sdk/python/spl/parser.py",
-      "summary": "Language: Python | Path: sdk/python/spl/parser.py | ~70 lines ## Functions - parse(src: str) -> AST",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 3,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-3616dd039555",
-      "type": "file",
-      "name": "sdk/go/spl/token.go",
-      "filePath": "sdk/go/spl/token.go",
-      "summary": "Language: Go | Path: sdk/go/spl/token.go | ~130 lines ## Classes - MintOptions",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 4,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-b9135c563ac5",
-      "type": "class",
-      "name": "spl.MintOptions",
-      "filePath": "sdk/go/spl/token.go",
-      "summary": "class MintOptions (sdk/go/spl/token.go:33)",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-28d130a15fa5",
-      "type": "class",
-      "name": "spl.Token",
-      "filePath": "sdk/go/spl/token.go",
-      "summary": "class Token (sdk/go/spl/token.go:13)",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-651d0d15e1d9",
-      "type": "class",
-      "name": "spl.VerifyTokenOptions",
-      "filePath": "sdk/go/spl/token.go",
-      "summary": "class VerifyTokenOptions (sdk/go/spl/token.go:99)",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-3b52c947ae91",
-      "type": "class",
-      "name": "spl.VerifyTokenResult",
-      "filePath": "sdk/go/spl/token.go",
-      "summary": "class VerifyTokenResult (sdk/go/spl/token.go:113)",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-44ade7b522af",
-      "type": "file",
-      "name": "sdk/csharp/AgentSafe.Spl.Tests/SplTests.cs",
-      "filePath": "sdk/csharp/AgentSafe.Spl.Tests/SplTests.cs",
-      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl.Tests/SplTests.cs | ~182 lines ## Classes - SplTests",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-483c30bffbc2",
-      "type": "class",
-      "name": "MerkleProofStep",
-      "filePath": "sdk/rust/src/crypto.rs",
-      "summary": "class MerkleProofStep (sdk/rust/src/crypto.rs:29)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-9461514f445a",
-      "type": "class",
-      "name": "Env",
-      "filePath": "sdk/rust/src/types.rs",
-      "summary": "class Env (sdk/rust/src/types.rs:104)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-a3867624f774",
-      "type": "file",
-      "name": "sdk/js/src/crypto.ts",
-      "filePath": "sdk/js/src/crypto.ts",
-      "summary": "Language: TypeScript | Path: sdk/js/src/crypto.ts | ~139 lines ## Functions - concat()",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 8,
-      "languageNotes": {
-        "language": "TypeScript",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-e108b61bde37",
-      "type": "class",
-      "name": "Env",
-      "filePath": "sdk/csharp/AgentSafe.Spl/Env.cs",
-      "summary": "class Env (sdk/csharp/AgentSafe.Spl/Env.cs:17)",
-      "tags": [
-        "c#",
-        "code"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "C#",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-8daa53b2093e",
-      "type": "file",
-      "name": "sdk/go/spl/eval.go",
-      "filePath": "sdk/go/spl/eval.go",
-      "summary": "Language: Go | Path: sdk/go/spl/eval.go | ~399 lines ## Classes - Env",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-7ca1322c5b11",
-      "type": "class",
-      "name": "spl.Env",
-      "filePath": "sdk/go/spl/eval.go",
-      "summary": "class Env (sdk/go/spl/eval.go:7)",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-972386ee2f49",
-      "type": "file",
-      "name": "sdk/python/spl/types.py",
-      "filePath": "sdk/python/spl/types.py",
-      "summary": "Language: Python | Path: sdk/python/spl/types.py | ~22 lines ## Classes - CryptoCallbacks",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 2,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-1bb39a360f3e",
-      "type": "class",
-      "name": "CryptoCallbacks",
-      "filePath": "sdk/python/spl/types.py",
-      "summary": "class CryptoCallbacks (sdk/python/spl/types.py:8) ## Methods - anonFunce31278a50101()",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 4,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-bfacad00f48e",
-      "type": "class",
-      "name": "Env",
-      "filePath": "sdk/python/spl/types.py",
-      "summary": "class Env (sdk/python/spl/types.py:15) ## Methods - anonFunce31278a50501(_a, _d)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-9e8bac1945d8",
-      "type": "file",
-      "name": "sdk/python/spl/evaluator.py",
-      "filePath": "sdk/python/spl/evaluator.py",
-      "summary": "Language: Python | Path: sdk/python/spl/evaluator.py | ~196 lines ## Classes - DepthExceeded(RuntimeError)",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 10,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-8b2796fd3096",
-      "type": "file",
-      "name": "contracts/sdk_python_spl_evaluator/interface.py",
-      "filePath": "contracts/sdk_python_spl_evaluator/interface.py",
-      "summary": "Language: Python | Path: contracts/sdk_python_spl_evaluator/interface.py | ~146 lines ## Classes - DepthExceeded",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 11,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-296a3916486e",
-      "type": "file",
-      "name": "sdk/go/spl/crypto.go",
-      "filePath": "sdk/go/spl/crypto.go",
-      "summary": "Language: Go | Path: sdk/go/spl/crypto.go | ~112 lines ## Classes - MerkleProofStep",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-7cd6ecf8def4",
-      "type": "class",
-      "name": "spl.MerkleProofStep",
-      "filePath": "sdk/go/spl/crypto.go",
-      "summary": "class MerkleProofStep (sdk/go/spl/crypto.go:31)",
-      "tags": [
-        "code",
-        "go"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Go",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-a03b5cd8e2c6",
-      "type": "file",
-      "name": "sdk/python/tests/test_integration.py",
-      "filePath": "sdk/python/tests/test_integration.py",
-      "summary": "Language: Python | Path: sdk/python/tests/test_integration.py | ~50 lines ## Functions - make_env()",
-      "tags": [
-        "code",
-        "python"
-      ],
-      "complexity": 5,
-      "languageNotes": {
-        "language": "Python",
-        "kindexType": "artifact",
-        "toolTier": "C"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-a4caf7baaec1",
-      "type": "class",
-      "name": "Env",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Env.java",
-      "summary": "class Env (sdk/java/src/main/java/io/agentsafe/spl/Env.java:10)",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-4006adb9a3ef",
-      "type": "class",
-      "name": "EvalState",
-      "filePath": "sdk/rust/src/evaluator.rs",
-      "summary": "class EvalState (sdk/rust/src/evaluator.rs:5)",
-      "tags": [
-        "code",
-        "rust"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Rust",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-mod-agent-safe-2c17b2c8cc23",
-      "type": "file",
-      "name": "sdk/java/src/main/java/io/agentsafe/spl/Token.java",
-      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Token.java",
-      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Token.java | ~221 lines ## Classes - Token",
-      "tags": [
-        "code",
-        "java"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "Java",
-        "kindexType": "artifact",
-        "toolTier": "A"
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-cee7f30c4f4b",
-      "type": "concept",
-      "name": "MintOptions",
-      "filePath": "/Users/jmcentire/Code/agent-safe/sdk/js/src/token.ts:22",
-      "summary": "class MintOptions (sdk/js/src/token.ts:22)",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "typescript",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    },
-    {
-      "id": "code-sym-agent-safe-473d8313b6b5",
-      "type": "concept",
-      "name": "Token",
-      "filePath": "/Users/jmcentire/Code/agent-safe/sdk/js/src/token.ts:10",
-      "summary": "class Token (sdk/js/src/token.ts:10)",
-      "tags": [
-        "code",
-        "typescript"
-      ],
-      "complexity": 1,
-      "languageNotes": {
-        "language": "typescript",
-        "kindexType": "concept",
-        "toolTier": ""
-      }
-    }
-  ],
   "edges": [
     {
-      "source": "code-mod-agent-safe-a8b4e080c431",
-      "target": "code-mod-agent-safe-6346f27175b1",
-      "type": "depends_on",
       "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-a8b4e080c431",
-      "target": "code-mod-agent-safe-714582afaae3",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-a8b4e080c431",
-      "target": "code-mod-agent-safe-fda8f7a3e0f7",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-a8b4e080c431",
-      "target": "code-mod-agent-safe-b2e130f6eefb",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-a8b4e080c431",
-      "target": "code-mod-agent-safe-bfd50a2a5755",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-958bbff10e63",
-      "target": "code-mod-agent-safe-ffcf6dbb9681",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-cace2f7f6fff",
-      "target": "code-mod-agent-safe-db830be8680e",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-cace2f7f6fff",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-cace2f7f6fff",
-      "target": "code-mod-agent-safe-e7973715c62c",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-cace2f7f6fff",
-      "target": "code-mod-agent-safe-ffcf6dbb9681",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-cace2f7f6fff",
-      "target": "code-mod-agent-safe-3a938092d367",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-2cadd29e2332",
-      "target": "code-mod-agent-safe-db830be8680e",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-2cadd29e2332",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-2cadd29e2332",
-      "target": "code-mod-agent-safe-e7973715c62c",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-2cadd29e2332",
-      "target": "code-mod-agent-safe-ffcf6dbb9681",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-f395aab771bf",
-      "target": "code-mod-agent-safe-ffcf6dbb9681",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
       "source": "code-mod-agent-safe-0246aaf1eaee",
       "target": "code-mod-agent-safe-ffcf6dbb9681",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
-      "source": "code-sym-agent-safe-87342165bd78",
-      "target": "code-mod-agent-safe-9e8bac1945d8",
-      "type": "contains",
       "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-87342165bd78",
-      "target": "code-sym-agent-safe-1ac983bf5ee0",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1ac983bf5ee0",
-      "target": "code-mod-agent-safe-8b2796fd3096",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1ac983bf5ee0",
-      "target": "code-sym-agent-safe-87342165bd78",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-a7f87e80ee6c",
-      "target": "code-mod-agent-safe-9e8bac1945d8",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-a7f87e80ee6c",
-      "target": "code-sym-agent-safe-e5a97a4df21d",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e5a97a4df21d",
-      "target": "code-mod-agent-safe-8b2796fd3096",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e5a97a4df21d",
-      "target": "code-sym-agent-safe-a7f87e80ee6c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-cee7676adaee",
-      "target": "code-mod-agent-safe-17d2613f5798",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-cee7676adaee",
-      "target": "code-sym-agent-safe-52d43ef66f90",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-49743a53ae18",
-      "target": "code-mod-agent-safe-bc12479341bb",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-49743a53ae18",
-      "target": "code-sym-agent-safe-e6b2d1cf0e38",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e6b2d1cf0e38",
-      "target": "code-mod-agent-safe-c2d7b39731f3",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e6b2d1cf0e38",
-      "target": "code-sym-agent-safe-49743a53ae18",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-edeb4d0f4470",
-      "target": "code-mod-agent-safe-d3f2d7c54062",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-edeb4d0f4470",
-      "target": "code-sym-agent-safe-7a6bbb9cb56b",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7a6bbb9cb56b",
-      "target": "code-mod-agent-safe-72ee543339ce",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7a6bbb9cb56b",
-      "target": "code-sym-agent-safe-edeb4d0f4470",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-cfba126499e7",
-      "target": "code-mod-agent-safe-fda8f7a3e0f7",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-cfba126499e7",
-      "target": "code-sym-agent-safe-1acd7838fbc6",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-cfba126499e7",
-      "target": "code-sym-agent-safe-8104b83075b4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-3a668f7a1b36",
-      "target": "code-mod-agent-safe-fda8f7a3e0f7",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-3a668f7a1b36",
-      "target": "code-sym-agent-safe-f12902990b55",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52bd85562750",
-      "target": "code-mod-agent-safe-f4b74211a51c",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52bd85562750",
-      "target": "code-sym-agent-safe-ddae5352364e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52bd85562750",
-      "target": "code-mod-agent-safe-44ade7b522af",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52bd85562750",
-      "target": "code-sym-agent-safe-e4af73ef9dfc",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52bd85562750",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52bd85562750",
-      "target": "code-sym-agent-safe-1acd7838fbc6",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52bd85562750",
-      "target": "code-sym-agent-safe-e108b61bde37",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52bd85562750",
-      "target": "code-mod-agent-safe-9b413c59a956",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52bd85562750",
-      "target": "code-sym-agent-safe-52d43ef66f90",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1acd7838fbc6",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1acd7838fbc6",
-      "target": "code-sym-agent-safe-cfba126499e7",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1acd7838fbc6",
-      "target": "code-sym-agent-safe-8104b83075b4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1acd7838fbc6",
-      "target": "code-mod-agent-safe-44ade7b522af",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1acd7838fbc6",
-      "target": "code-sym-agent-safe-e4af73ef9dfc",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1acd7838fbc6",
-      "target": "code-mod-agent-safe-f4b74211a51c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1acd7838fbc6",
-      "target": "code-sym-agent-safe-52bd85562750",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1acd7838fbc6",
-      "target": "code-sym-agent-safe-e108b61bde37",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1acd7838fbc6",
-      "target": "code-mod-agent-safe-9b413c59a956",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1acd7838fbc6",
-      "target": "code-sym-agent-safe-52d43ef66f90",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-ddae5352364e",
-      "target": "code-mod-agent-safe-7f56000be355",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-ddae5352364e",
-      "target": "code-sym-agent-safe-52bd85562750",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-ddae5352364e",
-      "target": "code-mod-agent-safe-db830be8680e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-ddae5352364e",
-      "target": "code-sym-agent-safe-8104b83075b4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-ddae5352364e",
-      "target": "code-mod-agent-safe-9e5946d9ebba",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-ddae5352364e",
-      "target": "code-sym-agent-safe-a4caf7baaec1",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-8104b83075b4",
-      "target": "code-mod-agent-safe-db830be8680e",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-8104b83075b4",
-      "target": "code-sym-agent-safe-cfba126499e7",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-8104b83075b4",
-      "target": "code-sym-agent-safe-1acd7838fbc6",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-8104b83075b4",
-      "target": "code-mod-agent-safe-7f56000be355",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-8104b83075b4",
-      "target": "code-sym-agent-safe-ddae5352364e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-8104b83075b4",
-      "target": "code-mod-agent-safe-9e5946d9ebba",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-8104b83075b4",
-      "target": "code-sym-agent-safe-a4caf7baaec1",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-f12902990b55",
-      "target": "code-mod-agent-safe-9e8bac1945d8",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-f12902990b55",
-      "target": "code-sym-agent-safe-3a668f7a1b36",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-f12902990b55",
-      "target": "code-sym-agent-safe-b6948be3b4cf",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-b6948be3b4cf",
-      "target": "code-mod-agent-safe-8b2796fd3096",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-b6948be3b4cf",
-      "target": "code-sym-agent-safe-f12902990b55",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52d43ef66f90",
-      "target": "code-mod-agent-safe-9b413c59a956",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52d43ef66f90",
-      "target": "code-mod-agent-safe-44ade7b522af",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52d43ef66f90",
-      "target": "code-sym-agent-safe-e4af73ef9dfc",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52d43ef66f90",
-      "target": "code-mod-agent-safe-f4b74211a51c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52d43ef66f90",
-      "target": "code-sym-agent-safe-52bd85562750",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52d43ef66f90",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52d43ef66f90",
-      "target": "code-sym-agent-safe-1acd7838fbc6",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52d43ef66f90",
-      "target": "code-sym-agent-safe-e108b61bde37",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-52d43ef66f90",
-      "target": "code-sym-agent-safe-cee7676adaee",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-51da15f62b98",
-      "target": "code-mod-agent-safe-2c17b2c8cc23",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.6
-    },
-    {
-      "source": "code-sym-agent-safe-51da15f62b98",
-      "target": "code-mod-agent-safe-9e5946d9ebba",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-51da15f62b98",
-      "target": "code-sym-agent-safe-349afd3f9da5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-864caab7488b",
-      "target": "code-mod-agent-safe-0bf6aa453bd8",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-0bf6aa453bd8",
-      "target": "code-mod-agent-safe-864caab7488b",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-349afd3f9da5",
-      "target": "code-mod-agent-safe-b2e130f6eefb",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-349afd3f9da5",
-      "target": "code-sym-agent-safe-51da15f62b98",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-e7973715c62c",
-      "target": "code-mod-agent-safe-f4b74211a51c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-e7973715c62c",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-e7973715c62c",
-      "target": "code-mod-agent-safe-b2e130f6eefb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-e7973715c62c",
-      "target": "code-mod-agent-safe-bc12479341bb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-d23bcc7a26c2",
-      "target": "code-mod-agent-safe-893f9bbc50cb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-d23bcc7a26c2",
-      "target": "code-mod-agent-safe-7f56000be355",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-d23bcc7a26c2",
-      "target": "code-mod-agent-safe-c2d7b39731f3",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-d23bcc7a26c2",
-      "target": "code-mod-agent-safe-17d2613f5798",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-893f9bbc50cb",
-      "target": "code-mod-agent-safe-d23bcc7a26c2",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-893f9bbc50cb",
-      "target": "code-mod-agent-safe-7f56000be355",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-893f9bbc50cb",
-      "target": "code-mod-agent-safe-c2d7b39731f3",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-893f9bbc50cb",
-      "target": "code-mod-agent-safe-17d2613f5798",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-98e11f01966a",
-      "target": "code-mod-agent-safe-893f9bbc50cb",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-98e11f01966a",
-      "target": "code-sym-agent-safe-2438cc757cbf",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-d3f2d7c54062",
-      "target": "code-mod-agent-safe-f4b74211a51c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-72ee543339ce",
-      "target": "code-mod-agent-safe-7f56000be355",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-72ee543339ce",
-      "target": "code-mod-agent-safe-c2d7b39731f3",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-2438cc757cbf",
-      "target": "code-mod-agent-safe-911747dea94b",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-2438cc757cbf",
-      "target": "code-sym-agent-safe-98e11f01966a",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-f4b74211a51c",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-f4b74211a51c",
-      "target": "code-mod-agent-safe-44ade7b522af",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-f4b74211a51c",
-      "target": "code-sym-agent-safe-e4af73ef9dfc",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-f4b74211a51c",
-      "target": "code-sym-agent-safe-1acd7838fbc6",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-f4b74211a51c",
-      "target": "code-sym-agent-safe-e108b61bde37",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-f4b74211a51c",
-      "target": "code-mod-agent-safe-9b413c59a956",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-f4b74211a51c",
-      "target": "code-sym-agent-safe-52d43ef66f90",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-f4b74211a51c",
-      "target": "code-mod-agent-safe-d3f2d7c54062",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-f4b74211a51c",
-      "target": "code-mod-agent-safe-e7973715c62c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-f4b74211a51c",
-      "target": "code-mod-agent-safe-b2e130f6eefb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-f4b74211a51c",
-      "target": "code-mod-agent-safe-bc12479341bb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-cc889846f244",
-      "target": "code-mod-agent-safe-f4b74211a51c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-cc889846f244",
-      "target": "code-mod-agent-safe-9b413c59a956",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-cc889846f244",
-      "target": "code-mod-agent-safe-44ade7b522af",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-cc889846f244",
-      "target": "code-sym-agent-safe-e4af73ef9dfc",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-cc889846f244",
-      "target": "code-sym-agent-safe-52bd85562750",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-cc889846f244",
-      "target": "code-sym-agent-safe-52d43ef66f90",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-cc889846f244",
-      "target": "code-mod-agent-safe-e7973715c62c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-cc889846f244",
-      "target": "code-mod-agent-safe-b2e130f6eefb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-cc889846f244",
-      "target": "code-mod-agent-safe-bc12479341bb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-7f56000be355",
-      "target": "code-mod-agent-safe-db830be8680e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-7f56000be355",
-      "target": "code-mod-agent-safe-9e5946d9ebba",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-7f56000be355",
-      "target": "code-sym-agent-safe-8104b83075b4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-7f56000be355",
-      "target": "code-sym-agent-safe-a4caf7baaec1",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-7f56000be355",
-      "target": "code-mod-agent-safe-d23bcc7a26c2",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-7f56000be355",
-      "target": "code-mod-agent-safe-893f9bbc50cb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-7f56000be355",
-      "target": "code-mod-agent-safe-72ee543339ce",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-7f56000be355",
-      "target": "code-mod-agent-safe-c2d7b39731f3",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-7f56000be355",
-      "target": "code-mod-agent-safe-17d2613f5798",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-db830be8680e",
-      "target": "code-mod-agent-safe-7f56000be355",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-db830be8680e",
-      "target": "code-sym-agent-safe-ddae5352364e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-db830be8680e",
-      "target": "code-mod-agent-safe-9e5946d9ebba",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-db830be8680e",
-      "target": "code-sym-agent-safe-a4caf7baaec1",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-db830be8680e",
-      "target": "code-mod-agent-safe-c2d7b39731f3",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-9b413c59a956",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-9b413c59a956",
-      "target": "code-mod-agent-safe-44ade7b522af",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-9b413c59a956",
-      "target": "code-sym-agent-safe-e4af73ef9dfc",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-9b413c59a956",
-      "target": "code-mod-agent-safe-f4b74211a51c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-9b413c59a956",
-      "target": "code-sym-agent-safe-52bd85562750",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-9b413c59a956",
-      "target": "code-sym-agent-safe-1acd7838fbc6",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-9b413c59a956",
-      "target": "code-sym-agent-safe-e108b61bde37",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-9b413c59a956",
-      "target": "code-mod-agent-safe-b2e130f6eefb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-17d2613f5798",
-      "target": "code-mod-agent-safe-d23bcc7a26c2",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-17d2613f5798",
-      "target": "code-mod-agent-safe-893f9bbc50cb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-17d2613f5798",
-      "target": "code-mod-agent-safe-7f56000be355",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-17d2613f5798",
-      "target": "code-mod-agent-safe-c2d7b39731f3",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-b2e130f6eefb",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-b2e130f6eefb",
-      "target": "code-mod-agent-safe-9b413c59a956",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-b2e130f6eefb",
-      "target": "code-mod-agent-safe-e7973715c62c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-b2e130f6eefb",
-      "target": "code-mod-agent-safe-f4b74211a51c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-b2e130f6eefb",
-      "target": "code-mod-agent-safe-bc12479341bb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-bc12479341bb",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-bc12479341bb",
-      "target": "code-mod-agent-safe-911747dea94b",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-bc12479341bb",
-      "target": "code-mod-agent-safe-f4b74211a51c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-bc12479341bb",
-      "target": "code-mod-agent-safe-b2e130f6eefb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-bc12479341bb",
-      "target": "code-mod-agent-safe-e7973715c62c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-c2d7b39731f3",
-      "target": "code-mod-agent-safe-72ee543339ce",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-c2d7b39731f3",
-      "target": "code-mod-agent-safe-7f56000be355",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-c2d7b39731f3",
-      "target": "code-mod-agent-safe-db830be8680e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-c2d7b39731f3",
-      "target": "code-mod-agent-safe-d23bcc7a26c2",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-c2d7b39731f3",
-      "target": "code-mod-agent-safe-893f9bbc50cb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-c2d7b39731f3",
-      "target": "code-mod-agent-safe-17d2613f5798",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-911747dea94b",
-      "target": "code-mod-agent-safe-bc12479341bb",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-835e51d3d584",
-      "target": "code-mod-agent-safe-d23bcc7a26c2",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-835e51d3d584",
-      "target": "code-sym-agent-safe-e4eaf53d1f89",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-b31f0788f9e0",
-      "target": "code-mod-agent-safe-66153400f40b",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-b31f0788f9e0",
-      "target": "code-sym-agent-safe-e4af73ef9dfc",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e4af73ef9dfc",
-      "target": "code-mod-agent-safe-44ade7b522af",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e4af73ef9dfc",
-      "target": "code-mod-agent-safe-f4b74211a51c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e4af73ef9dfc",
-      "target": "code-sym-agent-safe-52bd85562750",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e4af73ef9dfc",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e4af73ef9dfc",
-      "target": "code-sym-agent-safe-1acd7838fbc6",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e4af73ef9dfc",
-      "target": "code-sym-agent-safe-e108b61bde37",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e4af73ef9dfc",
-      "target": "code-mod-agent-safe-9b413c59a956",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e4af73ef9dfc",
-      "target": "code-sym-agent-safe-52d43ef66f90",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e4af73ef9dfc",
-      "target": "code-sym-agent-safe-b31f0788f9e0",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e4eaf53d1f89",
-      "target": "code-mod-agent-safe-fda8f7a3e0f7",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e4eaf53d1f89",
-      "target": "code-sym-agent-safe-835e51d3d584",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
       "source": "code-mod-agent-safe-29533f875656",
       "target": "code-mod-agent-safe-fda8f7a3e0f7",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-2cadd29e2332",
+      "target": "code-mod-agent-safe-cc889846f244",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-2cadd29e2332",
+      "target": "code-mod-agent-safe-db830be8680e",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-2cadd29e2332",
+      "target": "code-mod-agent-safe-e7973715c62c",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-2cadd29e2332",
+      "target": "code-mod-agent-safe-ffcf6dbb9681",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
       "source": "code-mod-agent-safe-6346f27175b1",
       "target": "code-mod-agent-safe-fda8f7a3e0f7",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
-      "source": "code-mod-agent-safe-bfd50a2a5755",
-      "target": "code-mod-agent-safe-3a938092d367",
-      "type": "depends_on",
       "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-bfd50a2a5755",
-      "target": "code-mod-agent-safe-29533f875656",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-bfd50a2a5755",
-      "target": "code-mod-agent-safe-6346f27175b1",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
-      "source": "code-mod-agent-safe-bfd50a2a5755",
-      "target": "code-mod-agent-safe-fda8f7a3e0f7",
-      "type": "depends_on",
-      "direction": "outbound",
-      "weight": 0.5
-    },
-    {
       "source": "code-mod-agent-safe-714582afaae3",
       "target": "code-mod-agent-safe-29533f875656",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
+      "direction": "outbound",
       "source": "code-mod-agent-safe-714582afaae3",
       "target": "code-mod-agent-safe-fda8f7a3e0f7",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
-      "source": "code-sym-agent-safe-00c9e9654c21",
-      "target": "code-mod-agent-safe-91e067cb9b0f",
-      "type": "contains",
       "direction": "outbound",
-      "weight": 0.6
-    },
-    {
-      "source": "code-mod-agent-safe-9e5946d9ebba",
-      "target": "code-mod-agent-safe-7f56000be355",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-9e5946d9ebba",
-      "target": "code-sym-agent-safe-ddae5352364e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-9e5946d9ebba",
-      "target": "code-mod-agent-safe-db830be8680e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-9e5946d9ebba",
-      "target": "code-sym-agent-safe-8104b83075b4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-9e5946d9ebba",
-      "target": "code-sym-agent-safe-51da15f62b98",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-f220cca142f1",
-      "target": "code-mod-agent-safe-bfd50a2a5755",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-f220cca142f1",
-      "target": "code-mod-agent-safe-58a04c4f73e0",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-ac4c7496d8f6",
-      "target": "code-mod-agent-safe-bfd50a2a5755",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-ac4c7496d8f6",
-      "target": "code-mod-agent-safe-58a04c4f73e0",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-c4d4f0d01f40",
+      "source": "code-mod-agent-safe-958bbff10e63",
       "target": "code-mod-agent-safe-ffcf6dbb9681",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
-      "source": "code-mod-agent-safe-58a04c4f73e0",
-      "target": "code-sym-agent-safe-ac4c7496d8f6",
-      "type": "contains",
       "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-58a04c4f73e0",
-      "target": "code-sym-agent-safe-f220cca142f1",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-3ff21d35b036",
-      "target": "code-mod-agent-safe-58a04c4f73e0",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-abbd50d32aad",
-      "target": "code-mod-agent-safe-93376014cae7",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-951d3b2e2edc",
-      "target": "code-mod-agent-safe-bfd50a2a5755",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-3a1df430fb2c",
-      "target": "code-mod-agent-safe-b66a2d6d4963",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-a82425c7542c",
-      "target": "code-mod-agent-safe-b66a2d6d4963",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7a74da777776",
-      "target": "code-mod-agent-safe-b66a2d6d4963",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-01ec4c10f060",
-      "target": "code-mod-agent-safe-714582afaae3",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-3616dd039555",
-      "target": "code-mod-agent-safe-8daa53b2093e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-3616dd039555",
-      "target": "code-sym-agent-safe-7ca1322c5b11",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-3616dd039555",
-      "target": "code-mod-agent-safe-296a3916486e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-3616dd039555",
-      "target": "code-sym-agent-safe-7cd6ecf8def4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-b9135c563ac5",
-      "target": "code-mod-agent-safe-3616dd039555",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-b9135c563ac5",
-      "target": "code-sym-agent-safe-28d130a15fa5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-b9135c563ac5",
-      "target": "code-sym-agent-safe-651d0d15e1d9",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-b9135c563ac5",
-      "target": "code-sym-agent-safe-3b52c947ae91",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-b9135c563ac5",
-      "target": "code-mod-agent-safe-8daa53b2093e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-b9135c563ac5",
-      "target": "code-sym-agent-safe-7ca1322c5b11",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-b9135c563ac5",
-      "target": "code-mod-agent-safe-296a3916486e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-b9135c563ac5",
-      "target": "code-sym-agent-safe-7cd6ecf8def4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-28d130a15fa5",
-      "target": "code-mod-agent-safe-3616dd039555",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-28d130a15fa5",
-      "target": "code-sym-agent-safe-b9135c563ac5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-28d130a15fa5",
-      "target": "code-sym-agent-safe-651d0d15e1d9",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-28d130a15fa5",
-      "target": "code-sym-agent-safe-3b52c947ae91",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-28d130a15fa5",
-      "target": "code-mod-agent-safe-8daa53b2093e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-28d130a15fa5",
-      "target": "code-sym-agent-safe-7ca1322c5b11",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-28d130a15fa5",
-      "target": "code-mod-agent-safe-296a3916486e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-28d130a15fa5",
-      "target": "code-sym-agent-safe-7cd6ecf8def4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-651d0d15e1d9",
-      "target": "code-mod-agent-safe-3616dd039555",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-651d0d15e1d9",
-      "target": "code-sym-agent-safe-b9135c563ac5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-651d0d15e1d9",
-      "target": "code-sym-agent-safe-28d130a15fa5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-651d0d15e1d9",
-      "target": "code-sym-agent-safe-3b52c947ae91",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-651d0d15e1d9",
-      "target": "code-mod-agent-safe-8daa53b2093e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-651d0d15e1d9",
-      "target": "code-sym-agent-safe-7ca1322c5b11",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-651d0d15e1d9",
-      "target": "code-mod-agent-safe-296a3916486e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-651d0d15e1d9",
-      "target": "code-sym-agent-safe-7cd6ecf8def4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-3b52c947ae91",
-      "target": "code-mod-agent-safe-3616dd039555",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-3b52c947ae91",
-      "target": "code-sym-agent-safe-b9135c563ac5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-3b52c947ae91",
-      "target": "code-sym-agent-safe-28d130a15fa5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-3b52c947ae91",
-      "target": "code-sym-agent-safe-651d0d15e1d9",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-3b52c947ae91",
-      "target": "code-mod-agent-safe-8daa53b2093e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-3b52c947ae91",
-      "target": "code-sym-agent-safe-7ca1322c5b11",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-3b52c947ae91",
-      "target": "code-mod-agent-safe-296a3916486e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-3b52c947ae91",
-      "target": "code-sym-agent-safe-7cd6ecf8def4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-44ade7b522af",
-      "target": "code-mod-agent-safe-f4b74211a51c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-44ade7b522af",
-      "target": "code-sym-agent-safe-52bd85562750",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-44ade7b522af",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-44ade7b522af",
-      "target": "code-sym-agent-safe-1acd7838fbc6",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-44ade7b522af",
-      "target": "code-sym-agent-safe-e108b61bde37",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-44ade7b522af",
-      "target": "code-mod-agent-safe-9b413c59a956",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-44ade7b522af",
-      "target": "code-sym-agent-safe-52d43ef66f90",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-483c30bffbc2",
-      "target": "code-mod-agent-safe-3a938092d367",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-9461514f445a",
-      "target": "code-mod-agent-safe-fda8f7a3e0f7",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-9461514f445a",
-      "target": "code-sym-agent-safe-e108b61bde37",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-9461514f445a",
-      "target": "code-sym-agent-safe-a4caf7baaec1",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e108b61bde37",
-      "target": "code-mod-agent-safe-cc889846f244",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e108b61bde37",
-      "target": "code-sym-agent-safe-9461514f445a",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e108b61bde37",
-      "target": "code-sym-agent-safe-a4caf7baaec1",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e108b61bde37",
-      "target": "code-mod-agent-safe-44ade7b522af",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e108b61bde37",
-      "target": "code-sym-agent-safe-e4af73ef9dfc",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e108b61bde37",
-      "target": "code-mod-agent-safe-f4b74211a51c",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e108b61bde37",
-      "target": "code-sym-agent-safe-52bd85562750",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e108b61bde37",
-      "target": "code-sym-agent-safe-1acd7838fbc6",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e108b61bde37",
-      "target": "code-mod-agent-safe-9b413c59a956",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-e108b61bde37",
-      "target": "code-sym-agent-safe-52d43ef66f90",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-8daa53b2093e",
-      "target": "code-mod-agent-safe-3616dd039555",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-8daa53b2093e",
-      "target": "code-sym-agent-safe-b9135c563ac5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-8daa53b2093e",
-      "target": "code-sym-agent-safe-28d130a15fa5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-8daa53b2093e",
-      "target": "code-sym-agent-safe-651d0d15e1d9",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-8daa53b2093e",
-      "target": "code-sym-agent-safe-3b52c947ae91",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-8daa53b2093e",
-      "target": "code-mod-agent-safe-296a3916486e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-8daa53b2093e",
-      "target": "code-sym-agent-safe-7cd6ecf8def4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7ca1322c5b11",
-      "target": "code-mod-agent-safe-8daa53b2093e",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7ca1322c5b11",
-      "target": "code-mod-agent-safe-3616dd039555",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7ca1322c5b11",
-      "target": "code-sym-agent-safe-b9135c563ac5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7ca1322c5b11",
-      "target": "code-sym-agent-safe-28d130a15fa5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7ca1322c5b11",
-      "target": "code-sym-agent-safe-651d0d15e1d9",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7ca1322c5b11",
-      "target": "code-sym-agent-safe-3b52c947ae91",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7ca1322c5b11",
-      "target": "code-mod-agent-safe-296a3916486e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7ca1322c5b11",
-      "target": "code-sym-agent-safe-7cd6ecf8def4",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-1bb39a360f3e",
-      "target": "code-mod-agent-safe-972386ee2f49",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-bfacad00f48e",
-      "target": "code-mod-agent-safe-972386ee2f49",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-296a3916486e",
-      "target": "code-mod-agent-safe-3616dd039555",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-296a3916486e",
-      "target": "code-sym-agent-safe-b9135c563ac5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-296a3916486e",
-      "target": "code-sym-agent-safe-28d130a15fa5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-296a3916486e",
-      "target": "code-sym-agent-safe-651d0d15e1d9",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-296a3916486e",
-      "target": "code-sym-agent-safe-3b52c947ae91",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-296a3916486e",
-      "target": "code-mod-agent-safe-8daa53b2093e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-mod-agent-safe-296a3916486e",
-      "target": "code-sym-agent-safe-7ca1322c5b11",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7cd6ecf8def4",
-      "target": "code-mod-agent-safe-296a3916486e",
-      "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7cd6ecf8def4",
-      "target": "code-mod-agent-safe-3616dd039555",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7cd6ecf8def4",
-      "target": "code-sym-agent-safe-b9135c563ac5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7cd6ecf8def4",
-      "target": "code-sym-agent-safe-28d130a15fa5",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7cd6ecf8def4",
-      "target": "code-sym-agent-safe-651d0d15e1d9",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7cd6ecf8def4",
-      "target": "code-sym-agent-safe-3b52c947ae91",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7cd6ecf8def4",
-      "target": "code-mod-agent-safe-8daa53b2093e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
-      "source": "code-sym-agent-safe-7cd6ecf8def4",
-      "target": "code-sym-agent-safe-7ca1322c5b11",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
       "source": "code-mod-agent-safe-a03b5cd8e2c6",
       "target": "code-mod-agent-safe-ffcf6dbb9681",
       "type": "depends_on",
-      "direction": "outbound",
       "weight": 0.5
     },
     {
-      "source": "code-sym-agent-safe-a4caf7baaec1",
-      "target": "code-mod-agent-safe-9e5946d9ebba",
-      "type": "contains",
       "direction": "outbound",
-      "weight": 0.0108
+      "source": "code-mod-agent-safe-a8b4e080c431",
+      "target": "code-mod-agent-safe-6346f27175b1",
+      "type": "depends_on",
+      "weight": 0.5
     },
     {
-      "source": "code-sym-agent-safe-a4caf7baaec1",
-      "target": "code-sym-agent-safe-9461514f445a",
-      "type": "related",
       "direction": "outbound",
-      "weight": 0.0108
+      "source": "code-mod-agent-safe-a8b4e080c431",
+      "target": "code-mod-agent-safe-714582afaae3",
+      "type": "depends_on",
+      "weight": 0.5
     },
     {
-      "source": "code-sym-agent-safe-a4caf7baaec1",
-      "target": "code-sym-agent-safe-e108b61bde37",
-      "type": "related",
       "direction": "outbound",
-      "weight": 0.0108
+      "source": "code-mod-agent-safe-a8b4e080c431",
+      "target": "code-mod-agent-safe-b2e130f6eefb",
+      "type": "depends_on",
+      "weight": 0.5
     },
     {
-      "source": "code-sym-agent-safe-a4caf7baaec1",
-      "target": "code-mod-agent-safe-7f56000be355",
-      "type": "related",
       "direction": "outbound",
-      "weight": 0.0108
+      "source": "code-mod-agent-safe-a8b4e080c431",
+      "target": "code-mod-agent-safe-bfd50a2a5755",
+      "type": "depends_on",
+      "weight": 0.5
     },
     {
-      "source": "code-sym-agent-safe-a4caf7baaec1",
-      "target": "code-sym-agent-safe-ddae5352364e",
-      "type": "related",
       "direction": "outbound",
-      "weight": 0.0108
+      "source": "code-mod-agent-safe-a8b4e080c431",
+      "target": "code-mod-agent-safe-fda8f7a3e0f7",
+      "type": "depends_on",
+      "weight": 0.5
     },
     {
-      "source": "code-sym-agent-safe-a4caf7baaec1",
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-bfd50a2a5755",
+      "target": "code-mod-agent-safe-29533f875656",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-bfd50a2a5755",
+      "target": "code-mod-agent-safe-3a938092d367",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-bfd50a2a5755",
+      "target": "code-mod-agent-safe-6346f27175b1",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-bfd50a2a5755",
+      "target": "code-mod-agent-safe-fda8f7a3e0f7",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-c4d4f0d01f40",
+      "target": "code-mod-agent-safe-ffcf6dbb9681",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-cace2f7f6fff",
+      "target": "code-mod-agent-safe-3a938092d367",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-cace2f7f6fff",
+      "target": "code-mod-agent-safe-cc889846f244",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-cace2f7f6fff",
       "target": "code-mod-agent-safe-db830be8680e",
-      "type": "related",
-      "direction": "outbound",
-      "weight": 0.0108
+      "type": "depends_on",
+      "weight": 0.5
     },
     {
-      "source": "code-sym-agent-safe-a4caf7baaec1",
-      "target": "code-sym-agent-safe-8104b83075b4",
-      "type": "related",
       "direction": "outbound",
-      "weight": 0.0108
+      "source": "code-mod-agent-safe-cace2f7f6fff",
+      "target": "code-mod-agent-safe-e7973715c62c",
+      "type": "depends_on",
+      "weight": 0.5
     },
     {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-cace2f7f6fff",
+      "target": "code-mod-agent-safe-ffcf6dbb9681",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-mod-agent-safe-f395aab771bf",
+      "target": "code-mod-agent-safe-ffcf6dbb9681",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-00c9e9654c21",
+      "target": "code-mod-agent-safe-91e067cb9b0f",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-01ec4c10f060",
+      "target": "code-mod-agent-safe-714582afaae3",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-1ac983bf5ee0",
+      "target": "code-mod-agent-safe-8b2796fd3096",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-1acd7838fbc6",
+      "target": "code-mod-agent-safe-cc889846f244",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-1bb39a360f3e",
+      "target": "code-mod-agent-safe-972386ee2f49",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-2438cc757cbf",
+      "target": "code-mod-agent-safe-911747dea94b",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-28d130a15fa5",
+      "target": "code-mod-agent-safe-3616dd039555",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-349afd3f9da5",
+      "target": "code-mod-agent-safe-b2e130f6eefb",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-3a1df430fb2c",
+      "target": "code-mod-agent-safe-b66a2d6d4963",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-3a668f7a1b36",
+      "target": "code-mod-agent-safe-fda8f7a3e0f7",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-3b52c947ae91",
+      "target": "code-mod-agent-safe-3616dd039555",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-3ff21d35b036",
+      "target": "code-mod-agent-safe-58a04c4f73e0",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
       "source": "code-sym-agent-safe-4006adb9a3ef",
       "target": "code-mod-agent-safe-29533f875656",
       "type": "contains",
-      "direction": "outbound",
-      "weight": 0.0108
+      "weight": 0.6
     },
     {
-      "source": "code-sym-agent-safe-cee7f30c4f4b",
-      "target": "code-mod-agent-safe-58a04c4f73e0",
-      "type": "contains",
       "direction": "outbound",
-      "weight": 0.0108
-    },
-    {
       "source": "code-sym-agent-safe-473d8313b6b5",
       "target": "code-mod-agent-safe-58a04c4f73e0",
       "type": "contains",
+      "weight": 0.6
+    },
+    {
       "direction": "outbound",
-      "weight": 0.0108
+      "source": "code-sym-agent-safe-483c30bffbc2",
+      "target": "code-mod-agent-safe-3a938092d367",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-49743a53ae18",
+      "target": "code-mod-agent-safe-bc12479341bb",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-51da15f62b98",
+      "target": "code-mod-agent-safe-2c17b2c8cc23",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-52bd85562750",
+      "target": "code-mod-agent-safe-f4b74211a51c",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-52d43ef66f90",
+      "target": "code-mod-agent-safe-9b413c59a956",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-651d0d15e1d9",
+      "target": "code-mod-agent-safe-3616dd039555",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-7a6bbb9cb56b",
+      "target": "code-mod-agent-safe-72ee543339ce",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-7a74da777776",
+      "target": "code-mod-agent-safe-b66a2d6d4963",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-7ca1322c5b11",
+      "target": "code-mod-agent-safe-8daa53b2093e",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-7cd6ecf8def4",
+      "target": "code-mod-agent-safe-296a3916486e",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-8104b83075b4",
+      "target": "code-mod-agent-safe-db830be8680e",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-835e51d3d584",
+      "target": "code-mod-agent-safe-d23bcc7a26c2",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-87342165bd78",
+      "target": "code-mod-agent-safe-9e8bac1945d8",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-9461514f445a",
+      "target": "code-mod-agent-safe-fda8f7a3e0f7",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-951d3b2e2edc",
+      "target": "code-mod-agent-safe-bfd50a2a5755",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-98e11f01966a",
+      "target": "code-mod-agent-safe-893f9bbc50cb",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-a4caf7baaec1",
+      "target": "code-mod-agent-safe-9e5946d9ebba",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-a7f87e80ee6c",
+      "target": "code-mod-agent-safe-9e8bac1945d8",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-a82425c7542c",
+      "target": "code-mod-agent-safe-b66a2d6d4963",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-abbd50d32aad",
+      "target": "code-mod-agent-safe-93376014cae7",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-ac4c7496d8f6",
+      "target": "code-mod-agent-safe-bfd50a2a5755",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-b31f0788f9e0",
+      "target": "code-mod-agent-safe-66153400f40b",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-b6948be3b4cf",
+      "target": "code-mod-agent-safe-8b2796fd3096",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-b9135c563ac5",
+      "target": "code-mod-agent-safe-3616dd039555",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-bfacad00f48e",
+      "target": "code-mod-agent-safe-972386ee2f49",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-cee7676adaee",
+      "target": "code-mod-agent-safe-17d2613f5798",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-cee7f30c4f4b",
+      "target": "code-mod-agent-safe-58a04c4f73e0",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-cfba126499e7",
+      "target": "code-mod-agent-safe-fda8f7a3e0f7",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-ddae5352364e",
+      "target": "code-mod-agent-safe-7f56000be355",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-e108b61bde37",
+      "target": "code-mod-agent-safe-cc889846f244",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-e4af73ef9dfc",
+      "target": "code-mod-agent-safe-44ade7b522af",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-e4eaf53d1f89",
+      "target": "code-mod-agent-safe-fda8f7a3e0f7",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-e5a97a4df21d",
+      "target": "code-mod-agent-safe-8b2796fd3096",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-e6b2d1cf0e38",
+      "target": "code-mod-agent-safe-c2d7b39731f3",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-edeb4d0f4470",
+      "target": "code-mod-agent-safe-d3f2d7c54062",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-f12902990b55",
+      "target": "code-mod-agent-safe-9e8bac1945d8",
+      "type": "contains",
+      "weight": 0.6
+    },
+    {
+      "direction": "outbound",
+      "source": "code-sym-agent-safe-f220cca142f1",
+      "target": "code-mod-agent-safe-bfd50a2a5755",
+      "type": "contains",
+      "weight": 0.6
     }
   ],
   "layers": [
     {
+      "description": "Kindex-inferred core layer.",
       "id": "core",
       "name": "Core",
-      "description": "Kindex-inferred core layer.",
       "nodeIds": [
         "code-mod-agent-safe-0bf6aa453bd8",
         "code-mod-agent-safe-0c3a64823151",
@@ -4242,15 +605,13 @@
         "code-mod-agent-safe-f395aab771bf",
         "code-mod-agent-safe-f4b74211a51c",
         "code-mod-agent-safe-fda8f7a3e0f7",
-        "code-mod-agent-safe-ffcf6dbb9681",
-        "code-sym-agent-safe-473d8313b6b5",
-        "code-sym-agent-safe-cee7f30c4f4b"
+        "code-mod-agent-safe-ffcf6dbb9681"
       ]
     },
     {
+      "description": "Kindex-inferred domain layer.",
       "id": "domain",
       "name": "Domain",
-      "description": "Kindex-inferred domain layer.",
       "nodeIds": [
         "code-sym-agent-safe-00c9e9654c21",
         "code-sym-agent-safe-01ec4c10f060",
@@ -4265,6 +626,7 @@
         "code-sym-agent-safe-3b52c947ae91",
         "code-sym-agent-safe-3ff21d35b036",
         "code-sym-agent-safe-4006adb9a3ef",
+        "code-sym-agent-safe-473d8313b6b5",
         "code-sym-agent-safe-483c30bffbc2",
         "code-sym-agent-safe-49743a53ae18",
         "code-sym-agent-safe-51da15f62b98",
@@ -4291,6 +653,7 @@
         "code-sym-agent-safe-b9135c563ac5",
         "code-sym-agent-safe-bfacad00f48e",
         "code-sym-agent-safe-cee7676adaee",
+        "code-sym-agent-safe-cee7f30c4f4b",
         "code-sym-agent-safe-cfba126499e7",
         "code-sym-agent-safe-ddae5352364e",
         "code-sym-agent-safe-e108b61bde37",
@@ -4304,9 +667,9 @@
       ]
     },
     {
+      "description": "Kindex-inferred test layer.",
       "id": "test",
       "name": "Test",
-      "description": "Kindex-inferred test layer.",
       "nodeIds": [
         "code-mod-agent-safe-0246aaf1eaee",
         "code-mod-agent-safe-135b4d665636",
@@ -4321,11 +684,1964 @@
       ]
     }
   ],
+  "nodes": [
+    {
+      "complexity": 1,
+      "filePath": "cli/js/src/index.ts",
+      "id": "code-mod-agent-safe-308051bb39dd",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "TypeScript",
+        "toolTier": "A"
+      },
+      "name": "cli/js/src/index.ts",
+      "summary": "Language: TypeScript | Path: cli/js/src/index.ts | ~27 lines",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "contracts/sdk_python_spl___main__/interface.py",
+      "id": "code-mod-agent-safe-0c3a64823151",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "contracts/sdk_python_spl___main__/interface.py",
+      "summary": "Language: Python | Path: contracts/sdk_python_spl___main__/interface.py | ~12 lines ## Functions - main() -> None",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 8,
+      "filePath": "contracts/sdk_python_spl_crypto/interface.py",
+      "id": "code-mod-agent-safe-51c417e354d2",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "contracts/sdk_python_spl_crypto/interface.py",
+      "summary": "Language: Python | Path: contracts/sdk_python_spl_crypto/interface.py | ~137 lines ## Functions - derive_service_key( master_key_hex: str, service_domain: str, ) -> tuple[str,str]",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "contracts/sdk_python_spl_evaluator/interface.py",
+      "id": "code-sym-agent-safe-1ac983bf5ee0",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Python",
+        "toolTier": ""
+      },
+      "name": "DepthExceeded",
+      "summary": "class DepthExceeded (contracts/sdk_python_spl_evaluator/interface.py:16)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "contracts/sdk_python_spl_evaluator/interface.py",
+      "id": "code-sym-agent-safe-b6948be3b4cf",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Python",
+        "toolTier": ""
+      },
+      "name": "SPLError",
+      "summary": "class SPLError (contracts/sdk_python_spl_evaluator/interface.py:20)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "contracts/sdk_python_spl_evaluator/interface.py",
+      "id": "code-sym-agent-safe-e5a97a4df21d",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Python",
+        "toolTier": ""
+      },
+      "name": "GasExhausted",
+      "summary": "class GasExhausted (contracts/sdk_python_spl_evaluator/interface.py:12)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 11,
+      "filePath": "contracts/sdk_python_spl_evaluator/interface.py",
+      "id": "code-mod-agent-safe-8b2796fd3096",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "contracts/sdk_python_spl_evaluator/interface.py",
+      "summary": "Language: Python | Path: contracts/sdk_python_spl_evaluator/interface.py | ~146 lines ## Classes - DepthExceeded",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 3,
+      "filePath": "contracts/sdk_python_spl_parser/interface.py",
+      "id": "code-mod-agent-safe-af2f80080f97",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "contracts/sdk_python_spl_parser/interface.py",
+      "summary": "Language: Python | Path: contracts/sdk_python_spl_parser/interface.py | ~49 lines ## Functions - parse( src: str, ) -> AST",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/crypto/generate_vectors.go",
+      "id": "code-mod-agent-safe-ee4f92c985d0",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Go",
+        "toolTier": "A"
+      },
+      "name": "examples/crypto/generate_vectors.go",
+      "summary": "Language: Go | Path: examples/crypto/generate_vectors.go | ~201 lines",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/e2e/e2e.go",
+      "id": "code-mod-agent-safe-18577d3b2d8f",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Go",
+        "toolTier": "A"
+      },
+      "name": "examples/e2e/e2e.go",
+      "summary": "Language: Go | Path: examples/e2e/e2e.go | ~120 lines",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/e2e/e2e.py",
+      "id": "code-mod-agent-safe-0bf6aa453bd8",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "examples/e2e/e2e.py",
+      "summary": "Language: Python | Path: examples/e2e/e2e.py | ~74 lines",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "examples/e2e/e2e.ts",
+      "id": "code-mod-agent-safe-864caab7488b",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "TypeScript",
+        "toolTier": "A"
+      },
+      "name": "examples/e2e/e2e.ts",
+      "summary": "Language: TypeScript | Path: examples/e2e/e2e.ts | ~82 lines",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl.Tests/SplTests.cs",
+      "id": "code-sym-agent-safe-e4af73ef9dfc",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "C#",
+        "toolTier": ""
+      },
+      "name": "SplTests",
+      "summary": "class SplTests (sdk/csharp/AgentSafe.Spl.Tests/SplTests.cs:6)",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl.Tests/SplTests.cs",
+      "id": "code-mod-agent-safe-44ade7b522af",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "C#",
+        "toolTier": "A"
+      },
+      "name": "sdk/csharp/AgentSafe.Spl.Tests/SplTests.cs",
+      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl.Tests/SplTests.cs | ~182 lines ## Classes - SplTests",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Crypto.cs",
+      "id": "code-sym-agent-safe-52bd85562750",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "C#",
+        "toolTier": ""
+      },
+      "name": "Crypto",
+      "summary": "class Crypto (sdk/csharp/AgentSafe.Spl/Crypto.cs:11)",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Crypto.cs",
+      "id": "code-mod-agent-safe-f4b74211a51c",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "C#",
+        "toolTier": "A"
+      },
+      "name": "sdk/csharp/AgentSafe.Spl/Crypto.cs",
+      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Crypto.cs | ~115 lines ## Classes - Crypto",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Env.cs",
+      "id": "code-sym-agent-safe-1acd7838fbc6",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "C#",
+        "toolTier": ""
+      },
+      "name": "CryptoCallbacks",
+      "summary": "class CryptoCallbacks (sdk/csharp/AgentSafe.Spl/Env.cs:3)",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Env.cs",
+      "id": "code-sym-agent-safe-e108b61bde37",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "C#",
+        "toolTier": ""
+      },
+      "name": "Env",
+      "summary": "class Env (sdk/csharp/AgentSafe.Spl/Env.cs:17)",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 2,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Env.cs",
+      "id": "code-mod-agent-safe-cc889846f244",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "C#",
+        "toolTier": "A"
+      },
+      "name": "sdk/csharp/AgentSafe.Spl/Env.cs",
+      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Env.cs | ~25 lines ## Classes - CryptoCallbacks",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Evaluator.cs",
+      "id": "code-sym-agent-safe-52d43ef66f90",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "C#",
+        "toolTier": ""
+      },
+      "name": "Evaluator",
+      "summary": "class Evaluator (sdk/csharp/AgentSafe.Spl/Evaluator.cs:3)",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Evaluator.cs",
+      "id": "code-mod-agent-safe-9b413c59a956",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "C#",
+        "toolTier": "A"
+      },
+      "name": "sdk/csharp/AgentSafe.Spl/Evaluator.cs",
+      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Evaluator.cs | ~123 lines ## Classes - Evaluator",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Node.cs",
+      "id": "code-mod-agent-safe-e7973715c62c",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "C#",
+        "toolTier": "A"
+      },
+      "name": "sdk/csharp/AgentSafe.Spl/Node.cs",
+      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Node.cs | ~4 lines",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Parser.cs",
+      "id": "code-sym-agent-safe-49743a53ae18",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "C#",
+        "toolTier": ""
+      },
+      "name": "Parser",
+      "summary": "class Parser (sdk/csharp/AgentSafe.Spl/Parser.cs:3)",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Parser.cs",
+      "id": "code-mod-agent-safe-bc12479341bb",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "C#",
+        "toolTier": "A"
+      },
+      "name": "sdk/csharp/AgentSafe.Spl/Parser.cs",
+      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Parser.cs | ~98 lines ## Classes - Parser",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/SplException.cs",
+      "id": "code-sym-agent-safe-edeb4d0f4470",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "C#",
+        "toolTier": ""
+      },
+      "name": "SplException",
+      "summary": "class SplException(Exception) (sdk/csharp/AgentSafe.Spl/SplException.cs:3)",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/SplException.cs",
+      "id": "code-mod-agent-safe-d3f2d7c54062",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "C#",
+        "toolTier": "A"
+      },
+      "name": "sdk/csharp/AgentSafe.Spl/SplException.cs",
+      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/SplException.cs | ~5 lines ## Classes - SplException(Exception)",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Token.cs",
+      "id": "code-sym-agent-safe-349afd3f9da5",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "C#",
+        "toolTier": ""
+      },
+      "name": "Token",
+      "summary": "class Token (sdk/csharp/AgentSafe.Spl/Token.cs:10)",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Token.cs",
+      "id": "code-mod-agent-safe-b2e130f6eefb",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "C#",
+        "toolTier": "A"
+      },
+      "name": "sdk/csharp/AgentSafe.Spl/Token.cs",
+      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Token.cs | ~108 lines ## Classes - Token",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Verifier.cs",
+      "id": "code-sym-agent-safe-2438cc757cbf",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "C#",
+        "toolTier": ""
+      },
+      "name": "Verifier",
+      "summary": "class Verifier (sdk/csharp/AgentSafe.Spl/Verifier.cs:3)",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/csharp/AgentSafe.Spl/Verifier.cs",
+      "id": "code-mod-agent-safe-911747dea94b",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "C#",
+        "toolTier": "A"
+      },
+      "name": "sdk/csharp/AgentSafe.Spl/Verifier.cs",
+      "summary": "Language: C# | Path: sdk/csharp/AgentSafe.Spl/Verifier.cs | ~7 lines ## Classes - Verifier",
+      "tags": [
+        "c#",
+        "code"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/go/spl/crypto.go",
+      "id": "code-sym-agent-safe-7cd6ecf8def4",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Go",
+        "toolTier": ""
+      },
+      "name": "spl.MerkleProofStep",
+      "summary": "class MerkleProofStep (sdk/go/spl/crypto.go:31)",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/go/spl/crypto.go",
+      "id": "code-mod-agent-safe-296a3916486e",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Go",
+        "toolTier": "A"
+      },
+      "name": "sdk/go/spl/crypto.go",
+      "summary": "Language: Go | Path: sdk/go/spl/crypto.go | ~112 lines ## Classes - MerkleProofStep",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/go/spl/eval.go",
+      "id": "code-sym-agent-safe-7ca1322c5b11",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Go",
+        "toolTier": ""
+      },
+      "name": "spl.Env",
+      "summary": "class Env (sdk/go/spl/eval.go:7)",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/go/spl/eval.go",
+      "id": "code-mod-agent-safe-8daa53b2093e",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Go",
+        "toolTier": "A"
+      },
+      "name": "sdk/go/spl/eval.go",
+      "summary": "Language: Go | Path: sdk/go/spl/eval.go | ~399 lines ## Classes - Env",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/go/spl/parser.go",
+      "id": "code-sym-agent-safe-abbd50d32aad",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Go",
+        "toolTier": ""
+      },
+      "name": "spl.Node",
+      "summary": "class Node (sdk/go/spl/parser.go:9)",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/go/spl/parser.go",
+      "id": "code-mod-agent-safe-93376014cae7",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Go",
+        "toolTier": "A"
+      },
+      "name": "sdk/go/spl/parser.go",
+      "summary": "Language: Go | Path: sdk/go/spl/parser.go | ~69 lines ## Classes - Node",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/go/spl/token.go",
+      "id": "code-sym-agent-safe-28d130a15fa5",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Go",
+        "toolTier": ""
+      },
+      "name": "spl.Token",
+      "summary": "class Token (sdk/go/spl/token.go:13)",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/go/spl/token.go",
+      "id": "code-sym-agent-safe-3b52c947ae91",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Go",
+        "toolTier": ""
+      },
+      "name": "spl.VerifyTokenResult",
+      "summary": "class VerifyTokenResult (sdk/go/spl/token.go:113)",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/go/spl/token.go",
+      "id": "code-sym-agent-safe-651d0d15e1d9",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Go",
+        "toolTier": ""
+      },
+      "name": "spl.VerifyTokenOptions",
+      "summary": "class VerifyTokenOptions (sdk/go/spl/token.go:99)",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/go/spl/token.go",
+      "id": "code-sym-agent-safe-b9135c563ac5",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Go",
+        "toolTier": ""
+      },
+      "name": "spl.MintOptions",
+      "summary": "class MintOptions (sdk/go/spl/token.go:33)",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 4,
+      "filePath": "sdk/go/spl/token.go",
+      "id": "code-mod-agent-safe-3616dd039555",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Go",
+        "toolTier": "A"
+      },
+      "name": "sdk/go/spl/token.go",
+      "summary": "Language: Go | Path: sdk/go/spl/token.go | ~130 lines ## Classes - MintOptions",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/go/verify/verify.go",
+      "id": "code-mod-agent-safe-d447330b692c",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Go",
+        "toolTier": "A"
+      },
+      "name": "sdk/go/verify/verify.go",
+      "summary": "Language: Go | Path: sdk/go/verify/verify.go | ~12 lines",
+      "tags": [
+        "code",
+        "go"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Crypto.java",
+      "id": "code-sym-agent-safe-ddae5352364e",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Java",
+        "toolTier": ""
+      },
+      "name": "Crypto",
+      "summary": "class Crypto (sdk/java/src/main/java/io/agentsafe/spl/Crypto.java:13)",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Crypto.java",
+      "id": "code-mod-agent-safe-7f56000be355",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Java",
+        "toolTier": "A"
+      },
+      "name": "sdk/java/src/main/java/io/agentsafe/spl/Crypto.java",
+      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Crypto.java | ~213 lines ## Classes - Crypto",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/CryptoCallbacks.java",
+      "id": "code-sym-agent-safe-8104b83075b4",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Java",
+        "toolTier": ""
+      },
+      "name": "CryptoCallbacks",
+      "summary": "class CryptoCallbacks (sdk/java/src/main/java/io/agentsafe/spl/CryptoCallbacks.java:11)",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/CryptoCallbacks.java",
+      "id": "code-mod-agent-safe-db830be8680e",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Java",
+        "toolTier": "A"
+      },
+      "name": "sdk/java/src/main/java/io/agentsafe/spl/CryptoCallbacks.java",
+      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/CryptoCallbacks.java | ~21 lines ## Classes - CryptoCallbacks",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Env.java",
+      "id": "code-sym-agent-safe-a4caf7baaec1",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Java",
+        "toolTier": ""
+      },
+      "name": "Env",
+      "summary": "class Env (sdk/java/src/main/java/io/agentsafe/spl/Env.java:10)",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Env.java",
+      "id": "code-mod-agent-safe-9e5946d9ebba",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Java",
+        "toolTier": "A"
+      },
+      "name": "sdk/java/src/main/java/io/agentsafe/spl/Env.java",
+      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Env.java | ~17 lines ## Classes - Env",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Evaluator.java",
+      "id": "code-sym-agent-safe-cee7676adaee",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Java",
+        "toolTier": ""
+      },
+      "name": "Evaluator",
+      "summary": "class Evaluator (sdk/java/src/main/java/io/agentsafe/spl/Evaluator.java:9)",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Evaluator.java",
+      "id": "code-mod-agent-safe-17d2613f5798",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Java",
+        "toolTier": "A"
+      },
+      "name": "sdk/java/src/main/java/io/agentsafe/spl/Evaluator.java",
+      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Evaluator.java | ~147 lines ## Classes - Evaluator",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Node.java",
+      "id": "code-sym-agent-safe-835e51d3d584",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Java",
+        "toolTier": ""
+      },
+      "name": "Node",
+      "summary": "class Node (sdk/java/src/main/java/io/agentsafe/spl/Node.java:9)",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Node.java",
+      "id": "code-mod-agent-safe-d23bcc7a26c2",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Java",
+        "toolTier": "A"
+      },
+      "name": "sdk/java/src/main/java/io/agentsafe/spl/Node.java",
+      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Node.java | ~51 lines ## Classes - Node",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Parser.java",
+      "id": "code-sym-agent-safe-e6b2d1cf0e38",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Java",
+        "toolTier": ""
+      },
+      "name": "Parser",
+      "summary": "class Parser (sdk/java/src/main/java/io/agentsafe/spl/Parser.java:9)",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Parser.java",
+      "id": "code-mod-agent-safe-c2d7b39731f3",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Java",
+        "toolTier": "A"
+      },
+      "name": "sdk/java/src/main/java/io/agentsafe/spl/Parser.java",
+      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Parser.java | ~96 lines ## Classes - Parser",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/SplException.java",
+      "id": "code-sym-agent-safe-7a6bbb9cb56b",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Java",
+        "toolTier": ""
+      },
+      "name": "SplException",
+      "summary": "class SplException(RuntimeException) (sdk/java/src/main/java/io/agentsafe/spl/SplException.java:3)",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/SplException.java",
+      "id": "code-mod-agent-safe-72ee543339ce",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Java",
+        "toolTier": "A"
+      },
+      "name": "sdk/java/src/main/java/io/agentsafe/spl/SplException.java",
+      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/SplException.java | ~4 lines ## Classes - SplException(RuntimeException)",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Token.java",
+      "id": "code-sym-agent-safe-51da15f62b98",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Java",
+        "toolTier": ""
+      },
+      "name": "Token",
+      "summary": "class Token (sdk/java/src/main/java/io/agentsafe/spl/Token.java:11)",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Token.java",
+      "id": "code-mod-agent-safe-2c17b2c8cc23",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Java",
+        "toolTier": "A"
+      },
+      "name": "sdk/java/src/main/java/io/agentsafe/spl/Token.java",
+      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Token.java | ~221 lines ## Classes - Token",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Verifier.java",
+      "id": "code-sym-agent-safe-98e11f01966a",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Java",
+        "toolTier": ""
+      },
+      "name": "Verifier",
+      "summary": "class Verifier (sdk/java/src/main/java/io/agentsafe/spl/Verifier.java:6)",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/main/java/io/agentsafe/spl/Verifier.java",
+      "id": "code-mod-agent-safe-893f9bbc50cb",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Java",
+        "toolTier": "A"
+      },
+      "name": "sdk/java/src/main/java/io/agentsafe/spl/Verifier.java",
+      "summary": "Language: Java | Path: sdk/java/src/main/java/io/agentsafe/spl/Verifier.java | ~15 lines ## Classes - Verifier",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/test/java/io/agentsafe/spl/SplTest.java",
+      "id": "code-sym-agent-safe-b31f0788f9e0",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Java",
+        "toolTier": ""
+      },
+      "name": "SplTest",
+      "summary": "class SplTest (sdk/java/src/test/java/io/agentsafe/spl/SplTest.java:9)",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/java/src/test/java/io/agentsafe/spl/SplTest.java",
+      "id": "code-mod-agent-safe-66153400f40b",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Java",
+        "toolTier": "A"
+      },
+      "name": "sdk/java/src/test/java/io/agentsafe/spl/SplTest.java",
+      "summary": "Language: Java | Path: sdk/java/src/test/java/io/agentsafe/spl/SplTest.java | ~184 lines ## Classes - SplTest",
+      "tags": [
+        "code",
+        "java"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/js/src/bench.ts",
+      "id": "code-mod-agent-safe-d027216fc0a0",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "TypeScript",
+        "toolTier": "A"
+      },
+      "name": "sdk/js/src/bench.ts",
+      "summary": "Language: TypeScript | Path: sdk/js/src/bench.ts | ~59 lines",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 2,
+      "filePath": "sdk/js/src/crypto.test.ts",
+      "id": "code-mod-agent-safe-beff1e2d2873",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "TypeScript",
+        "toolTier": "A"
+      },
+      "name": "sdk/js/src/crypto.test.ts",
+      "summary": "Language: TypeScript | Path: sdk/js/src/crypto.test.ts | ~53 lines ## Functions - loadVectors()",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 8,
+      "filePath": "sdk/js/src/crypto.ts",
+      "id": "code-mod-agent-safe-a3867624f774",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "TypeScript",
+        "toolTier": "A"
+      },
+      "name": "sdk/js/src/crypto.ts",
+      "summary": "Language: TypeScript | Path: sdk/js/src/crypto.ts | ~139 lines ## Functions - concat()",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/js/src/index.ts",
+      "id": "code-mod-agent-safe-924bf178fff7",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "TypeScript",
+        "toolTier": "A"
+      },
+      "name": "sdk/js/src/index.ts",
+      "summary": "Language: TypeScript | Path: sdk/js/src/index.ts | ~31 lines",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 2,
+      "filePath": "sdk/js/src/spl.test.ts",
+      "id": "code-mod-agent-safe-135b4d665636",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "TypeScript",
+        "toolTier": "A"
+      },
+      "name": "sdk/js/src/spl.test.ts",
+      "summary": "Language: TypeScript | Path: sdk/js/src/spl.test.ts | ~291 lines ## Functions - evalExpr()",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/js/src/spl.ts",
+      "id": "code-sym-agent-safe-00c9e9654c21",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "TypeScript",
+        "toolTier": ""
+      },
+      "name": "Sym",
+      "summary": "class Sym (sdk/js/src/spl.ts:2)",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 8,
+      "filePath": "sdk/js/src/spl.ts",
+      "id": "code-mod-agent-safe-91e067cb9b0f",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "TypeScript",
+        "toolTier": "A"
+      },
+      "name": "sdk/js/src/spl.ts",
+      "summary": "Language: TypeScript | Path: sdk/js/src/spl.ts | ~186 lines ## Classes - Sym",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/js/src/token.ts",
+      "id": "code-sym-agent-safe-3ff21d35b036",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "TypeScript",
+        "toolTier": ""
+      },
+      "name": "VerifyTokenOptions",
+      "summary": "class VerifyTokenOptions (sdk/js/src/token.ts:30)",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/js/src/token.ts",
+      "id": "code-sym-agent-safe-473d8313b6b5",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "TypeScript",
+        "toolTier": ""
+      },
+      "name": "Token",
+      "summary": "class Token (sdk/js/src/token.ts:10)",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/js/src/token.ts",
+      "id": "code-sym-agent-safe-cee7f30c4f4b",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "TypeScript",
+        "toolTier": ""
+      },
+      "name": "MintOptions",
+      "summary": "class MintOptions (sdk/js/src/token.ts:22)",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 8,
+      "filePath": "sdk/js/src/token.ts",
+      "id": "code-mod-agent-safe-58a04c4f73e0",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "TypeScript",
+        "toolTier": "A"
+      },
+      "name": "sdk/js/src/token.ts",
+      "summary": "Language: TypeScript | Path: sdk/js/src/token.ts | ~196 lines ## Classes - MintOptions",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/js/src/verify.ts",
+      "id": "code-mod-agent-safe-ffcf6dbb9681",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "TypeScript",
+        "toolTier": "A"
+      },
+      "name": "sdk/js/src/verify.ts",
+      "summary": "Language: TypeScript | Path: sdk/js/src/verify.ts | ~22 lines ## Functions - verify()",
+      "tags": [
+        "code",
+        "typescript"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/python/spl/__init__.py",
+      "id": "code-mod-agent-safe-c4d4f0d01f40",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/spl/__init__.py",
+      "summary": "Language: Python | Path: sdk/python/spl/__init__.py | ~6 lines",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/python/spl/__main__.py",
+      "id": "code-mod-agent-safe-f395aab771bf",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/spl/__main__.py",
+      "summary": "Language: Python | Path: sdk/python/spl/__main__.py | ~11 lines ## Functions - main()",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 8,
+      "filePath": "sdk/python/spl/crypto.py",
+      "id": "code-mod-agent-safe-17d8026734d6",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/spl/crypto.py",
+      "summary": "Language: Python | Path: sdk/python/spl/crypto.py | ~121 lines ## Functions - derive_service_key(master_key_hex: str, service_domain: str) -> tuple[str,str]",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/python/spl/evaluator.py",
+      "id": "code-sym-agent-safe-87342165bd78",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Python",
+        "toolTier": ""
+      },
+      "name": "DepthExceeded",
+      "summary": "class DepthExceeded(RuntimeError) (sdk/python/spl/evaluator.py:13)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/python/spl/evaluator.py",
+      "id": "code-sym-agent-safe-a7f87e80ee6c",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Python",
+        "toolTier": ""
+      },
+      "name": "GasExhausted",
+      "summary": "class GasExhausted(RuntimeError) (sdk/python/spl/evaluator.py:9)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/python/spl/evaluator.py",
+      "id": "code-sym-agent-safe-f12902990b55",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Python",
+        "toolTier": ""
+      },
+      "name": "SPLError",
+      "summary": "class SPLError(RuntimeError) (sdk/python/spl/evaluator.py:17)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 10,
+      "filePath": "sdk/python/spl/evaluator.py",
+      "id": "code-mod-agent-safe-9e8bac1945d8",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/spl/evaluator.py",
+      "summary": "Language: Python | Path: sdk/python/spl/evaluator.py | ~196 lines ## Classes - DepthExceeded(RuntimeError)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 3,
+      "filePath": "sdk/python/spl/parser.py",
+      "id": "code-mod-agent-safe-6d5bc8d460d1",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/spl/parser.py",
+      "summary": "Language: Python | Path: sdk/python/spl/parser.py | ~70 lines ## Functions - parse(src: str) -> AST",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 5,
+      "filePath": "sdk/python/spl/token.py",
+      "id": "code-mod-agent-safe-45851be93607",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/spl/token.py",
+      "summary": "Language: Python | Path: sdk/python/spl/token.py | ~138 lines ## Functions - create_presentation_signature(token: dict, agent_private_key_hex: str) -> str",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 4,
+      "filePath": "sdk/python/spl/types.py",
+      "id": "code-sym-agent-safe-1bb39a360f3e",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Python",
+        "toolTier": ""
+      },
+      "name": "CryptoCallbacks",
+      "summary": "class CryptoCallbacks (sdk/python/spl/types.py:8) ## Methods - anonFunc2fcfa1870101()",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/python/spl/types.py",
+      "id": "code-sym-agent-safe-bfacad00f48e",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Python",
+        "toolTier": ""
+      },
+      "name": "Env",
+      "summary": "class Env (sdk/python/spl/types.py:15) ## Methods - anonFunc2fcfa1870501(_a, _d)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 2,
+      "filePath": "sdk/python/spl/types.py",
+      "id": "code-mod-agent-safe-972386ee2f49",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/spl/types.py",
+      "summary": "Language: Python | Path: sdk/python/spl/types.py | ~22 lines ## Classes - CryptoCallbacks",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/python/spl/verifier.py",
+      "id": "code-mod-agent-safe-1cf754e42ee6",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/spl/verifier.py",
+      "summary": "Language: Python | Path: sdk/python/spl/verifier.py | ~7 lines ## Functions - verify(policy_ast: Any, req: dict, env: Any) -> dict",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 2,
+      "filePath": "sdk/python/tests/test_crypto.py",
+      "id": "code-sym-agent-safe-3a1df430fb2c",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Python",
+        "toolTier": ""
+      },
+      "name": "TestEd25519",
+      "summary": "class TestEd25519 (sdk/python/tests/test_crypto.py:17) ## Methods - test_tampered_message(self)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/python/tests/test_crypto.py",
+      "id": "code-sym-agent-safe-7a74da777776",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Python",
+        "toolTier": ""
+      },
+      "name": "TestMerkleProof",
+      "summary": "class TestMerkleProof (sdk/python/tests/test_crypto.py:35) ## Methods - test_cases(self)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/python/tests/test_crypto.py",
+      "id": "code-sym-agent-safe-a82425c7542c",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Python",
+        "toolTier": ""
+      },
+      "name": "TestHashChain",
+      "summary": "class TestHashChain (sdk/python/tests/test_crypto.py:47) ## Methods - test_cases(self)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 4,
+      "filePath": "sdk/python/tests/test_crypto.py",
+      "id": "code-mod-agent-safe-b66a2d6d4963",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/tests/test_crypto.py",
+      "summary": "Language: Python | Path: sdk/python/tests/test_crypto.py | ~48 lines ## Classes - TestEd25519",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 24,
+      "filePath": "sdk/python/tests/test_evaluator.py",
+      "id": "code-mod-agent-safe-958bbff10e63",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/tests/test_evaluator.py",
+      "summary": "Language: Python | Path: sdk/python/tests/test_evaluator.py | ~144 lines ## Functions - eval_expr(src, env=None)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 6,
+      "filePath": "sdk/python/tests/test_gas.py",
+      "id": "code-mod-agent-safe-0246aaf1eaee",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/tests/test_gas.py",
+      "summary": "Language: Python | Path: sdk/python/tests/test_gas.py | ~54 lines ## Functions - make_env(**overrides)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 5,
+      "filePath": "sdk/python/tests/test_integration.py",
+      "id": "code-mod-agent-safe-a03b5cd8e2c6",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/tests/test_integration.py",
+      "summary": "Language: Python | Path: sdk/python/tests/test_integration.py | ~50 lines ## Functions - make_env()",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 12,
+      "filePath": "sdk/python/tests/test_parser.py",
+      "id": "code-mod-agent-safe-a225e7fcefe8",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Python",
+        "toolTier": "C"
+      },
+      "name": "sdk/python/tests/test_parser.py",
+      "summary": "Language: Python | Path: sdk/python/tests/test_parser.py | ~59 lines ## Functions - test_extra_tokens()",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 2,
+      "filePath": "sdk/rust/examples/verify.rs",
+      "id": "code-mod-agent-safe-2cadd29e2332",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "sdk/rust/examples/verify.rs",
+      "summary": "Language: Rust | Path: sdk/rust/examples/verify.rs | ~78 lines ## Functions - json_to_node(v: &serde_json::Value) -> Node",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/rust/src/crypto.rs",
+      "id": "code-sym-agent-safe-483c30bffbc2",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "MerkleProofStep",
+      "summary": "class MerkleProofStep (sdk/rust/src/crypto.rs:29)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 9,
+      "filePath": "sdk/rust/src/crypto.rs",
+      "id": "code-mod-agent-safe-3a938092d367",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "sdk/rust/src/crypto.rs",
+      "summary": "Language: Rust | Path: sdk/rust/src/crypto.rs | ~116 lines ## Classes - MerkleProofStep",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/rust/src/evaluator.rs",
+      "id": "code-sym-agent-safe-4006adb9a3ef",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "EvalState",
+      "summary": "class EvalState (sdk/rust/src/evaluator.rs:5)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 8,
+      "filePath": "sdk/rust/src/evaluator.rs",
+      "id": "code-mod-agent-safe-29533f875656",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "sdk/rust/src/evaluator.rs",
+      "summary": "Language: Rust | Path: sdk/rust/src/evaluator.rs | ~219 lines ## Classes - EvalState",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/rust/src/lib.rs",
+      "id": "code-mod-agent-safe-a8b4e080c431",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "sdk/rust/src/lib.rs",
+      "summary": "Language: Rust | Path: sdk/rust/src/lib.rs | ~6 lines",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 5,
+      "filePath": "sdk/rust/src/parser.rs",
+      "id": "code-mod-agent-safe-6346f27175b1",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "sdk/rust/src/parser.rs",
+      "summary": "Language: Rust | Path: sdk/rust/src/parser.rs | ~204 lines ## Functions - flush_buf(buf: &mut String, tokens: &mut Vec<String>)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/rust/src/token.rs",
+      "id": "code-sym-agent-safe-951d3b2e2edc",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "VerifyTokenResult",
+      "summary": "class VerifyTokenResult (sdk/rust/src/token.rs:127)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/rust/src/token.rs",
+      "id": "code-sym-agent-safe-ac4c7496d8f6",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Token",
+      "summary": "class Token (sdk/rust/src/token.rs:13)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/rust/src/token.rs",
+      "id": "code-sym-agent-safe-f220cca142f1",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "MintOptions",
+      "summary": "class MintOptions (sdk/rust/src/token.rs:31)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 9,
+      "filePath": "sdk/rust/src/token.rs",
+      "id": "code-mod-agent-safe-bfd50a2a5755",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "sdk/rust/src/token.rs",
+      "summary": "Language: Rust | Path: sdk/rust/src/token.rs | ~143 lines ## Classes - MintOptions",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/rust/src/types.rs",
+      "id": "code-sym-agent-safe-3a668f7a1b36",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "SplError",
+      "summary": "class SplError (sdk/rust/src/types.rs:63)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/rust/src/types.rs",
+      "id": "code-sym-agent-safe-9461514f445a",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Env",
+      "summary": "class Env (sdk/rust/src/types.rs:104)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/rust/src/types.rs",
+      "id": "code-sym-agent-safe-cfba126499e7",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "CryptoCallbacks",
+      "summary": "class CryptoCallbacks (sdk/rust/src/types.rs:81)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/rust/src/types.rs",
+      "id": "code-sym-agent-safe-e4eaf53d1f89",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "Node",
+      "summary": "class Node (sdk/rust/src/types.rs:6)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 4,
+      "filePath": "sdk/rust/src/types.rs",
+      "id": "code-mod-agent-safe-fda8f7a3e0f7",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "sdk/rust/src/types.rs",
+      "summary": "Language: Rust | Path: sdk/rust/src/types.rs | ~115 lines ## Classes - CryptoCallbacks",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 1,
+      "filePath": "sdk/rust/src/verifier.rs",
+      "id": "code-sym-agent-safe-01ec4c10f060",
+      "languageNotes": {
+        "kindexType": "concept",
+        "language": "Rust",
+        "toolTier": ""
+      },
+      "name": "VerifyResult",
+      "summary": "class VerifyResult (sdk/rust/src/verifier.rs:5)",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "class"
+    },
+    {
+      "complexity": 2,
+      "filePath": "sdk/rust/src/verifier.rs",
+      "id": "code-mod-agent-safe-714582afaae3",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "sdk/rust/src/verifier.rs",
+      "summary": "Language: Rust | Path: sdk/rust/src/verifier.rs | ~11 lines ## Classes - VerifyResult",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    },
+    {
+      "complexity": 29,
+      "filePath": "sdk/rust/tests/integration.rs",
+      "id": "code-mod-agent-safe-cace2f7f6fff",
+      "languageNotes": {
+        "kindexType": "artifact",
+        "language": "Rust",
+        "toolTier": "C"
+      },
+      "name": "sdk/rust/tests/integration.rs",
+      "summary": "Language: Rust | Path: sdk/rust/tests/integration.rs | ~313 lines ## Functions - eval_expr(src: &str, env: Env) -> Result<bool, String>",
+      "tags": [
+        "code",
+        "rust"
+      ],
+      "type": "file"
+    }
+  ],
+  "project": {
+    "analyzedAt": "2026-05-24T17:34:48-05:00",
+    "description": "Code map exported from Kindex for agent-safe.",
+    "frameworks": [],
+    "gitCommitHash": "95bbb6f9fe5d84643384bbaf7fe72ae9cd08245b",
+    "languages": [
+      "C#",
+      "Go",
+      "Java",
+      "Python",
+      "Rust",
+      "TypeScript"
+    ],
+    "name": "agent-safe"
+  },
   "tour": [
     {
-      "order": 1,
-      "title": "Core",
-      "description": "Review 55 node(s) in the Core layer.",
+      "description": "Review 53 node(s) in the Core layer.",
       "nodeIds": [
         "code-mod-agent-safe-0bf6aa453bd8",
         "code-mod-agent-safe-0c3a64823151",
@@ -4352,12 +2668,12 @@
         "code-mod-agent-safe-893f9bbc50cb",
         "code-mod-agent-safe-8b2796fd3096",
         "code-mod-agent-safe-8daa53b2093e"
-      ]
+      ],
+      "order": 1,
+      "title": "Core"
     },
     {
-      "order": 2,
-      "title": "Domain",
-      "description": "Review 49 node(s) in the Domain layer.",
+      "description": "Review 51 node(s) in the Domain layer.",
       "nodeIds": [
         "code-sym-agent-safe-00c9e9654c21",
         "code-sym-agent-safe-01ec4c10f060",
@@ -4372,6 +2688,7 @@
         "code-sym-agent-safe-3b52c947ae91",
         "code-sym-agent-safe-3ff21d35b036",
         "code-sym-agent-safe-4006adb9a3ef",
+        "code-sym-agent-safe-473d8313b6b5",
         "code-sym-agent-safe-483c30bffbc2",
         "code-sym-agent-safe-49743a53ae18",
         "code-sym-agent-safe-51da15f62b98",
@@ -4382,13 +2699,12 @@
         "code-sym-agent-safe-7a74da777776",
         "code-sym-agent-safe-7ca1322c5b11",
         "code-sym-agent-safe-7cd6ecf8def4",
-        "code-sym-agent-safe-8104b83075b4",
-        "code-sym-agent-safe-835e51d3d584"
-      ]
+        "code-sym-agent-safe-8104b83075b4"
+      ],
+      "order": 2,
+      "title": "Domain"
     },
     {
-      "order": 3,
-      "title": "Test",
       "description": "Review 10 node(s) in the Test layer.",
       "nodeIds": [
         "code-mod-agent-safe-0246aaf1eaee",
@@ -4401,7 +2717,10 @@
         "code-mod-agent-safe-b66a2d6d4963",
         "code-mod-agent-safe-beff1e2d2873",
         "code-mod-agent-safe-cace2f7f6fff"
-      ]
+      ],
+      "order": 3,
+      "title": "Test"
     }
-  ]
+  ],
+  "version": "1.0.0"
 }
