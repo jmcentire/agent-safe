@@ -42,7 +42,7 @@
   },
   "homepage": "https://jmcentire.github.io/agent-safe/",
   "devDependencies": {
-    "@types/node": "^25.6.0",
+    "@types/node": "^26.0.0",
     "typescript": "^6.0.2"
   }
 }
