@@ -104,4 +104,4 @@ docs/         # GitHub Pages landing page
 
 ## Kindex
 
-Agent-Safe captures discoveries, decisions, and security rationale in [Kindex](~/Code/kindex). Search before adding. Link related concepts.
+Agent-Safe captures discoveries, decisions, and security rationale in [Kindex](https://github.com/jmcentire/kindex). Search before adding. Link related concepts.
