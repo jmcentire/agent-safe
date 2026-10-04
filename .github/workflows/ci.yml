@@ -32,7 +32,7 @@ jobs:
       - run: cd sdk/go && go test ./spl/ -v
       - name: Audit dependencies
         run: |
-          go install golang.org/x/vuln/cmd/govulncheck@latest
+          go install golang.org/x/vuln/cmd/govulncheck@v1.7.0  # v1.8.0+ requires Go 1.26
           cd sdk/go && govulncheck ./... || true
 
   python:
