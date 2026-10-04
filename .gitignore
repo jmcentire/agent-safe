@@ -25,3 +25,6 @@ AUDIT_PLAN.md
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Pact working state (generated, machine-local)
+.pact/
